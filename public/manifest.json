@@ -1,0 +1,29 @@
+{
+  "name": "Fresh Pops Oil Filtration",
+  "short_name": "Fresh Pops",
+  "description": "Professional fryer oil filtration for commercial kitchens in Florida.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#070F09",
+  "theme_color": "#16A34A",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
