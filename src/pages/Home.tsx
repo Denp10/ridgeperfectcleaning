@@ -3,13 +3,14 @@ import {
   HomeIcon, Building2, Sparkles, ArrowLeftRight, BedDouble,
   HardHat, Car, Droplets, ShieldCheck, DollarSign, CalendarCheck,
   UserCheck, Star, Phone, Mail, MapPin, Menu, X, ChevronRight,
-  Globe, CheckCircle, ArrowDown,
+  Globe, CheckCircle, ArrowDown, MessageCircle, ChevronDown,
+  Send, ExternalLink,
 } from "lucide-react";
 
-// ─── Browser language detection ───────────────────────────────────────────────
+// ─── Browser language ─────────────────────────────────────────────────────────
 const getBrowserLang = (): "en" | "es" => {
-  const lang = (navigator.language || (navigator.languages && navigator.languages[0]) || "en").toLowerCase();
-  return lang.startsWith("es") ? "es" : "en";
+  const l = (navigator.language || (navigator.languages?.[0]) || "en").toLowerCase();
+  return l.startsWith("es") ? "es" : "en";
 };
 
 // ─── Translations ─────────────────────────────────────────────────────────────
@@ -42,6 +43,43 @@ const t = {
         { title: "Pressure Washing", desc: "Blast away grime from any surface" },
       ],
     },
+    pricing: {
+      heading: "Pricing",
+      sub: "Transparent rates, no hidden fees",
+      note: "* Final price depends on property size and condition. Free estimate always included.",
+      plans: [
+        {
+          name: "Basic Clean",
+          price: "From $80",
+          color: "border-[#3AB5E5]",
+          badge: "",
+          features: ["Kitchen & bathrooms", "Vacuuming & mopping", "Surface dusting", "Trash removal", "Up to 2 bedrooms"],
+        },
+        {
+          name: "Deep Clean",
+          price: "From $160",
+          color: "border-[#0D2B4E]",
+          badge: "Most Popular",
+          features: ["Everything in Basic", "Inside appliances", "Baseboards & blinds", "Cabinet interiors", "Up to 4 bedrooms"],
+        },
+        {
+          name: "Commercial / Specialty",
+          price: "Custom Quote",
+          color: "border-[#6BC043]",
+          badge: "",
+          features: ["Offices & businesses", "Post-construction", "Move-in / Move-out", "Airbnb turnovers", "Pressure washing"],
+        },
+      ],
+    },
+    testimonials: {
+      heading: "What Clients Say",
+      sub: "Real reviews from Palm Beach County residents",
+      items: [
+        { name: "Maria L.", area: "West Palm Beach", text: "Ridge cleaned my entire home before I moved in. Absolutely spotless — every corner, every cabinet. I was blown away. Highly recommend!", stars: 5 },
+        { name: "James T.", area: "Boca Raton", text: "They do my Airbnb turnovers every week. Always on time, always perfect. My guests consistently leave 5-star reviews about cleanliness.", stars: 5 },
+        { name: "Sandra R.", area: "Boynton Beach", text: "After our renovation, the construction dust was everywhere. Ridge handled it all professionally. Our home looked brand new. Amazing team!", stars: 5 },
+      ],
+    },
     why: {
       heading: "Why Choose Us",
       sub: "Trusted by hundreds of clients across Palm Beach County",
@@ -58,15 +96,24 @@ const t = {
         cta: "Book Your Cleaning",
       },
     },
+    gallery: { heading: "Our Work", sub: "See the Ridge difference in action" },
     about: {
       heading: "About Us",
       sub: "Locally owned, community driven",
       p1: "Ridge Perfect Cleaning Solutions is a trusted cleaning company serving Palm Beach County. We deliver residential, commercial, and specialty cleaning with a commitment to excellence and attention to detail.",
       p2: "Our trained, background-checked professionals use eco-friendly, plant-based products to keep your space spotless while protecting your family and the environment.",
     },
-    gallery: {
-      heading: "Our Work",
-      sub: "See the Ridge difference in action",
+    faq: {
+      heading: "FAQ",
+      sub: "Common questions answered",
+      items: [
+        { q: "Do you bring your own cleaning supplies?", a: "Yes! We bring all professional-grade, eco-friendly, plant-based products and equipment at no extra cost to you." },
+        { q: "Are you insured and bonded?", a: "Absolutely. Ridge Perfect Cleaning is fully insured and bonded. All our staff are background-checked for your peace of mind." },
+        { q: "How do I get a quote?", a: "Simply call us at (561) 818-0778, send an email, or fill out the contact form below. We'll get back to you within a few hours with a free estimate." },
+        { q: "How long does a cleaning take?", a: "It depends on the property size. A standard 2-bedroom home typically takes 2–3 hours. Deep cleans and post-construction may take longer." },
+        { q: "Do I need to be home during the cleaning?", a: "Not at all. Many clients give us a key or access code. We treat every home with the same respect and care whether you're there or not." },
+        { q: "What areas do you serve?", a: "We serve all of Palm Beach County including West Palm Beach, Lake Worth, Boynton Beach, Delray Beach, Boca Raton, Palm Beach Gardens, and surrounding areas." },
+      ],
     },
     areas: {
       heading: "Service Areas",
@@ -76,12 +123,20 @@ const t = {
       heading: "Contact Us",
       sub: "Get your free quote today",
       call: "Call Us", email: "Email Us", area: "Service Area", areaVal: "Palm Beach County, FL",
+      form: {
+        name: "Your Name", phone: "Phone Number", service: "Service Needed",
+        message: "Tell us about your space (size, type, any notes...)",
+        send: "Send Message",
+        services: ["Residential Cleaning", "Commercial Cleaning", "Deep Cleaning", "Move-In / Move-Out", "Airbnb Cleaning", "Post-Construction", "Mobile Car Wash", "Pressure Washing", "Other"],
+        success: "Message sent! We'll contact you soon.",
+      },
       card: {
         title: "Ready for a Spotless Space?",
         desc: "Contact us today for a free, no-obligation quote.",
         checks: ["Free Estimates", "Flexible Scheduling", "Satisfaction Guaranteed", "Locally Owned & Operated"],
-        cta1: "Call Now", cta2: "Send Email",
+        cta1: "Call Now", cta2: "WhatsApp",
       },
+      google: "View on Google Business",
     },
     footer: {
       desc: "Professional cleaning services throughout Palm Beach County — residential, commercial, and specialty cleaning done right.",
@@ -119,6 +174,43 @@ const t = {
         { title: "Lavado a Presión", desc: "Elimina suciedad de cualquier superficie" },
       ],
     },
+    pricing: {
+      heading: "Precios",
+      sub: "Tarifas transparentes, sin costos ocultos",
+      note: "* El precio final depende del tamaño y condición de la propiedad. Siempre incluye estimado gratuito.",
+      plans: [
+        {
+          name: "Limpieza Básica",
+          price: "Desde $80",
+          color: "border-[#3AB5E5]",
+          badge: "",
+          features: ["Cocina y baños", "Aspirado y trapeado", "Desempolvado de superficies", "Retiro de basura", "Hasta 2 habitaciones"],
+        },
+        {
+          name: "Limpieza Profunda",
+          price: "Desde $160",
+          color: "border-[#0D2B4E]",
+          badge: "Más Popular",
+          features: ["Todo lo de Básica", "Interior de electrodomésticos", "Rodapiés y persianas", "Interior de gabinetes", "Hasta 4 habitaciones"],
+        },
+        {
+          name: "Comercial / Especial",
+          price: "Cotización",
+          color: "border-[#6BC043]",
+          badge: "",
+          features: ["Oficinas y negocios", "Post-construcción", "Mudanza / Entrada", "Turnos Airbnb", "Lavado a presión"],
+        },
+      ],
+    },
+    testimonials: {
+      heading: "Lo Que Dicen Nuestros Clientes",
+      sub: "Reseñas reales de residentes de Palm Beach County",
+      items: [
+        { name: "María L.", area: "West Palm Beach", text: "Ridge limpió mi casa completa antes de mudarme. Absolutamente impecable — cada rincón, cada gabinete. Quedé sorprendida. ¡Los recomiendo mucho!", stars: 5 },
+        { name: "James T.", area: "Boca Raton", text: "Hacen mis turnos de Airbnb cada semana. Siempre a tiempo, siempre perfecto. Mis huéspedes constantemente dejan reseñas de 5 estrellas sobre la limpieza.", stars: 5 },
+        { name: "Sandra R.", area: "Boynton Beach", text: "Después de nuestra remodelación, el polvo de construcción estaba en todas partes. Ridge lo manejó todo profesionalmente. ¡Nuestra casa quedó como nueva!", stars: 5 },
+      ],
+    },
     why: {
       heading: "Por Qué Elegirnos",
       sub: "La confianza de cientos de clientes en Palm Beach County",
@@ -135,15 +227,24 @@ const t = {
         cta: "Reserva tu Limpieza",
       },
     },
+    gallery: { heading: "Nuestro Trabajo", sub: "Mira la diferencia Ridge en acción" },
     about: {
       heading: "Sobre Nosotros",
       sub: "Empresa local, orientada a la comunidad",
-      p1: "Ridge Perfect Cleaning Solutions es una empresa de confianza que sirve a Palm Beach County. Ofrecemos servicios de limpieza residencial, comercial y especializada con compromiso de excelencia.",
+      p1: "Ridge Perfect Cleaning Solutions es una empresa de confianza que sirve a Palm Beach County. Ofrecemos servicios de limpieza residencial, comercial y especializada con compromiso de excelencia y atención al detalle.",
       p2: "Nuestros profesionales capacitados y verificados usan productos ecológicos de base vegetal para mantener tu espacio impecable, protegiendo a tu familia y al medio ambiente.",
     },
-    gallery: {
-      heading: "Nuestro Trabajo",
-      sub: "Mira la diferencia Ridge en acción",
+    faq: {
+      heading: "Preguntas Frecuentes",
+      sub: "Respuestas a las preguntas más comunes",
+      items: [
+        { q: "¿Traen sus propios productos de limpieza?", a: "¡Sí! Traemos todos los productos profesionales ecológicos de base vegetal y el equipo necesario sin costo adicional para ti." },
+        { q: "¿Están asegurados y certificados?", a: "Absolutamente. Ridge Perfect Cleaning está completamente asegurado. Todo nuestro personal pasa por verificación de antecedentes." },
+        { q: "¿Cómo obtengo una cotización?", a: "Simplemente llámanos al (561) 818-0778, envíanos un email, o completa el formulario de contacto. Te respondemos en pocas horas con un estimado gratuito." },
+        { q: "¿Cuánto tiempo dura una limpieza?", a: "Depende del tamaño de la propiedad. Una casa de 2 habitaciones toma aproximadamente 2–3 horas. Las limpiezas profundas pueden tomar más." },
+        { q: "¿Necesito estar en casa durante la limpieza?", a: "Para nada. Muchos clientes nos dan una llave o código de acceso. Tratamos cada hogar con el mismo respeto y cuidado estés presente o no." },
+        { q: "¿Qué áreas cubren?", a: "Servimos todo Palm Beach County: West Palm Beach, Lake Worth, Boynton Beach, Delray Beach, Boca Raton, Palm Beach Gardens y áreas cercanas." },
+      ],
     },
     areas: {
       heading: "Áreas de Servicio",
@@ -153,12 +254,20 @@ const t = {
       heading: "Contáctanos",
       sub: "Obtén tu cotización gratuita hoy",
       call: "Llámanos", email: "Escríbenos", area: "Área de Servicio", areaVal: "Palm Beach County, FL",
+      form: {
+        name: "Tu Nombre", phone: "Número de Teléfono", service: "Servicio Necesario",
+        message: "Cuéntanos sobre tu espacio (tamaño, tipo, notas...)",
+        send: "Enviar Mensaje",
+        services: ["Limpieza Residencial", "Limpieza Comercial", "Limpieza Profunda", "Mudanza / Entrada", "Limpieza Airbnb", "Post-Construcción", "Lavado de Autos Móvil", "Lavado a Presión", "Otro"],
+        success: "¡Mensaje enviado! Te contactaremos pronto.",
+      },
       card: {
         title: "¿Listo para un Espacio Impecable?",
         desc: "Contáctanos hoy para una cotización gratuita y sin compromiso.",
         checks: ["Estimados Gratuitos", "Horarios Flexibles", "Satisfacción Garantizada", "Empresa Local"],
-        cta1: "Llamar Ahora", cta2: "Enviar Email",
+        cta1: "Llamar Ahora", cta2: "WhatsApp",
       },
+      google: "Ver en Google Business",
     },
     footer: {
       desc: "Servicios de limpieza profesional en todo Palm Beach County — residencial, comercial y especializada.",
@@ -173,12 +282,7 @@ const t = {
 const serviceIcons = [HomeIcon, Building2, Sparkles, ArrowLeftRight, BedDouble, HardHat, Car, Droplets];
 const whyIcons    = [Star, DollarSign, CalendarCheck, ShieldCheck, UserCheck];
 
-// Each image used exactly once across the page
-// Hero:    image 1b (team)
-// About:   image 1a (kitchen) + image 1c (vacuuming)
-// Gallery: Image 2a + 2b + 2c (commercial)
-
-// ─── Reveal on scroll ─────────────────────────────────────────────────────────
+// ─── Scroll reveal ────────────────────────────────────────────────────────────
 function useReveal() {
   const ref = useRef<HTMLDivElement>(null);
   const [on, setOn] = useState(false);
@@ -186,7 +290,7 @@ function useReveal() {
     const el = ref.current; if (!el) return;
     const io = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) { setOn(true); io.disconnect(); } },
-      { threshold: 0.08 }
+      { threshold: 0.07 }
     );
     io.observe(el);
     return () => io.disconnect();
@@ -194,14 +298,12 @@ function useReveal() {
   return { ref, on };
 }
 
-const Reveal = ({
-  children, delay = 0, className = "",
-}: { children: React.ReactNode; delay?: number; className?: string }) => {
+const Reveal = ({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) => {
   const { ref, on } = useReveal();
   return (
     <div ref={ref} className={className} style={{
       opacity: on ? 1 : 0,
-      transform: on ? "translateY(0)" : "translateY(24px)",
+      transform: on ? "translateY(0)" : "translateY(22px)",
       transition: `opacity .55s ease ${delay}ms, transform .55s ease ${delay}ms`,
     }}>
       {children}
@@ -209,7 +311,6 @@ const Reveal = ({
   );
 };
 
-// ─── Section heading helper ────────────────────────────────────────────────────
 const SectionHead = ({ label, title }: { label: string; title: string }) => (
   <Reveal className="text-center mb-12">
     <p className="text-[#3AB5E5] text-xs font-bold uppercase tracking-widest mb-2">{label}</p>
@@ -220,21 +321,13 @@ const SectionHead = ({ label, title }: { label: string; title: string }) => (
 
 // ─── Logo ─────────────────────────────────────────────────────────────────────
 const Logo = ({ scrolled }: { scrolled: boolean }) => (
-  <button
-    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-    className="flex items-center gap-2.5 select-none group"
-  >
-    <img
-      src="/Logo complet.png"
-      alt="Ridge Perfect Cleaning"
-      className="h-12 sm:h-14 w-auto"
-      style={{ mixBlendMode: "multiply" }}
-    />
+  <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-2.5 select-none">
+    <img src="/Logo sin fondo.png" alt="Ridge Perfect Cleaning" className="h-11 sm:h-13 w-auto" />
     <div className="flex flex-col leading-tight">
-      <span className={`text-[12px] font-black tracking-widest transition-colors ${scrolled ? "text-[#0D2B4E]" : "text-white/90"}`}>
+      <span className={`text-[11px] font-black tracking-widest transition-colors ${scrolled ? "text-[#0D2B4E]" : "text-white/90"}`}>
         PERFECT CLEANING
       </span>
-      <span className="text-[12px] font-black tracking-widest text-[#6BC043]">SOLUTIONS</span>
+      <span className="text-[11px] font-black tracking-widest text-[#6BC043]">SOLUTIONS</span>
     </div>
   </button>
 );
@@ -244,7 +337,14 @@ export const Home = () => {
   const [lang,     setLang]     = useState<"en" | "es">(getBrowserLang);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [openFaq,  setOpenFaq]  = useState<number | null>(null);
+  const [formSent, setFormSent] = useState(false);
+  const [form, setForm] = useState({ name: "", phone: "", service: "", message: "" });
   const tx = t[lang];
+
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 70);
@@ -257,6 +357,18 @@ export const Home = () => {
     setMenuOpen(false);
   };
 
+  const handleForm = (e: React.FormEvent) => {
+    e.preventDefault();
+    const subject = encodeURIComponent(`Cleaning Request – ${form.service || "General"}`);
+    const body = encodeURIComponent(
+      `Name: ${form.name}\nPhone: ${form.phone}\nService: ${form.service}\n\n${form.message}`
+    );
+    window.open(`mailto:info@ridgeperfectcleaning.com?subject=${subject}&body=${body}`, "_blank");
+    setFormSent(true);
+    setTimeout(() => setFormSent(false), 5000);
+    setForm({ name: "", phone: "", service: "", message: "" });
+  };
+
   const navLinks = [
     { id: "services", label: tx.nav.services },
     { id: "why-us",   label: tx.nav.whyUs   },
@@ -267,11 +379,12 @@ export const Home = () => {
   return (
     <div className="font-sans text-gray-800 overflow-x-hidden">
       <style>{`
-        @keyframes float  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-        @keyframes pring  { 0%{box-shadow:0 0 0 0 rgba(58,181,229,.45)} 70%{box-shadow:0 0 0 12px rgba(58,181,229,0)} 100%{box-shadow:0 0 0 0 rgba(58,181,229,0)} }
-        @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:none} }
-        .float { animation:float 4s ease-in-out infinite; }
-        .pring { animation:pring 2.4s ease-out infinite; }
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        @keyframes pring { 0%{box-shadow:0 0 0 0 rgba(58,181,229,.5)} 70%{box-shadow:0 0 0 14px rgba(58,181,229,0)} 100%{box-shadow:0 0 0 0 rgba(58,181,229,0)} }
+        @keyframes wpulse { 0%{box-shadow:0 0 0 0 rgba(37,211,102,.5)} 70%{box-shadow:0 0 0 14px rgba(37,211,102,0)} 100%{box-shadow:0 0 0 0 rgba(37,211,102,0)} }
+        .float   { animation:float 4s ease-in-out infinite; }
+        .pring   { animation:pring 2.4s ease-out infinite; }
+        .wpulse  { animation:wpulse 2.2s ease-out infinite; }
         .card-lift { transition:transform .22s ease,box-shadow .22s ease; }
         .card-lift:hover { transform:translateY(-5px); box-shadow:0 16px 36px rgba(13,43,78,.10); }
         .icon-wrap { transition:background .2s ease,transform .2s ease; }
@@ -286,9 +399,23 @@ export const Home = () => {
         .img-zoom { overflow:hidden; }
         .img-zoom img { transition:transform .45s ease; }
         .img-zoom:hover img { transform:scale(1.05); }
+        input,select,textarea { outline:none; }
+        input:focus,select:focus,textarea:focus { border-color:#3AB5E5 !important; box-shadow:0 0 0 3px rgba(58,181,229,.15); }
       `}</style>
 
-      {/* ══ NAVBAR — taller & more prominent ════════════════════════════════════ */}
+      {/* ── FLOATING WHATSAPP ─────────────────────────────────────────────────── */}
+      <a
+        href="https://wa.me/15618180778"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="wpulse fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-[#25D366] text-white pl-4 pr-5 py-3 rounded-full shadow-lg font-bold text-sm hover:bg-[#20c05a] transition-colors"
+        title="WhatsApp"
+      >
+        <MessageCircle size={20} fill="white" strokeWidth={0} />
+        WhatsApp
+      </a>
+
+      {/* ── NAVBAR ───────────────────────────────────────────────────────────── */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled ? "bg-white/97 backdrop-blur-md shadow-md border-b border-gray-100 py-2" : "bg-transparent py-4"
       }`}>
@@ -305,11 +432,8 @@ export const Home = () => {
                 {label}
               </button>
             ))}
-
-            {/* Language toggle */}
             <button
               onClick={() => setLang(l => l === "en" ? "es" : "en")}
-              title={lang === "en" ? "Switch to Spanish" : "Cambiar a inglés"}
               className={`flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full border transition-all ${
                 scrolled
                   ? "border-[#3AB5E5] text-[#3AB5E5] hover:bg-[#3AB5E5] hover:text-white"
@@ -317,7 +441,6 @@ export const Home = () => {
               }`}>
               <Globe size={12} /> {lang === "en" ? "ES" : "EN"}
             </button>
-
             <a href="tel:5618180778"
               className="pring btn-p flex items-center gap-2 bg-[#3AB5E5] text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-[#2aa0d0]">
               <Phone size={14} /> (561) 818-0778
@@ -326,25 +449,21 @@ export const Home = () => {
 
           {/* Mobile */}
           <div className="md:hidden flex items-center gap-2">
-            <button
-              onClick={() => setLang(l => l === "en" ? "es" : "en")}
+            <button onClick={() => setLang(l => l === "en" ? "es" : "en")}
               className={`flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full border ${
                 scrolled ? "border-[#3AB5E5] text-[#3AB5E5]" : "border-white/50 text-white/80"
               }`}>
               <Globe size={11} /> {lang === "en" ? "ES" : "EN"}
             </button>
-            <a href="tel:5618180778"
-              className="bg-[#3AB5E5] text-white p-2 rounded-full">
+            <a href="tel:5618180778" className="bg-[#3AB5E5] text-white p-2 rounded-full">
               <Phone size={15} />
             </a>
-            <button onClick={() => setMenuOpen(!menuOpen)}
-              className={`p-1 ${scrolled ? "text-[#0D2B4E]" : "text-white"}`}>
+            <button onClick={() => setMenuOpen(!menuOpen)} className={`p-1 ${scrolled ? "text-[#0D2B4E]" : "text-white"}`}>
               {menuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>
 
-        {/* Mobile dropdown */}
         {menuOpen && (
           <div className="md:hidden bg-white border-t border-gray-100 px-5 pb-5 shadow-lg">
             {navLinks.map(({ id, label }) => (
@@ -361,16 +480,14 @@ export const Home = () => {
         )}
       </nav>
 
-      {/* ══ HERO — compact ══════════════════════════════════════════════════════ */}
-      <section className="relative bg-[#0D2B4E] overflow-hidden" style={{ minHeight: "68vh" }}>
-        {/* Decorative blobs */}
+      {/* ── HERO ─────────────────────────────────────────────────────────────── */}
+      <section className="relative bg-[#0D2B4E] overflow-hidden" style={{ minHeight: "82vh" }}>
         <div className="absolute top-10 -left-24 w-72 h-72 rounded-full bg-[#3AB5E5]/10 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full bg-[#6BC043]/8 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-10 right-0 w-80 h-80 rounded-full bg-[#6BC043]/8 blur-3xl pointer-events-none" />
 
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-6 items-center pt-28 pb-10 lg:pt-32 lg:pb-12">
-
-          {/* Text */}
-          <div className="text-center lg:text-left" style={{ animation: "fadeUp .7s ease both" }}>
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-8 items-center pt-32 pb-16 lg:pt-36 lg:pb-16">
+          {/* Text — visible immediately, no hidden animation */}
+          <div className="text-center lg:text-left">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-none mb-3">
               <span className="text-[#3AB5E5]">{tx.hero.title1}</span><br />
               <span className="text-[#6BC043]">{tx.hero.title2}</span>
@@ -378,19 +495,16 @@ export const Home = () => {
             <p className="text-base text-white/55 italic mb-3">{tx.hero.subtitle}</p>
             <p className="text-white/70 mb-1.5 text-sm leading-relaxed max-w-md mx-auto lg:mx-0">{tx.hero.desc}</p>
             <p className="text-[#3AB5E5] font-semibold text-xs mb-7">{tx.hero.tagline}</p>
-
             <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-9">
               <button onClick={() => scrollTo("contact")}
-                className="btn-p bg-[#3AB5E5] text-white px-7 py-3 rounded-full font-bold text-sm shadow-lg">
+                className="btn-p bg-[#3AB5E5] text-white px-7 py-3.5 rounded-full font-bold text-sm shadow-lg">
                 {tx.hero.cta1}
               </button>
               <a href="tel:5618180778"
-                className="btn-o border-2 border-white/35 text-white px-7 py-3 rounded-full font-bold text-sm flex items-center justify-center gap-2 hover:bg-white hover:text-[#0D2B4E] hover:border-white">
+                className="btn-o border-2 border-white/35 text-white px-7 py-3.5 rounded-full font-bold text-sm flex items-center justify-center gap-2 hover:bg-white hover:text-[#0D2B4E] hover:border-white">
                 <Phone size={14} /> {tx.hero.cta2}
               </a>
             </div>
-
-            {/* Stats */}
             <div className="flex justify-center lg:justify-start gap-8">
               {[
                 { v: tx.hero.s1v, l: tx.hero.s1l },
@@ -405,26 +519,24 @@ export const Home = () => {
             </div>
           </div>
 
-          {/* Team photo — hero only, not reused */}
-          <div className="hidden lg:flex justify-center items-end relative" style={{ animation: "fadeUp .7s ease .2s both" }}>
+          {/* Team photo — only used here */}
+          <div className="hidden lg:flex justify-center items-end relative">
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
               <div className="w-72 h-72 rounded-full border border-[#3AB5E5]/15" />
             </div>
             <img
               src="/image 1b.png"
               alt="Ridge cleaning team"
-              className="relative z-10 max-h-[380px] w-auto object-contain drop-shadow-2xl"
+              className="relative z-10 max-h-[420px] w-auto object-contain drop-shadow-2xl"
             />
           </div>
         </div>
 
-        {/* Scroll hint */}
         <button onClick={() => scrollTo("services")}
-          className="absolute bottom-3 left-1/2 -translate-x-1/2 text-white/25 hover:text-white/50 transition-colors float z-10">
+          className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/25 hover:text-white/50 transition-colors float z-10">
           <ArrowDown size={18} />
         </button>
 
-        {/* Wave */}
         <div className="-mb-px">
           <svg viewBox="0 0 1440 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="w-full block">
             <path d="M0,25 C360,50 1080,0 1440,25 L1440,50 L0,50 Z" fill="white" />
@@ -432,7 +544,7 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* ══ SERVICES ════════════════════════════════════════════════════════════ */}
+      {/* ── SERVICES ─────────────────────────────────────────────────────────── */}
       <section id="services" className="py-20 px-4 sm:px-6 bg-white">
         <div className="max-w-6xl mx-auto">
           <SectionHead label={tx.services.heading} title={tx.services.sub} />
@@ -455,7 +567,7 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* ══ GALLERY — commercial images only, each used once ════════════════════ */}
+      {/* ── GALLERY — 3 commercial images, each used once ────────────────────── */}
       <section className="py-20 px-4 sm:px-6 bg-[#F8FBFF]">
         <div className="max-w-6xl mx-auto">
           <SectionHead label={tx.gallery.heading} title={tx.gallery.sub} />
@@ -475,7 +587,74 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* ══ WHY US ══════════════════════════════════════════════════════════════ */}
+      {/* ── PRICING ──────────────────────────────────────────────────────────── */}
+      <section className="py-20 px-4 sm:px-6 bg-white">
+        <div className="max-w-5xl mx-auto">
+          <SectionHead label={tx.pricing.heading} title={tx.pricing.sub} />
+          <div className="grid sm:grid-cols-3 gap-6">
+            {tx.pricing.plans.map(({ name, price, color, badge, features }, i) => (
+              <Reveal key={name} delay={i * 80}>
+                <div className={`card-lift relative border-2 ${color} rounded-2xl p-7 h-full flex flex-col bg-white`}>
+                  {badge && (
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#0D2B4E] text-white text-[10px] font-bold px-3 py-1 rounded-full whitespace-nowrap">
+                      {badge}
+                    </span>
+                  )}
+                  <h3 className="font-black text-[#0D2B4E] text-lg mb-1">{name}</h3>
+                  <p className="text-2xl font-black text-[#3AB5E5] mb-5">{price}</p>
+                  <ul className="space-y-2.5 flex-1">
+                    {features.map(f => (
+                      <li key={f} className="flex items-start gap-2 text-sm text-gray-600">
+                        <CheckCircle size={15} strokeWidth={2} className="text-[#6BC043] shrink-0 mt-0.5" />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <button onClick={() => scrollTo("contact")}
+                    className="btn-p mt-7 w-full bg-[#3AB5E5] text-white py-2.5 rounded-full font-bold text-sm hover:bg-[#2aa0d0]">
+                    {lang === "en" ? "Get a Quote" : "Obtén Cotización"}
+                  </button>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal>
+            <p className="text-center text-gray-400 text-xs mt-6">{tx.pricing.note}</p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── TESTIMONIALS ─────────────────────────────────────────────────────── */}
+      <section className="py-20 px-4 sm:px-6 bg-[#F8FBFF]">
+        <div className="max-w-6xl mx-auto">
+          <SectionHead label={tx.testimonials.heading} title={tx.testimonials.sub} />
+          <div className="grid sm:grid-cols-3 gap-6">
+            {tx.testimonials.items.map(({ name, area, text, stars }, i) => (
+              <Reveal key={name} delay={i * 80}>
+                <div className="card-lift bg-white border border-gray-100 rounded-2xl p-7 h-full flex flex-col">
+                  <div className="flex gap-0.5 mb-4">
+                    {Array.from({ length: stars }).map((_, s) => (
+                      <Star key={s} size={15} className="text-yellow-400" fill="#FBBF24" strokeWidth={0} />
+                    ))}
+                  </div>
+                  <p className="text-gray-600 text-sm leading-relaxed flex-1 mb-5">"{text}"</p>
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-full bg-[#3AB5E5] flex items-center justify-center text-white font-black text-sm shrink-0">
+                      {name.charAt(0)}
+                    </div>
+                    <div>
+                      <div className="font-bold text-[#0D2B4E] text-sm">{name}</div>
+                      <div className="text-gray-400 text-xs">{area}</div>
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── WHY US ───────────────────────────────────────────────────────────── */}
       <section id="why-us" className="py-20 px-4 sm:px-6 bg-white">
         <div className="max-w-6xl mx-auto">
           <SectionHead label={tx.why.heading} title={tx.why.sub} />
@@ -498,7 +677,6 @@ export const Home = () => {
                 );
               })}
             </div>
-
             <Reveal delay={80}>
               <div className="bg-[#0D2B4E] rounded-2xl p-8 text-white">
                 <div className="w-10 h-10 bg-[#3AB5E5]/20 rounded-full flex items-center justify-center mb-5">
@@ -524,20 +702,17 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* ══ ABOUT — uses image 1a + 1c, not repeated elsewhere ══════════════════ */}
+      {/* ── ABOUT — image 1a + 1c only here ─────────────────────────────────── */}
       <section id="about" className="py-20 px-4 sm:px-6 bg-[#F8FBFF]">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <Reveal>
             <div className="grid grid-cols-2 gap-3">
-              {/* Tall left image */}
               <div className="img-zoom rounded-2xl overflow-hidden row-span-2" style={{ aspectRatio: "3/4" }}>
                 <img src="/image 1a.png" alt="Residential cleaning" className="w-full h-full object-cover" loading="lazy" />
               </div>
-              {/* Top right image */}
               <div className="img-zoom rounded-2xl overflow-hidden" style={{ aspectRatio: "1/1" }}>
                 <img src="/image 1c.png" alt="Carpet cleaning" className="w-full h-full object-cover" loading="lazy" />
               </div>
-              {/* Bottom right stat tile */}
               <div className="bg-[#0D2B4E] rounded-2xl flex flex-col items-center justify-center" style={{ aspectRatio: "1/1" }}>
                 <div className="text-3xl font-black text-[#3AB5E5]">5★</div>
                 <div className="text-[10px] text-white/50 mt-1 uppercase tracking-wider">
@@ -546,7 +721,6 @@ export const Home = () => {
               </div>
             </div>
           </Reveal>
-
           <Reveal delay={100}>
             <p className="text-[#3AB5E5] text-xs font-bold uppercase tracking-widest mb-2">{tx.about.heading}</p>
             <h2 className="text-3xl sm:text-4xl font-black text-[#0D2B4E] mb-2">{tx.about.sub}</h2>
@@ -574,7 +748,38 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* ══ SERVICE AREAS ═══════════════════════════════════════════════════════ */}
+      {/* ── FAQ ──────────────────────────────────────────────────────────────── */}
+      <section className="py-20 px-4 sm:px-6 bg-white">
+        <div className="max-w-3xl mx-auto">
+          <SectionHead label={tx.faq.heading} title={tx.faq.sub} />
+          <div className="space-y-3">
+            {tx.faq.items.map(({ q, a }, i) => (
+              <Reveal key={i} delay={i * 40}>
+                <div className="border border-gray-100 rounded-xl overflow-hidden bg-white shadow-sm">
+                  <button
+                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                    className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-gray-50 transition-colors"
+                  >
+                    <span className="font-bold text-[#0D2B4E] text-sm pr-4">{q}</span>
+                    <ChevronDown
+                      size={18}
+                      className="text-[#3AB5E5] shrink-0 transition-transform duration-200"
+                      style={{ transform: openFaq === i ? "rotate(180deg)" : "rotate(0deg)" }}
+                    />
+                  </button>
+                  {openFaq === i && (
+                    <div className="px-6 pb-5">
+                      <p className="text-gray-500 text-sm leading-relaxed">{a}</p>
+                    </div>
+                  )}
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SERVICE AREAS ────────────────────────────────────────────────────── */}
       <section className="py-14 px-4 sm:px-6 bg-gradient-to-br from-[#0D2B4E] via-[#0a3565] to-[#1a6a9e]">
         <div className="max-w-4xl mx-auto text-center">
           <Reveal>
@@ -591,44 +796,93 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* ══ CONTACT ═════════════════════════════════════════════════════════════ */}
-      <section id="contact" className="py-20 px-4 sm:px-6 bg-white">
+      {/* ── CONTACT + FORM ───────────────────────────────────────────────────── */}
+      <section id="contact" className="py-20 px-4 sm:px-6 bg-[#F8FBFF]">
         <div className="max-w-6xl mx-auto">
           <SectionHead label={tx.contact.heading} title={tx.contact.sub} />
-          <div className="grid md:grid-cols-2 gap-8 items-start">
+          <div className="grid lg:grid-cols-2 gap-10 items-start">
+
+            {/* Left: info cards + form */}
             <div className="space-y-4">
               {[
                 { href: "tel:5618180778", Icon: Phone, bg: "bg-[#3AB5E5]", label: tx.contact.call, value: "(561) 818-0778", hc: "group-hover:text-[#3AB5E5]" },
                 { href: "mailto:info@ridgeperfectcleaning.com", Icon: Mail, bg: "bg-[#6BC043]", label: tx.contact.email, value: "info@ridgeperfectcleaning.com", hc: "group-hover:text-[#6BC043]" },
               ].map(({ href, Icon, bg, label, value, hc }) => (
-                <Reveal key={label}>
-                  <a href={href} className="card-lift group flex items-center gap-4 bg-white border border-gray-100 rounded-xl p-5 block">
-                    <div className={`${bg} w-12 h-12 rounded-xl flex items-center justify-center shrink-0`}>
-                      <Icon size={19} strokeWidth={1.8} className="text-white" />
-                    </div>
-                    <div className="min-w-0">
-                      <div className="text-[10px] text-gray-400 font-semibold uppercase tracking-widest">{label}</div>
-                      <div className={`font-bold text-[#0D2B4E] text-sm sm:text-base truncate transition-colors ${hc}`}>{value}</div>
-                    </div>
-                    <ChevronRight size={14} className="text-gray-300 ml-auto shrink-0 group-hover:text-[#3AB5E5] transition-colors" />
-                  </a>
-                </Reveal>
+                <a key={label} href={href}
+                  className="card-lift group flex items-center gap-4 bg-white border border-gray-100 rounded-xl p-5 block">
+                  <div className={`${bg} w-12 h-12 rounded-xl flex items-center justify-center shrink-0`}>
+                    <Icon size={19} strokeWidth={1.8} className="text-white" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-[10px] text-gray-400 font-semibold uppercase tracking-widest">{label}</div>
+                    <div className={`font-bold text-[#0D2B4E] text-sm sm:text-base truncate transition-colors ${hc}`}>{value}</div>
+                  </div>
+                  <ChevronRight size={14} className="text-gray-300 ml-auto shrink-0 group-hover:text-[#3AB5E5] transition-colors" />
+                </a>
               ))}
-              <Reveal>
-                <div className="flex items-center gap-4 bg-white border border-gray-100 rounded-xl p-5">
-                  <div className="bg-[#0D2B4E] w-12 h-12 rounded-xl flex items-center justify-center shrink-0">
-                    <MapPin size={19} strokeWidth={1.8} className="text-white" />
-                  </div>
-                  <div>
-                    <div className="text-[10px] text-gray-400 font-semibold uppercase tracking-widest">{tx.contact.area}</div>
-                    <div className="font-bold text-[#0D2B4E] text-base">{tx.contact.areaVal}</div>
-                  </div>
+              <div className="flex items-center gap-4 bg-white border border-gray-100 rounded-xl p-5">
+                <div className="bg-[#0D2B4E] w-12 h-12 rounded-xl flex items-center justify-center shrink-0">
+                  <MapPin size={19} strokeWidth={1.8} className="text-white" />
                 </div>
-              </Reveal>
+                <div>
+                  <div className="text-[10px] text-gray-400 font-semibold uppercase tracking-widest">{tx.contact.area}</div>
+                  <div className="font-bold text-[#0D2B4E] text-base">{tx.contact.areaVal}</div>
+                </div>
+              </div>
+
+              {/* Contact form */}
+              <form onSubmit={handleForm} className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm space-y-4 mt-2">
+                <h3 className="font-black text-[#0D2B4E] text-base mb-2">
+                  {lang === "en" ? "Send us a message" : "Envíanos un mensaje"}
+                </h3>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <input
+                    required
+                    type="text"
+                    placeholder={tx.contact.form.name}
+                    value={form.name}
+                    onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                    className="border border-gray-200 rounded-xl px-4 py-3 text-sm w-full transition-all"
+                  />
+                  <input
+                    type="tel"
+                    placeholder={tx.contact.form.phone}
+                    value={form.phone}
+                    onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
+                    className="border border-gray-200 rounded-xl px-4 py-3 text-sm w-full transition-all"
+                  />
+                </div>
+                <select
+                  value={form.service}
+                  onChange={e => setForm(f => ({ ...f, service: e.target.value }))}
+                  className="border border-gray-200 rounded-xl px-4 py-3 text-sm w-full text-gray-600 transition-all bg-white"
+                >
+                  <option value="">{tx.contact.form.service}</option>
+                  {tx.contact.form.services.map(s => <option key={s} value={s}>{s}</option>)}
+                </select>
+                <textarea
+                  rows={3}
+                  placeholder={tx.contact.form.message}
+                  value={form.message}
+                  onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
+                  className="border border-gray-200 rounded-xl px-4 py-3 text-sm w-full resize-none transition-all"
+                />
+                {formSent ? (
+                  <div className="flex items-center gap-2 text-[#6BC043] font-semibold text-sm">
+                    <CheckCircle size={16} /> {tx.contact.form.success}
+                  </div>
+                ) : (
+                  <button type="submit"
+                    className="btn-p flex items-center gap-2 bg-[#0D2B4E] text-white px-6 py-3 rounded-full font-bold text-sm">
+                    <Send size={14} /> {tx.contact.form.send}
+                  </button>
+                )}
+              </form>
             </div>
 
+            {/* Right: CTA card */}
             <Reveal delay={80}>
-              <div className="bg-[#0D2B4E] rounded-2xl p-8 text-white">
+              <div className="bg-[#0D2B4E] rounded-2xl p-8 text-white sticky top-24">
                 <h3 className="text-xl sm:text-2xl font-black mb-2">{tx.contact.card.title}</h3>
                 <p className="text-gray-400 text-sm mb-6">{tx.contact.card.desc}</p>
                 <div className="space-y-2.5 mb-8">
@@ -644,9 +898,16 @@ export const Home = () => {
                     className="btn-p flex items-center justify-center gap-2 bg-[#3AB5E5] text-white py-3 rounded-full font-bold text-sm">
                     <Phone size={14} /> {tx.contact.card.cta1}
                   </a>
-                  <a href="mailto:info@ridgeperfectcleaning.com"
-                    className="btn-o flex items-center justify-center gap-2 border-2 border-[#3AB5E5]/40 text-[#3AB5E5] py-3 rounded-full font-bold text-sm hover:bg-[#3AB5E5] hover:text-white hover:border-[#3AB5E5]">
-                    <Mail size={14} /> {tx.contact.card.cta2}
+                  <a href="https://wa.me/15618180778" target="_blank" rel="noopener noreferrer"
+                    className="btn-o flex items-center justify-center gap-2 bg-[#25D366] text-white py-3 rounded-full font-bold text-sm hover:bg-[#20c05a]">
+                    <MessageCircle size={14} fill="white" strokeWidth={0} /> {tx.contact.card.cta2}
+                  </a>
+                  <a
+                    href="https://maps.google.com/?q=Ridge+Perfect+Cleaning+Palm+Beach+County+FL"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-o flex items-center justify-center gap-2 border border-white/20 text-white/70 py-2.5 rounded-full text-xs font-semibold hover:border-white/50 hover:text-white">
+                    <ExternalLink size={12} /> {tx.contact.google}
                   </a>
                 </div>
               </div>
@@ -655,18 +916,22 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* ══ FOOTER ══════════════════════════════════════════════════════════════ */}
+      {/* ── FOOTER ───────────────────────────────────────────────────────────── */}
       <footer className="bg-[#0D2B4E] text-white pt-14 pb-8 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto grid sm:grid-cols-2 md:grid-cols-3 gap-10 mb-10">
           <div>
             <div className="flex items-center gap-2.5 mb-4">
-              <img src="/Logo complet.png" alt="Ridge Logo" className="h-11 w-auto" style={{ mixBlendMode: "screen" }} />
+              <img src="/Logo sin fondo.png" alt="Ridge Logo" className="h-12 w-auto" />
               <div className="flex flex-col leading-tight">
                 <span className="text-[11px] font-black tracking-widest text-white/80">PERFECT CLEANING</span>
                 <span className="text-[11px] font-black tracking-widest text-[#6BC043]">SOLUTIONS</span>
               </div>
             </div>
-            <p className="text-gray-400 text-xs leading-relaxed">{tx.footer.desc}</p>
+            <p className="text-gray-400 text-xs leading-relaxed mb-4">{tx.footer.desc}</p>
+            <a href="https://wa.me/15618180778" target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-[#25D366] text-white px-4 py-2 rounded-full text-xs font-bold hover:bg-[#20c05a] transition-colors">
+              <MessageCircle size={13} fill="white" strokeWidth={0} /> WhatsApp
+            </a>
           </div>
 
           <div>
@@ -692,13 +957,19 @@ export const Home = () => {
               <div className="flex items-center gap-2.5 text-gray-400 text-xs">
                 <MapPin size={12} className="text-[#3AB5E5] shrink-0" /> Palm Beach County, FL
               </div>
+              <a
+                href="https://maps.google.com/?q=Ridge+Perfect+Cleaning+Palm+Beach+County+FL"
+                target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-2.5 text-gray-400 hover:text-white text-xs transition-colors">
+                <ExternalLink size={12} className="text-[#3AB5E5] shrink-0" /> {tx.contact.google}
+              </a>
             </div>
           </div>
         </div>
 
         <div className="max-w-6xl mx-auto pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
           <p className="text-gray-500">© {new Date().getFullYear()} Ridge Perfect Cleaning Solutions. {tx.footer.rights}</p>
-          <p className="text-[#6BC043] font-semibold">{tx.footer.tagline}</p>
+          <p className="text-[#6BC043] font-semibold hidden sm:block">{tx.footer.tagline}</p>
           <p className="text-gray-500">
             {tx.footer.madeBy}{" "}
             <a href="https://vyax.com" target="_blank" rel="noopener noreferrer"
