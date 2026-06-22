@@ -321,13 +321,13 @@ const SectionHead = ({ label, title }: { label: string; title: string }) => (
 
 // ─── Logo ─────────────────────────────────────────────────────────────────────
 const Logo = ({ scrolled }: { scrolled: boolean }) => (
-  <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-2.5 select-none">
-    <img src="/Logo sin fondo.png" alt="Ridge Perfect Cleaning" className="h-11 sm:h-13 w-auto" />
+  <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-3 select-none">
+    <img src="/Logo sin fondo.png" alt="Ridge Perfect Cleaning" className="h-14 sm:h-16 w-auto" />
     <div className="flex flex-col leading-tight">
-      <span className={`text-[11px] font-black tracking-widest transition-colors ${scrolled ? "text-[#0D2B4E]" : "text-white/90"}`}>
+      <span className={`text-[13px] font-black tracking-widest transition-colors ${scrolled ? "text-[#0D2B4E]" : "text-white/90"}`}>
         PERFECT CLEANING
       </span>
-      <span className="text-[11px] font-black tracking-widest text-[#6BC043]">SOLUTIONS</span>
+      <span className="text-[13px] font-black tracking-widest text-[#6BC043]">SOLUTIONS</span>
     </div>
   </button>
 );
@@ -417,7 +417,7 @@ export const Home = () => {
 
       {/* ── NAVBAR ───────────────────────────────────────────────────────────── */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-white/97 backdrop-blur-md shadow-md border-b border-gray-100 py-2" : "bg-transparent py-4"
+        scrolled ? "bg-white/97 backdrop-blur-md shadow-md border-b border-gray-100 py-3" : "bg-transparent py-5"
       }`}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
           <Logo scrolled={scrolled} />
@@ -485,7 +485,7 @@ export const Home = () => {
         <div className="absolute top-10 -left-24 w-72 h-72 rounded-full bg-[#3AB5E5]/10 blur-3xl pointer-events-none" />
         <div className="absolute bottom-10 right-0 w-80 h-80 rounded-full bg-[#6BC043]/8 blur-3xl pointer-events-none" />
 
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-8 items-center pt-32 pb-16 lg:pt-36 lg:pb-16">
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-8 items-center pt-36 pb-16 lg:pt-40 lg:pb-16">
           {/* Text — visible immediately, no hidden animation */}
           <div className="text-center lg:text-left">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-none mb-3">
@@ -519,16 +519,32 @@ export const Home = () => {
             </div>
           </div>
 
-          {/* Team photo — only used here */}
-          <div className="hidden lg:flex justify-center items-end relative">
+          {/* Video — Ridge Cleaning */}
+          <div className="hidden lg:flex justify-center items-center relative">
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="w-72 h-72 rounded-full border border-[#3AB5E5]/15" />
+              <div className="w-80 h-80 rounded-full border border-[#3AB5E5]/15" />
             </div>
-            <img
-              src="/image 1b.png"
-              alt="Ridge cleaning team"
-              className="relative z-10 max-h-[420px] w-auto object-contain drop-shadow-2xl"
-            />
+            <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-2 border-white/10" style={{ maxWidth: 460 }}>
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-auto block"
+                style={{ maxHeight: 420 }}
+              >
+                <source src="/Ridge Cleaning.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+
+          {/* Mobile: show video below text */}
+          <div className="lg:hidden mt-4">
+            <div className="rounded-2xl overflow-hidden shadow-xl border border-white/10">
+              <video autoPlay muted loop playsInline className="w-full h-auto block">
+                <source src="/Ridge Cleaning.mp4" type="video/mp4" />
+              </video>
+            </div>
           </div>
         </div>
 
@@ -567,25 +583,6 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* ── GALLERY — 3 commercial images, each used once ────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 bg-[#F8FBFF]">
-        <div className="max-w-6xl mx-auto">
-          <SectionHead label={tx.gallery.heading} title={tx.gallery.sub} />
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {[
-              { src: "/Image 2a.png", alt: "Commercial window cleaning" },
-              { src: "/Image 2b.png", alt: "Office window cleaning" },
-              { src: "/Image 2c.png", alt: "Office desk cleaning" },
-            ].map(({ src, alt }, i) => (
-              <Reveal key={src} delay={i * 70}>
-                <div className="img-zoom rounded-2xl overflow-hidden shadow-sm border border-gray-100" style={{ aspectRatio: "3/4" }}>
-                  <img src={src} alt={alt} className="w-full h-full object-cover" loading="lazy" />
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ── PRICING ──────────────────────────────────────────────────────────── */}
       <section className="py-20 px-4 sm:px-6 bg-white">
