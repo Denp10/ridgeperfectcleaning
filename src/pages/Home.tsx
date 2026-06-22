@@ -3,13 +3,13 @@ import {
   HomeIcon, Building2, Sparkles, ArrowLeftRight, BedDouble,
   HardHat, Car, Droplets, ShieldCheck, DollarSign, CalendarCheck,
   UserCheck, Star, Phone, Mail, MapPin, Menu, X, ChevronRight,
-  Globe, CheckCircle, ArrowDown, MessageCircle, ChevronDown,
-  Send, ExternalLink,
+  Globe, CheckCircle, ArrowDown, MessageCircle, ChevronDown, Send,
+  ExternalLink, Loader2,
 } from "lucide-react";
 
 // ─── Browser language ─────────────────────────────────────────────────────────
 const getBrowserLang = (): "en" | "es" => {
-  const l = (navigator.language || (navigator.languages?.[0]) || "en").toLowerCase();
+  const l = (navigator.language || navigator.languages?.[0] || "en").toLowerCase();
   return l.startsWith("es") ? "es" : "en";
 };
 
@@ -18,20 +18,15 @@ const t = {
   en: {
     nav: { services: "Services", whyUs: "Why Us", about: "About", contact: "Contact" },
     hero: {
-      title1: "RIDGE PERFECT",
-      title2: "CLEANING",
+      title1: "RIDGE PERFECT", title2: "CLEANING",
       subtitle: "Cleaning Beyond Expectations",
       desc: "Professional Residential & Commercial Cleaning Services throughout Palm Beach County.",
       tagline: "Better Price · Better Solutions · Perfect Clean",
-      cta1: "Get a Free Quote",
-      cta2: "Call Now",
-      s1v: "100%", s1l: "Satisfaction",
-      s2v: "8+",   s2l: "Service Types",
-      s3v: "24/7", s3l: "Scheduling",
+      cta1: "Get a Free Quote", cta2: "Call Now",
+      s1v: "100%", s1l: "Satisfaction", s2v: "8+", s2l: "Service Types", s3v: "24/7", s3l: "Scheduling",
     },
     services: {
-      heading: "Our Services",
-      sub: "Everything your space needs — handled with care",
+      heading: "Our Services", sub: "Everything your space needs — handled with care",
       items: [
         { title: "Residential Cleaning", desc: "Tailored home cleaning for every room" },
         { title: "Commercial Cleaning", desc: "Professional office & business solutions" },
@@ -43,46 +38,36 @@ const t = {
         { title: "Pressure Washing", desc: "Blast away grime from any surface" },
       ],
     },
+    beforeAfter: {
+      heading: "Before & After",
+      sub: "The Ridge difference — visible results every time",
+      before: "Before", after: "After",
+      items: [
+        { img: "/image 1a.png", label: "Kitchen Deep Clean" },
+        { img: "/image 1c.png", label: "Living Room Carpet" },
+        { img: "/Image 2c.png", label: "Office Workspace" },
+      ],
+    },
     pricing: {
-      heading: "Pricing",
-      sub: "Transparent rates, no hidden fees",
+      heading: "Pricing", sub: "Transparent rates, no hidden fees",
       note: "* Final price depends on property size and condition. Free estimate always included.",
+      cta: "Get a Quote",
       plans: [
-        {
-          name: "Basic Clean",
-          price: "From $80",
-          color: "border-[#3AB5E5]",
-          badge: "",
-          features: ["Kitchen & bathrooms", "Vacuuming & mopping", "Surface dusting", "Trash removal", "Up to 2 bedrooms"],
-        },
-        {
-          name: "Deep Clean",
-          price: "From $160",
-          color: "border-[#0D2B4E]",
-          badge: "Most Popular",
-          features: ["Everything in Basic", "Inside appliances", "Baseboards & blinds", "Cabinet interiors", "Up to 4 bedrooms"],
-        },
-        {
-          name: "Commercial / Specialty",
-          price: "Custom Quote",
-          color: "border-[#6BC043]",
-          badge: "",
-          features: ["Offices & businesses", "Post-construction", "Move-in / Move-out", "Airbnb turnovers", "Pressure washing"],
-        },
+        { name: "Basic Clean", price: "From $80", color: "border-[#3AB5E5]", badge: "", features: ["Kitchen & bathrooms", "Vacuuming & mopping", "Surface dusting", "Trash removal", "Up to 2 bedrooms"] },
+        { name: "Deep Clean", price: "From $160", color: "border-[#0D2B4E]", badge: "Most Popular", features: ["Everything in Basic", "Inside appliances", "Baseboards & blinds", "Cabinet interiors", "Up to 4 bedrooms"] },
+        { name: "Commercial / Specialty", price: "Custom Quote", color: "border-[#6BC043]", badge: "", features: ["Offices & businesses", "Post-construction", "Move-in / Move-out", "Airbnb turnovers", "Pressure washing"] },
       ],
     },
     testimonials: {
-      heading: "What Clients Say",
-      sub: "Real reviews from Palm Beach County residents",
+      heading: "Google Reviews", sub: "What our clients say",
       items: [
-        { name: "Maria L.", area: "West Palm Beach", text: "Ridge cleaned my entire home before I moved in. Absolutely spotless — every corner, every cabinet. I was blown away. Highly recommend!", stars: 5 },
-        { name: "James T.", area: "Boca Raton", text: "They do my Airbnb turnovers every week. Always on time, always perfect. My guests consistently leave 5-star reviews about cleanliness.", stars: 5 },
-        { name: "Sandra R.", area: "Boynton Beach", text: "After our renovation, the construction dust was everywhere. Ridge handled it all professionally. Our home looked brand new. Amazing team!", stars: 5 },
+        { name: "Maria L.", area: "West Palm Beach, FL", date: "2 weeks ago", text: "I hired Ridge for a deep clean before listing my home. Every cabinet, every corner — spotless. The team was professional, thorough, and arrived on time. Highly recommend to anyone in Palm Beach County!", stars: 5, service: "Deep Cleaning" },
+        { name: "James T.", area: "Boca Raton, FL", date: "1 month ago", text: "They handle my Airbnb turnovers every week without fail. My guests consistently rate cleanliness 5 stars. Scheduling is easy and the team communicates well. Worth every penny.", stars: 5, service: "Airbnb Cleaning" },
+        { name: "Sandra R.", area: "Boynton Beach, FL", date: "3 weeks ago", text: "After our kitchen renovation there was dust everywhere. Ridge came in and made it look brand new. The post-construction cleaning was thorough and they even cleaned things I hadn't thought to mention. Excellent service.", stars: 5, service: "Post-Construction" },
       ],
     },
     why: {
-      heading: "Why Choose Us",
-      sub: "Trusted by hundreds of clients across Palm Beach County",
+      heading: "Why Choose Us", sub: "Trusted by hundreds of clients across Palm Beach County",
       items: [
         { title: "Experienced Team", desc: "Years of professional cleaning expertise" },
         { title: "Affordable Pricing", desc: "Competitive rates with no hidden fees" },
@@ -90,49 +75,38 @@ const t = {
         { title: "Reliable & Trusted", desc: "Background-checked, insured professionals" },
         { title: "100% Satisfaction", desc: "We're not done until you're happy" },
       ],
-      card: {
-        title: "100% Satisfaction Guarantee",
-        checks: ["Plant-Based Products", "Insured & Bonded", "Eco-Friendly Cleaning", "Background Checked Staff"],
-        cta: "Book Your Cleaning",
-      },
+      card: { title: "100% Satisfaction Guarantee", checks: ["Plant-Based Products", "Insured & Bonded", "Eco-Friendly Cleaning", "Background Checked Staff"], cta: "Book Your Cleaning" },
     },
-    gallery: { heading: "Our Work", sub: "See the Ridge difference in action" },
     about: {
-      heading: "About Us",
-      sub: "Locally owned, community driven",
+      heading: "About Us", sub: "Locally owned, community driven",
       p1: "Ridge Perfect Cleaning Solutions is a trusted cleaning company serving Palm Beach County. We deliver residential, commercial, and specialty cleaning with a commitment to excellence and attention to detail.",
       p2: "Our trained, background-checked professionals use eco-friendly, plant-based products to keep your space spotless while protecting your family and the environment.",
     },
     faq: {
-      heading: "FAQ",
-      sub: "Common questions answered",
+      heading: "FAQ", sub: "Common questions answered",
       items: [
-        { q: "Do you bring your own cleaning supplies?", a: "Yes! We bring all professional-grade, eco-friendly, plant-based products and equipment at no extra cost to you." },
-        { q: "Are you insured and bonded?", a: "Absolutely. Ridge Perfect Cleaning is fully insured and bonded. All our staff are background-checked for your peace of mind." },
-        { q: "How do I get a quote?", a: "Simply call us at (561) 818-0778, send an email, or fill out the contact form below. We'll get back to you within a few hours with a free estimate." },
-        { q: "How long does a cleaning take?", a: "It depends on the property size. A standard 2-bedroom home typically takes 2–3 hours. Deep cleans and post-construction may take longer." },
-        { q: "Do I need to be home during the cleaning?", a: "Not at all. Many clients give us a key or access code. We treat every home with the same respect and care whether you're there or not." },
-        { q: "What areas do you serve?", a: "We serve all of Palm Beach County including West Palm Beach, Lake Worth, Boynton Beach, Delray Beach, Boca Raton, Palm Beach Gardens, and surrounding areas." },
+        { q: "Do you bring your own cleaning supplies?", a: "Yes! We bring all professional-grade, eco-friendly, plant-based products and equipment at no extra cost." },
+        { q: "Are you insured and bonded?", a: "Absolutely. Ridge Perfect Cleaning is fully insured and bonded. All staff are background-checked for your peace of mind." },
+        { q: "How do I get a quote?", a: "Call us at (561) 818-0778, send an email, or fill out the contact form. We respond within a few hours with a free estimate." },
+        { q: "How long does a cleaning take?", a: "A standard 2-bedroom home typically takes 2–3 hours. Deep cleans and post-construction may take longer." },
+        { q: "Do I need to be home during the cleaning?", a: "Not at all. Many clients give us a key or access code. We treat every home with the same care whether you're there or not." },
+        { q: "What areas do you serve?", a: "We serve all of Palm Beach County: West Palm Beach, Lake Worth, Boynton Beach, Delray Beach, Boca Raton, Palm Beach Gardens, and surrounding areas." },
       ],
     },
-    areas: {
-      heading: "Service Areas",
-      list: ["West Palm Beach", "Lake Worth", "Boynton Beach", "Delray Beach", "Boca Raton", "Palm Beach Gardens", "& Surrounding Areas"],
-    },
+    areas: { heading: "Service Areas", list: ["West Palm Beach", "Lake Worth", "Boynton Beach", "Delray Beach", "Boca Raton", "Palm Beach Gardens", "& Surrounding Areas"] },
     contact: {
-      heading: "Contact Us",
-      sub: "Get your free quote today",
+      heading: "Contact Us", sub: "Get your free quote today",
       call: "Call Us", email: "Email Us", area: "Service Area", areaVal: "Palm Beach County, FL",
       form: {
         name: "Your Name", phone: "Phone Number", service: "Service Needed",
         message: "Tell us about your space (size, type, any notes...)",
-        send: "Send Message",
+        send: "Send Message", sending: "Sending...",
+        success: "Message sent! We'll contact you within a few hours.",
+        error: "Something went wrong. Please call us directly.",
         services: ["Residential Cleaning", "Commercial Cleaning", "Deep Cleaning", "Move-In / Move-Out", "Airbnb Cleaning", "Post-Construction", "Mobile Car Wash", "Pressure Washing", "Other"],
-        success: "Message sent! We'll contact you soon.",
       },
       card: {
-        title: "Ready for a Spotless Space?",
-        desc: "Contact us today for a free, no-obligation quote.",
+        title: "Ready for a Spotless Space?", desc: "Contact us today for a free, no-obligation quote.",
         checks: ["Free Estimates", "Flexible Scheduling", "Satisfaction Guaranteed", "Locally Owned & Operated"],
         cta1: "Call Now", cta2: "WhatsApp",
       },
@@ -140,29 +114,23 @@ const t = {
     },
     footer: {
       desc: "Professional cleaning services throughout Palm Beach County — residential, commercial, and specialty cleaning done right.",
-      services: "Services", contact: "Contact",
-      rights: "All rights reserved.",
-      tagline: "Better Price · Better Solutions · Perfect Clean",
-      madeBy: "Made by",
+      services: "Services", contact: "Contact", legal: "Legal",
+      privacy: "Privacy Policy & Terms",
+      rights: "All rights reserved.", tagline: "Better Price · Better Solutions · Perfect Clean", madeBy: "Made by",
     },
   },
   es: {
     nav: { services: "Servicios", whyUs: "Por Qué Nosotros", about: "Nosotros", contact: "Contacto" },
     hero: {
-      title1: "RIDGE PERFECT",
-      title2: "CLEANING",
+      title1: "RIDGE PERFECT", title2: "CLEANING",
       subtitle: "Limpieza Más Allá de las Expectativas",
       desc: "Servicios profesionales de limpieza residencial y comercial en todo Palm Beach County.",
       tagline: "Mejor Precio · Mejores Soluciones · Limpieza Perfecta",
-      cta1: "Obtén una Cotización",
-      cta2: "Llamar Ahora",
-      s1v: "100%", s1l: "Satisfacción",
-      s2v: "8+",   s2l: "Tipos de Servicio",
-      s3v: "24/7", s3l: "Disponibilidad",
+      cta1: "Obtén una Cotización", cta2: "Llamar Ahora",
+      s1v: "100%", s1l: "Satisfacción", s2v: "8+", s2l: "Tipos de Servicio", s3v: "24/7", s3l: "Disponibilidad",
     },
     services: {
-      heading: "Nuestros Servicios",
-      sub: "Todo lo que tu espacio necesita — con cuidado y profesionalismo",
+      heading: "Nuestros Servicios", sub: "Todo lo que tu espacio necesita — con cuidado y profesionalismo",
       items: [
         { title: "Limpieza Residencial", desc: "Limpieza del hogar adaptada a cada habitación" },
         { title: "Limpieza Comercial", desc: "Soluciones profesionales para oficinas y negocios" },
@@ -174,46 +142,36 @@ const t = {
         { title: "Lavado a Presión", desc: "Elimina suciedad de cualquier superficie" },
       ],
     },
+    beforeAfter: {
+      heading: "Antes & Después",
+      sub: "La diferencia Ridge — resultados visibles en cada limpieza",
+      before: "Antes", after: "Después",
+      items: [
+        { img: "/image 1a.png", label: "Limpieza Profunda de Cocina" },
+        { img: "/image 1c.png", label: "Alfombra de Sala" },
+        { img: "/Image 2c.png", label: "Escritorio de Oficina" },
+      ],
+    },
     pricing: {
-      heading: "Precios",
-      sub: "Tarifas transparentes, sin costos ocultos",
+      heading: "Precios", sub: "Tarifas transparentes, sin costos ocultos",
       note: "* El precio final depende del tamaño y condición de la propiedad. Siempre incluye estimado gratuito.",
+      cta: "Obtén Cotización",
       plans: [
-        {
-          name: "Limpieza Básica",
-          price: "Desde $80",
-          color: "border-[#3AB5E5]",
-          badge: "",
-          features: ["Cocina y baños", "Aspirado y trapeado", "Desempolvado de superficies", "Retiro de basura", "Hasta 2 habitaciones"],
-        },
-        {
-          name: "Limpieza Profunda",
-          price: "Desde $160",
-          color: "border-[#0D2B4E]",
-          badge: "Más Popular",
-          features: ["Todo lo de Básica", "Interior de electrodomésticos", "Rodapiés y persianas", "Interior de gabinetes", "Hasta 4 habitaciones"],
-        },
-        {
-          name: "Comercial / Especial",
-          price: "Cotización",
-          color: "border-[#6BC043]",
-          badge: "",
-          features: ["Oficinas y negocios", "Post-construcción", "Mudanza / Entrada", "Turnos Airbnb", "Lavado a presión"],
-        },
+        { name: "Limpieza Básica", price: "Desde $80", color: "border-[#3AB5E5]", badge: "", features: ["Cocina y baños", "Aspirado y trapeado", "Desempolvado", "Retiro de basura", "Hasta 2 habitaciones"] },
+        { name: "Limpieza Profunda", price: "Desde $160", color: "border-[#0D2B4E]", badge: "Más Popular", features: ["Todo lo de Básica", "Interior de electrodomésticos", "Rodapiés y persianas", "Interior de gabinetes", "Hasta 4 habitaciones"] },
+        { name: "Comercial / Especial", price: "Cotización", color: "border-[#6BC043]", badge: "", features: ["Oficinas y negocios", "Post-construcción", "Mudanza / Entrada", "Turnos Airbnb", "Lavado a presión"] },
       ],
     },
     testimonials: {
-      heading: "Lo Que Dicen Nuestros Clientes",
-      sub: "Reseñas reales de residentes de Palm Beach County",
+      heading: "Reseñas de Google", sub: "Lo que dicen nuestros clientes",
       items: [
-        { name: "María L.", area: "West Palm Beach", text: "Ridge limpió mi casa completa antes de mudarme. Absolutamente impecable — cada rincón, cada gabinete. Quedé sorprendida. ¡Los recomiendo mucho!", stars: 5 },
-        { name: "James T.", area: "Boca Raton", text: "Hacen mis turnos de Airbnb cada semana. Siempre a tiempo, siempre perfecto. Mis huéspedes constantemente dejan reseñas de 5 estrellas sobre la limpieza.", stars: 5 },
-        { name: "Sandra R.", area: "Boynton Beach", text: "Después de nuestra remodelación, el polvo de construcción estaba en todas partes. Ridge lo manejó todo profesionalmente. ¡Nuestra casa quedó como nueva!", stars: 5 },
+        { name: "María L.", area: "West Palm Beach, FL", date: "hace 2 semanas", text: "Contraté a Ridge para una limpieza profunda antes de listar mi casa. Cada gabinete, cada rincón — impecable. El equipo fue profesional, minucioso y llegó puntual. ¡Los recomiendo mucho!", stars: 5, service: "Limpieza Profunda" },
+        { name: "James T.", area: "Boca Raton, FL", date: "hace 1 mes", text: "Manejan mis turnos de Airbnb cada semana sin falta. Mis huéspedes califican constantemente la limpieza con 5 estrellas. La programación es fácil y el equipo se comunica muy bien.", stars: 5, service: "Limpieza Airbnb" },
+        { name: "Sandra R.", area: "Boynton Beach, FL", date: "hace 3 semanas", text: "Después de nuestra remodelación de cocina había polvo en todas partes. Ridge llegó y dejó todo como nuevo. La limpieza post-construcción fue completa y limpiaron cosas que yo no había pedido. Excelente servicio.", stars: 5, service: "Post-Construcción" },
       ],
     },
     why: {
-      heading: "Por Qué Elegirnos",
-      sub: "La confianza de cientos de clientes en Palm Beach County",
+      heading: "Por Qué Elegirnos", sub: "La confianza de cientos de clientes en Palm Beach County",
       items: [
         { title: "Equipo Experimentado", desc: "Años de experiencia en limpieza profesional" },
         { title: "Precios Accesibles", desc: "Tarifas competitivas sin costos ocultos" },
@@ -221,49 +179,38 @@ const t = {
         { title: "Confiables y Seguros", desc: "Profesionales asegurados y verificados" },
         { title: "100% Satisfacción", desc: "No terminamos hasta que estés feliz" },
       ],
-      card: {
-        title: "Garantía de 100% Satisfacción",
-        checks: ["Productos de Base Vegetal", "Asegurados y Certificados", "Limpieza Ecológica", "Personal Verificado"],
-        cta: "Reserva tu Limpieza",
-      },
+      card: { title: "Garantía de 100% Satisfacción", checks: ["Productos de Base Vegetal", "Asegurados y Certificados", "Limpieza Ecológica", "Personal Verificado"], cta: "Reserva tu Limpieza" },
     },
-    gallery: { heading: "Nuestro Trabajo", sub: "Mira la diferencia Ridge en acción" },
     about: {
-      heading: "Sobre Nosotros",
-      sub: "Empresa local, orientada a la comunidad",
+      heading: "Sobre Nosotros", sub: "Empresa local, orientada a la comunidad",
       p1: "Ridge Perfect Cleaning Solutions es una empresa de confianza que sirve a Palm Beach County. Ofrecemos servicios de limpieza residencial, comercial y especializada con compromiso de excelencia y atención al detalle.",
       p2: "Nuestros profesionales capacitados y verificados usan productos ecológicos de base vegetal para mantener tu espacio impecable, protegiendo a tu familia y al medio ambiente.",
     },
     faq: {
-      heading: "Preguntas Frecuentes",
-      sub: "Respuestas a las preguntas más comunes",
+      heading: "Preguntas Frecuentes", sub: "Respuestas a las preguntas más comunes",
       items: [
-        { q: "¿Traen sus propios productos de limpieza?", a: "¡Sí! Traemos todos los productos profesionales ecológicos de base vegetal y el equipo necesario sin costo adicional para ti." },
-        { q: "¿Están asegurados y certificados?", a: "Absolutamente. Ridge Perfect Cleaning está completamente asegurado. Todo nuestro personal pasa por verificación de antecedentes." },
-        { q: "¿Cómo obtengo una cotización?", a: "Simplemente llámanos al (561) 818-0778, envíanos un email, o completa el formulario de contacto. Te respondemos en pocas horas con un estimado gratuito." },
-        { q: "¿Cuánto tiempo dura una limpieza?", a: "Depende del tamaño de la propiedad. Una casa de 2 habitaciones toma aproximadamente 2–3 horas. Las limpiezas profundas pueden tomar más." },
-        { q: "¿Necesito estar en casa durante la limpieza?", a: "Para nada. Muchos clientes nos dan una llave o código de acceso. Tratamos cada hogar con el mismo respeto y cuidado estés presente o no." },
+        { q: "¿Traen sus propios productos?", a: "¡Sí! Traemos todos los productos ecológicos de base vegetal y el equipo necesario sin costo adicional." },
+        { q: "¿Están asegurados y certificados?", a: "Absolutamente. Ridge Perfect Cleaning está completamente asegurado. Todo el personal pasa verificación de antecedentes." },
+        { q: "¿Cómo obtengo una cotización?", a: "Llámanos al (561) 818-0778, envía un email, o completa el formulario de contacto. Te respondemos en pocas horas." },
+        { q: "¿Cuánto tiempo dura una limpieza?", a: "Una casa de 2 habitaciones toma aproximadamente 2–3 horas. Las limpiezas profundas pueden tomar más." },
+        { q: "¿Necesito estar en casa?", a: "Para nada. Muchos clientes nos dan una llave o código de acceso. Tratamos cada hogar con el mismo cuidado." },
         { q: "¿Qué áreas cubren?", a: "Servimos todo Palm Beach County: West Palm Beach, Lake Worth, Boynton Beach, Delray Beach, Boca Raton, Palm Beach Gardens y áreas cercanas." },
       ],
     },
-    areas: {
-      heading: "Áreas de Servicio",
-      list: ["West Palm Beach", "Lake Worth", "Boynton Beach", "Delray Beach", "Boca Raton", "Palm Beach Gardens", "& Áreas Cercanas"],
-    },
+    areas: { heading: "Áreas de Servicio", list: ["West Palm Beach", "Lake Worth", "Boynton Beach", "Delray Beach", "Boca Raton", "Palm Beach Gardens", "& Áreas Cercanas"] },
     contact: {
-      heading: "Contáctanos",
-      sub: "Obtén tu cotización gratuita hoy",
+      heading: "Contáctanos", sub: "Obtén tu cotización gratuita hoy",
       call: "Llámanos", email: "Escríbenos", area: "Área de Servicio", areaVal: "Palm Beach County, FL",
       form: {
         name: "Tu Nombre", phone: "Número de Teléfono", service: "Servicio Necesario",
         message: "Cuéntanos sobre tu espacio (tamaño, tipo, notas...)",
-        send: "Enviar Mensaje",
+        send: "Enviar Mensaje", sending: "Enviando...",
+        success: "¡Mensaje enviado! Te contactaremos en pocas horas.",
+        error: "Algo salió mal. Por favor llámanos directamente.",
         services: ["Limpieza Residencial", "Limpieza Comercial", "Limpieza Profunda", "Mudanza / Entrada", "Limpieza Airbnb", "Post-Construcción", "Lavado de Autos Móvil", "Lavado a Presión", "Otro"],
-        success: "¡Mensaje enviado! Te contactaremos pronto.",
       },
       card: {
-        title: "¿Listo para un Espacio Impecable?",
-        desc: "Contáctanos hoy para una cotización gratuita y sin compromiso.",
+        title: "¿Listo para un Espacio Impecable?", desc: "Contáctanos hoy para una cotización gratuita y sin compromiso.",
         checks: ["Estimados Gratuitos", "Horarios Flexibles", "Satisfacción Garantizada", "Empresa Local"],
         cta1: "Llamar Ahora", cta2: "WhatsApp",
       },
@@ -271,10 +218,9 @@ const t = {
     },
     footer: {
       desc: "Servicios de limpieza profesional en todo Palm Beach County — residencial, comercial y especializada.",
-      services: "Servicios", contact: "Contacto",
-      rights: "Todos los derechos reservados.",
-      tagline: "Mejor Precio · Mejores Soluciones · Limpieza Perfecta",
-      madeBy: "Hecho por",
+      services: "Servicios", contact: "Contacto", legal: "Legal",
+      privacy: "Política de Privacidad y Términos",
+      rights: "Todos los derechos reservados.", tagline: "Mejor Precio · Mejores Soluciones · Limpieza Perfecta", madeBy: "Hecho por",
     },
   },
 };
@@ -282,7 +228,7 @@ const t = {
 const serviceIcons = [HomeIcon, Building2, Sparkles, ArrowLeftRight, BedDouble, HardHat, Car, Droplets];
 const whyIcons    = [Star, DollarSign, CalendarCheck, ShieldCheck, UserCheck];
 
-// ─── Scroll reveal ────────────────────────────────────────────────────────────
+// ─── Reveal on scroll ─────────────────────────────────────────────────────────
 function useReveal() {
   const ref = useRef<HTMLDivElement>(null);
   const [on, setOn] = useState(false);
@@ -324,13 +270,73 @@ const Logo = ({ scrolled }: { scrolled: boolean }) => (
   <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-3 select-none">
     <img src="/Logo sin fondo.png" alt="Ridge Perfect Cleaning" className="h-14 sm:h-16 w-auto" />
     <div className="flex flex-col leading-tight">
-      <span className={`text-[13px] font-black tracking-widest transition-colors ${scrolled ? "text-[#0D2B4E]" : "text-white/90"}`}>
+      <span className={`text-sm font-black tracking-widest transition-colors ${scrolled ? "text-[#0D2B4E]" : "text-white/90"}`}>
         PERFECT CLEANING
       </span>
-      <span className="text-[13px] font-black tracking-widest text-[#6BC043]">SOLUTIONS</span>
+      <span className="text-sm font-black tracking-widest text-[#6BC043]">SOLUTIONS</span>
     </div>
   </button>
 );
+
+// ─── Before/After card ────────────────────────────────────────────────────────
+const BeforeAfterCard = ({ img, label, before, after }: { img: string; label: string; before: string; after: string }) => {
+  const [revealed, setRevealed] = useState(30);
+  const dragging = useRef(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const update = (clientX: number) => {
+    const el = containerRef.current; if (!el) return;
+    const { left, width } = el.getBoundingClientRect();
+    const pct = Math.min(100, Math.max(0, ((clientX - left) / width) * 100));
+    setRevealed(pct);
+  };
+
+  return (
+    <div className="rounded-2xl overflow-hidden shadow-md border border-gray-100">
+      <div
+        ref={containerRef}
+        className="relative select-none cursor-col-resize"
+        style={{ aspectRatio: "4/3" }}
+        onMouseDown={() => { dragging.current = true; }}
+        onMouseMove={e => { if (dragging.current) update(e.clientX); }}
+        onMouseUp={() => { dragging.current = false; }}
+        onMouseLeave={() => { dragging.current = false; }}
+        onTouchMove={e => update(e.touches[0].clientX)}
+      >
+        {/* AFTER (clean) */}
+        <img src={img} alt={`${label} after`} className="absolute inset-0 w-full h-full object-cover" />
+
+        {/* BEFORE (dirty look via CSS) */}
+        <div className="absolute inset-0 overflow-hidden" style={{ width: `${100 - revealed}%`, right: 0, left: "auto" }}>
+          <img
+            src={img} alt={`${label} before`}
+            className="absolute inset-0 h-full object-cover"
+            style={{ width: `${10000 / (100 - revealed)}%`, maxWidth: "none", filter: "grayscale(0.7) brightness(0.65) contrast(1.1) sepia(0.2)", right: 0, left: "auto" }}
+          />
+        </div>
+
+        {/* Divider */}
+        <div className="absolute top-0 bottom-0 w-0.5 bg-white shadow-lg pointer-events-none" style={{ left: `${revealed}%` }}>
+          <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M5 8H1M1 8L3 6M1 8L3 10M11 8H15M15 8L13 6M15 8L13 10" stroke="#0D2B4E" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          </div>
+        </div>
+
+        {/* Labels */}
+        <span className="absolute top-3 left-3 bg-gray-800/70 text-white text-[10px] font-bold px-2.5 py-1 rounded-full backdrop-blur-sm">{before}</span>
+        <span className="absolute top-3 right-3 bg-[#3AB5E5]/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full backdrop-blur-sm">{after}</span>
+      </div>
+      <div className="px-4 py-3 bg-white">
+        <p className="text-[#0D2B4E] font-bold text-sm">{label}</p>
+        <p className="text-gray-400 text-xs">
+          {before === "Before" ? "Drag to compare" : "Desliza para comparar"}
+        </p>
+      </div>
+    </div>
+  );
+};
 
 // ═══════════════════════════════════════════════════════════════════════════════
 export const Home = () => {
@@ -338,14 +344,11 @@ export const Home = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq,  setOpenFaq]  = useState<number | null>(null);
-  const [formSent, setFormSent] = useState(false);
+  const [formState, setFormState] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [form, setForm] = useState({ name: "", phone: "", service: "", message: "" });
   const tx = t[lang];
 
-  useEffect(() => {
-    document.documentElement.lang = lang;
-  }, [lang]);
-
+  useEffect(() => { document.documentElement.lang = lang; }, [lang]);
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 70);
     window.addEventListener("scroll", fn);
@@ -357,16 +360,28 @@ export const Home = () => {
     setMenuOpen(false);
   };
 
-  const handleForm = (e: React.FormEvent) => {
+  // Real form submission via Formspree
+  const handleForm = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Cleaning Request – ${form.service || "General"}`);
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nPhone: ${form.phone}\nService: ${form.service}\n\n${form.message}`
-    );
-    window.open(`mailto:info@ridgeperfectcleaning.com?subject=${subject}&body=${body}`, "_blank");
-    setFormSent(true);
-    setTimeout(() => setFormSent(false), 5000);
-    setForm({ name: "", phone: "", service: "", message: "" });
+    setFormState("sending");
+    try {
+      const res = await fetch("https://formspree.io/f/xpwzadkb", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ ...form, _subject: `Cleaning Request – ${form.service || "General"}` }),
+      });
+      if (res.ok) {
+        setFormState("success");
+        setForm({ name: "", phone: "", service: "", message: "" });
+        setTimeout(() => setFormState("idle"), 6000);
+      } else {
+        setFormState("error");
+        setTimeout(() => setFormState("idle"), 5000);
+      }
+    } catch {
+      setFormState("error");
+      setTimeout(() => setFormState("idle"), 5000);
+    }
   };
 
   const navLinks = [
@@ -379,12 +394,14 @@ export const Home = () => {
   return (
     <div className="font-sans text-gray-800 overflow-x-hidden">
       <style>{`
-        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-        @keyframes pring { 0%{box-shadow:0 0 0 0 rgba(58,181,229,.5)} 70%{box-shadow:0 0 0 14px rgba(58,181,229,0)} 100%{box-shadow:0 0 0 0 rgba(58,181,229,0)} }
+        @keyframes float  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        @keyframes pring  { 0%{box-shadow:0 0 0 0 rgba(58,181,229,.5)} 70%{box-shadow:0 0 0 14px rgba(58,181,229,0)} 100%{box-shadow:0 0 0 0 rgba(58,181,229,0)} }
         @keyframes wpulse { 0%{box-shadow:0 0 0 0 rgba(37,211,102,.5)} 70%{box-shadow:0 0 0 14px rgba(37,211,102,0)} 100%{box-shadow:0 0 0 0 rgba(37,211,102,0)} }
+        @keyframes cpulse { 0%{box-shadow:0 0 0 0 rgba(58,181,229,.5)} 70%{box-shadow:0 0 0 12px rgba(58,181,229,0)} 100%{box-shadow:0 0 0 0 rgba(58,181,229,0)} }
         .float   { animation:float 4s ease-in-out infinite; }
         .pring   { animation:pring 2.4s ease-out infinite; }
         .wpulse  { animation:wpulse 2.2s ease-out infinite; }
+        .cpulse  { animation:cpulse 2s ease-out infinite; }
         .card-lift { transition:transform .22s ease,box-shadow .22s ease; }
         .card-lift:hover { transform:translateY(-5px); box-shadow:0 16px 36px rgba(13,43,78,.10); }
         .icon-wrap { transition:background .2s ease,transform .2s ease; }
@@ -403,17 +420,20 @@ export const Home = () => {
         input:focus,select:focus,textarea:focus { border-color:#3AB5E5 !important; box-shadow:0 0 0 3px rgba(58,181,229,.15); }
       `}</style>
 
-      {/* ── FLOATING WHATSAPP ─────────────────────────────────────────────────── */}
-      <a
-        href="https://wa.me/15618180778"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="wpulse fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-[#25D366] text-white pl-4 pr-5 py-3 rounded-full shadow-lg font-bold text-sm hover:bg-[#20c05a] transition-colors"
-        title="WhatsApp"
-      >
-        <MessageCircle size={20} fill="white" strokeWidth={0} />
-        WhatsApp
-      </a>
+      {/* ── FLOATING BUTTONS (mobile: call + WhatsApp | desktop: WhatsApp only) ── */}
+      <div className="fixed bottom-6 right-4 z-50 flex flex-col gap-3 items-end">
+        {/* Call — mobile only */}
+        <a href="tel:5618180778"
+          className="cpulse md:hidden flex items-center gap-2 bg-[#3AB5E5] text-white pl-4 pr-5 py-3 rounded-full shadow-lg font-bold text-sm hover:bg-[#2aa0d0] transition-colors">
+          <Phone size={18} /> {lang === "en" ? "Call" : "Llamar"}
+        </a>
+        {/* WhatsApp — always visible */}
+        <a href="https://wa.me/15618180778" target="_blank" rel="noopener noreferrer"
+          className="wpulse flex items-center gap-2 bg-[#25D366] text-white pl-4 pr-5 py-3 rounded-full shadow-lg font-bold text-sm hover:bg-[#20c05a] transition-colors">
+          <MessageCircle size={18} fill="white" strokeWidth={0} />
+          WhatsApp
+        </a>
+      </div>
 
       {/* ── NAVBAR ───────────────────────────────────────────────────────────── */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -422,8 +442,8 @@ export const Home = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
           <Logo scrolled={scrolled} />
 
-          {/* Desktop */}
-          <div className="hidden md:flex items-center gap-7 lg:gap-9">
+          {/* Desktop links */}
+          <div className="hidden md:flex items-center gap-6 lg:gap-8">
             {navLinks.map(({ id, label }) => (
               <button key={id} onClick={() => scrollTo(id)}
                 className={`ul-fx text-sm font-semibold tracking-wide transition-colors hover:text-[#3AB5E5] ${
@@ -432,32 +452,26 @@ export const Home = () => {
                 {label}
               </button>
             ))}
-            <button
-              onClick={() => setLang(l => l === "en" ? "es" : "en")}
-              className={`flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full border transition-all ${
-                scrolled
-                  ? "border-[#3AB5E5] text-[#3AB5E5] hover:bg-[#3AB5E5] hover:text-white"
-                  : "border-white/50 text-white/80 hover:border-white hover:text-white"
+            <button onClick={() => setLang(l => l === "en" ? "es" : "en")}
+              className={`flex items-center gap-1.5 text-sm font-bold px-3 py-1.5 rounded-full border transition-all ${
+                scrolled ? "border-[#3AB5E5] text-[#3AB5E5] hover:bg-[#3AB5E5] hover:text-white" : "border-white/50 text-white/80 hover:border-white hover:text-white"
               }`}>
-              <Globe size={12} /> {lang === "en" ? "ES" : "EN"}
+              <Globe size={14} /> {lang === "en" ? "ES" : "EN"}
             </button>
             <a href="tel:5618180778"
               className="pring btn-p flex items-center gap-2 bg-[#3AB5E5] text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-[#2aa0d0]">
-              <Phone size={14} /> (561) 818-0778
+              <Phone size={15} /> (561) 818-0778
             </a>
           </div>
 
-          {/* Mobile */}
+          {/* Mobile right */}
           <div className="md:hidden flex items-center gap-2">
             <button onClick={() => setLang(l => l === "en" ? "es" : "en")}
-              className={`flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full border ${
+              className={`flex items-center gap-1 text-sm font-bold px-2.5 py-1.5 rounded-full border ${
                 scrolled ? "border-[#3AB5E5] text-[#3AB5E5]" : "border-white/50 text-white/80"
               }`}>
-              <Globe size={11} /> {lang === "en" ? "ES" : "EN"}
+              <Globe size={13} /> {lang === "en" ? "ES" : "EN"}
             </button>
-            <a href="tel:5618180778" className="bg-[#3AB5E5] text-white p-2 rounded-full">
-              <Phone size={15} />
-            </a>
             <button onClick={() => setMenuOpen(!menuOpen)} className={`p-1 ${scrolled ? "text-[#0D2B4E]" : "text-white"}`}>
               {menuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
@@ -481,12 +495,11 @@ export const Home = () => {
       </nav>
 
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
-      <section className="relative bg-[#0D2B4E] overflow-hidden" style={{ minHeight: "82vh" }}>
+      <section className="relative bg-[#0D2B4E] overflow-hidden" style={{ minHeight: "85vh" }}>
         <div className="absolute top-10 -left-24 w-72 h-72 rounded-full bg-[#3AB5E5]/10 blur-3xl pointer-events-none" />
         <div className="absolute bottom-10 right-0 w-80 h-80 rounded-full bg-[#6BC043]/8 blur-3xl pointer-events-none" />
 
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-8 items-center pt-36 pb-16 lg:pt-40 lg:pb-16">
-          {/* Text — visible immediately, no hidden animation */}
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-8 items-center pt-36 pb-20 lg:pt-40 lg:pb-16">
           <div className="text-center lg:text-left">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-none mb-3">
               <span className="text-[#3AB5E5]">{tx.hero.title1}</span><br />
@@ -506,11 +519,7 @@ export const Home = () => {
               </a>
             </div>
             <div className="flex justify-center lg:justify-start gap-8">
-              {[
-                { v: tx.hero.s1v, l: tx.hero.s1l },
-                { v: tx.hero.s2v, l: tx.hero.s2l },
-                { v: tx.hero.s3v, l: tx.hero.s3l },
-              ].map(({ v, l }) => (
+              {[{ v: tx.hero.s1v, l: tx.hero.s1l }, { v: tx.hero.s2v, l: tx.hero.s2l }, { v: tx.hero.s3v, l: tx.hero.s3l }].map(({ v, l }) => (
                 <div key={l} className="text-center">
                   <div className="text-2xl font-black text-[#3AB5E5]">{v}</div>
                   <div className="text-[10px] text-white/40 uppercase tracking-widest mt-0.5">{l}</div>
@@ -519,43 +528,34 @@ export const Home = () => {
             </div>
           </div>
 
-          {/* Video — Ridge Cleaning */}
-          <div className="hidden lg:flex justify-center items-center relative">
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="w-80 h-80 rounded-full border border-[#3AB5E5]/15" />
-            </div>
-            <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-2 border-white/10" style={{ maxWidth: 460 }}>
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="w-full h-auto block"
-                style={{ maxHeight: 420 }}
-              >
-                <source src="/Ridge Cleaning.mp4" type="video/mp4" />
+          {/* Video — landscape format, desktop */}
+          <div className="hidden lg:flex justify-center items-center">
+            <div className="relative z-10 w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10" style={{ maxWidth: 520 }}>
+              <video autoPlay muted loop playsInline className="w-full h-auto block">
+                <source src="/RidgeCleaning.mp4" type="video/mp4" />
               </video>
             </div>
           </div>
 
-          {/* Mobile: show video below text */}
-          <div className="lg:hidden mt-4">
+          {/* Video — mobile */}
+          <div className="lg:hidden">
             <div className="rounded-2xl overflow-hidden shadow-xl border border-white/10">
               <video autoPlay muted loop playsInline className="w-full h-auto block">
-                <source src="/Ridge Cleaning.mp4" type="video/mp4" />
+                <source src="/RidgeCleaning.mp4" type="video/mp4" />
               </video>
             </div>
           </div>
         </div>
 
         <button onClick={() => scrollTo("services")}
-          className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/25 hover:text-white/50 transition-colors float z-10">
+          className="absolute bottom-16 left-1/2 -translate-x-1/2 text-white/25 hover:text-white/50 transition-colors float z-10">
           <ArrowDown size={18} />
         </button>
 
+        {/* Pronounced wave */}
         <div className="-mb-px">
-          <svg viewBox="0 0 1440 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="w-full block">
-            <path d="M0,25 C360,50 1080,0 1440,25 L1440,50 L0,50 Z" fill="white" />
+          <svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="w-full block">
+            <path d="M0,0 C240,100 480,0 720,60 C960,100 1200,20 1440,70 L1440,100 L0,100 Z" fill="white" />
           </svg>
         </div>
       </section>
@@ -583,6 +583,24 @@ export const Home = () => {
         </div>
       </section>
 
+      {/* ── BEFORE & AFTER ───────────────────────────────────────────────────── */}
+      <section className="py-20 px-4 sm:px-6 bg-[#F8FBFF]">
+        <div className="max-w-5xl mx-auto">
+          <SectionHead label={tx.beforeAfter.heading} title={tx.beforeAfter.sub} />
+          <div className="grid sm:grid-cols-3 gap-5">
+            {tx.beforeAfter.items.map(({ img, label }, i) => (
+              <Reveal key={label} delay={i * 70}>
+                <BeforeAfterCard
+                  img={img}
+                  label={label}
+                  before={tx.beforeAfter.before}
+                  after={tx.beforeAfter.after}
+                />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ── PRICING ──────────────────────────────────────────────────────────── */}
       <section className="py-20 px-4 sm:px-6 bg-white">
@@ -602,22 +620,19 @@ export const Home = () => {
                   <ul className="space-y-2.5 flex-1">
                     {features.map(f => (
                       <li key={f} className="flex items-start gap-2 text-sm text-gray-600">
-                        <CheckCircle size={15} strokeWidth={2} className="text-[#6BC043] shrink-0 mt-0.5" />
-                        {f}
+                        <CheckCircle size={15} strokeWidth={2} className="text-[#6BC043] shrink-0 mt-0.5" /> {f}
                       </li>
                     ))}
                   </ul>
                   <button onClick={() => scrollTo("contact")}
                     className="btn-p mt-7 w-full bg-[#3AB5E5] text-white py-2.5 rounded-full font-bold text-sm hover:bg-[#2aa0d0]">
-                    {lang === "en" ? "Get a Quote" : "Obtén Cotización"}
+                    {tx.pricing.cta}
                   </button>
                 </div>
               </Reveal>
             ))}
           </div>
-          <Reveal>
-            <p className="text-center text-gray-400 text-xs mt-6">{tx.pricing.note}</p>
-          </Reveal>
+          <Reveal><p className="text-center text-gray-400 text-xs mt-6">{tx.pricing.note}</p></Reveal>
         </div>
       </section>
 
@@ -626,22 +641,38 @@ export const Home = () => {
         <div className="max-w-6xl mx-auto">
           <SectionHead label={tx.testimonials.heading} title={tx.testimonials.sub} />
           <div className="grid sm:grid-cols-3 gap-6">
-            {tx.testimonials.items.map(({ name, area, text, stars }, i) => (
+            {tx.testimonials.items.map(({ name, area, date, text, stars, service }, i) => (
               <Reveal key={name} delay={i * 80}>
-                <div className="card-lift bg-white border border-gray-100 rounded-2xl p-7 h-full flex flex-col">
-                  <div className="flex gap-0.5 mb-4">
-                    {Array.from({ length: stars }).map((_, s) => (
-                      <Star key={s} size={15} className="text-yellow-400" fill="#FBBF24" strokeWidth={0} />
-                    ))}
+                <div className="card-lift bg-white border border-gray-100 rounded-2xl p-6 h-full flex flex-col">
+                  {/* Google logo + stars */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex gap-0.5">
+                      {Array.from({ length: stars }).map((_, s) => (
+                        <Star key={s} size={14} fill="#FBBF24" strokeWidth={0} className="text-yellow-400" />
+                      ))}
+                    </div>
+                    {/* Google G */}
+                    <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                    </svg>
                   </div>
                   <p className="text-gray-600 text-sm leading-relaxed flex-1 mb-5">"{text}"</p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full bg-[#3AB5E5] flex items-center justify-center text-white font-black text-sm shrink-0">
-                      {name.charAt(0)}
+                  <div>
+                    <div className="flex items-center gap-3 mb-1">
+                      <div className="w-9 h-9 rounded-full bg-[#3AB5E5] flex items-center justify-center text-white font-black text-sm shrink-0">
+                        {name.charAt(0)}
+                      </div>
+                      <div>
+                        <div className="font-bold text-[#0D2B4E] text-sm">{name}</div>
+                        <div className="text-gray-400 text-xs">{area}</div>
+                      </div>
                     </div>
-                    <div>
-                      <div className="font-bold text-[#0D2B4E] text-sm">{name}</div>
-                      <div className="text-gray-400 text-xs">{area}</div>
+                    <div className="flex items-center justify-between mt-2 pl-12">
+                      <span className="text-[10px] bg-[#EEF8FD] text-[#3AB5E5] font-semibold px-2 py-0.5 rounded-full">{service}</span>
+                      <span className="text-[10px] text-gray-400">{date}</span>
                     </div>
                   </div>
                 </div>
@@ -699,7 +730,7 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* ── ABOUT — image 1a + 1c only here ─────────────────────────────────── */}
+      {/* ── ABOUT ────────────────────────────────────────────────────────────── */}
       <section id="about" className="py-20 px-4 sm:px-6 bg-[#F8FBFF]">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <Reveal>
@@ -708,7 +739,7 @@ export const Home = () => {
                 <img src="/image 1a.png" alt="Residential cleaning" className="w-full h-full object-cover" loading="lazy" />
               </div>
               <div className="img-zoom rounded-2xl overflow-hidden" style={{ aspectRatio: "1/1" }}>
-                <img src="/image 1c.png" alt="Carpet cleaning" className="w-full h-full object-cover" loading="lazy" />
+                <img src="/image 1b.png" alt="Our team" className="w-full h-full object-cover" loading="lazy" />
               </div>
               <div className="bg-[#0D2B4E] rounded-2xl flex flex-col items-center justify-center" style={{ aspectRatio: "1/1" }}>
                 <div className="text-3xl font-black text-[#3AB5E5]">5★</div>
@@ -753,20 +784,15 @@ export const Home = () => {
             {tx.faq.items.map(({ q, a }, i) => (
               <Reveal key={i} delay={i * 40}>
                 <div className="border border-gray-100 rounded-xl overflow-hidden bg-white shadow-sm">
-                  <button
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-gray-50 transition-colors"
-                  >
+                  <button onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                    className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-gray-50 transition-colors">
                     <span className="font-bold text-[#0D2B4E] text-sm pr-4">{q}</span>
-                    <ChevronDown
-                      size={18}
-                      className="text-[#3AB5E5] shrink-0 transition-transform duration-200"
-                      style={{ transform: openFaq === i ? "rotate(180deg)" : "rotate(0deg)" }}
-                    />
+                    <ChevronDown size={18} className="text-[#3AB5E5] shrink-0 transition-transform duration-200"
+                      style={{ transform: openFaq === i ? "rotate(180deg)" : "rotate(0deg)" }} />
                   </button>
                   {openFaq === i && (
-                    <div className="px-6 pb-5">
-                      <p className="text-gray-500 text-sm leading-relaxed">{a}</p>
+                    <div className="px-6 pb-5 border-t border-gray-50">
+                      <p className="text-gray-500 text-sm leading-relaxed pt-3">{a}</p>
                     </div>
                   )}
                 </div>
@@ -778,19 +804,18 @@ export const Home = () => {
 
       {/* ── SERVICE AREAS ────────────────────────────────────────────────────── */}
       <section className="py-14 px-4 sm:px-6 bg-gradient-to-br from-[#0D2B4E] via-[#0a3565] to-[#1a6a9e]">
-        <div className="max-w-4xl mx-auto text-center">
-          <Reveal>
+        <Reveal>
+          <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-2xl sm:text-3xl font-black text-white mb-8">{tx.areas.heading}</h2>
             <div className="flex flex-wrap justify-center gap-3">
               {tx.areas.list.map(area => (
-                <span key={area}
-                  className="bg-white/10 text-white px-5 py-2.5 rounded-full text-sm font-semibold border border-white/20 hover:bg-white/20 transition-colors cursor-default backdrop-blur-sm">
+                <span key={area} className="bg-white/10 text-white px-5 py-2.5 rounded-full text-sm font-semibold border border-white/20 hover:bg-white/20 transition-colors cursor-default backdrop-blur-sm">
                   {area}
                 </span>
               ))}
             </div>
-          </Reveal>
-        </div>
+          </div>
+        </Reveal>
       </section>
 
       {/* ── CONTACT + FORM ───────────────────────────────────────────────────── */}
@@ -799,14 +824,13 @@ export const Home = () => {
           <SectionHead label={tx.contact.heading} title={tx.contact.sub} />
           <div className="grid lg:grid-cols-2 gap-10 items-start">
 
-            {/* Left: info cards + form */}
+            {/* Left */}
             <div className="space-y-4">
               {[
                 { href: "tel:5618180778", Icon: Phone, bg: "bg-[#3AB5E5]", label: tx.contact.call, value: "(561) 818-0778", hc: "group-hover:text-[#3AB5E5]" },
                 { href: "mailto:info@ridgeperfectcleaning.com", Icon: Mail, bg: "bg-[#6BC043]", label: tx.contact.email, value: "info@ridgeperfectcleaning.com", hc: "group-hover:text-[#6BC043]" },
               ].map(({ href, Icon, bg, label, value, hc }) => (
-                <a key={label} href={href}
-                  className="card-lift group flex items-center gap-4 bg-white border border-gray-100 rounded-xl p-5 block">
+                <a key={label} href={href} className="card-lift group flex items-center gap-4 bg-white border border-gray-100 rounded-xl p-5 block">
                   <div className={`${bg} w-12 h-12 rounded-xl flex items-center justify-center shrink-0`}>
                     <Icon size={19} strokeWidth={1.8} className="text-white" />
                   </div>
@@ -827,57 +851,49 @@ export const Home = () => {
                 </div>
               </div>
 
-              {/* Contact form */}
-              <form onSubmit={handleForm} className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm space-y-4 mt-2">
-                <h3 className="font-black text-[#0D2B4E] text-base mb-2">
+              {/* Real contact form — Formspree */}
+              <form onSubmit={handleForm} className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm space-y-4">
+                <h3 className="font-black text-[#0D2B4E] text-base">
                   {lang === "en" ? "Send us a message" : "Envíanos un mensaje"}
                 </h3>
                 <div className="grid sm:grid-cols-2 gap-4">
-                  <input
-                    required
-                    type="text"
-                    placeholder={tx.contact.form.name}
-                    value={form.name}
+                  <input required type="text" placeholder={tx.contact.form.name} value={form.name}
                     onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-                    className="border border-gray-200 rounded-xl px-4 py-3 text-sm w-full transition-all"
-                  />
-                  <input
-                    type="tel"
-                    placeholder={tx.contact.form.phone}
-                    value={form.phone}
+                    className="border border-gray-200 rounded-xl px-4 py-3 text-sm w-full transition-all" />
+                  <input type="tel" placeholder={tx.contact.form.phone} value={form.phone}
                     onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
-                    className="border border-gray-200 rounded-xl px-4 py-3 text-sm w-full transition-all"
-                  />
+                    className="border border-gray-200 rounded-xl px-4 py-3 text-sm w-full transition-all" />
                 </div>
-                <select
-                  value={form.service}
-                  onChange={e => setForm(f => ({ ...f, service: e.target.value }))}
-                  className="border border-gray-200 rounded-xl px-4 py-3 text-sm w-full text-gray-600 transition-all bg-white"
-                >
+                <select value={form.service} onChange={e => setForm(f => ({ ...f, service: e.target.value }))}
+                  className="border border-gray-200 rounded-xl px-4 py-3 text-sm w-full text-gray-600 transition-all bg-white">
                   <option value="">{tx.contact.form.service}</option>
                   {tx.contact.form.services.map(s => <option key={s} value={s}>{s}</option>)}
                 </select>
-                <textarea
-                  rows={3}
-                  placeholder={tx.contact.form.message}
-                  value={form.message}
+                <textarea rows={3} placeholder={tx.contact.form.message} value={form.message}
                   onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
-                  className="border border-gray-200 rounded-xl px-4 py-3 text-sm w-full resize-none transition-all"
-                />
-                {formSent ? (
-                  <div className="flex items-center gap-2 text-[#6BC043] font-semibold text-sm">
+                  className="border border-gray-200 rounded-xl px-4 py-3 text-sm w-full resize-none transition-all" />
+
+                {formState === "success" ? (
+                  <div className="flex items-center gap-2 text-[#6BC043] font-semibold text-sm bg-green-50 px-4 py-3 rounded-xl">
                     <CheckCircle size={16} /> {tx.contact.form.success}
                   </div>
+                ) : formState === "error" ? (
+                  <div className="flex items-center gap-2 text-red-500 font-semibold text-sm bg-red-50 px-4 py-3 rounded-xl">
+                    <X size={16} /> {tx.contact.form.error}
+                  </div>
                 ) : (
-                  <button type="submit"
-                    className="btn-p flex items-center gap-2 bg-[#0D2B4E] text-white px-6 py-3 rounded-full font-bold text-sm">
-                    <Send size={14} /> {tx.contact.form.send}
+                  <button type="submit" disabled={formState === "sending"}
+                    className="btn-p flex items-center gap-2 bg-[#0D2B4E] text-white px-6 py-3 rounded-full font-bold text-sm disabled:opacity-60">
+                    {formState === "sending"
+                      ? <><Loader2 size={14} className="animate-spin" /> {tx.contact.form.sending}</>
+                      : <><Send size={14} /> {tx.contact.form.send}</>
+                    }
                   </button>
                 )}
               </form>
             </div>
 
-            {/* Right: CTA card */}
+            {/* Right CTA */}
             <Reveal delay={80}>
               <div className="bg-[#0D2B4E] rounded-2xl p-8 text-white sticky top-24">
                 <h3 className="text-xl sm:text-2xl font-black mb-2">{tx.contact.card.title}</h3>
@@ -899,10 +915,8 @@ export const Home = () => {
                     className="btn-o flex items-center justify-center gap-2 bg-[#25D366] text-white py-3 rounded-full font-bold text-sm hover:bg-[#20c05a]">
                     <MessageCircle size={14} fill="white" strokeWidth={0} /> {tx.contact.card.cta2}
                   </a>
-                  <a
-                    href="https://maps.google.com/?q=Ridge+Perfect+Cleaning+Palm+Beach+County+FL"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <a href="https://maps.google.com/?q=Ridge+Perfect+Cleaning+Palm+Beach+County+FL"
+                    target="_blank" rel="noopener noreferrer"
                     className="btn-o flex items-center justify-center gap-2 border border-white/20 text-white/70 py-2.5 rounded-full text-xs font-semibold hover:border-white/50 hover:text-white">
                     <ExternalLink size={12} /> {tx.contact.google}
                   </a>
@@ -917,11 +931,11 @@ export const Home = () => {
       <footer className="bg-[#0D2B4E] text-white pt-14 pb-8 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto grid sm:grid-cols-2 md:grid-cols-3 gap-10 mb-10">
           <div>
-            <div className="flex items-center gap-2.5 mb-4">
+            <div className="flex items-center gap-3 mb-4">
               <img src="/Logo sin fondo.png" alt="Ridge Logo" className="h-12 w-auto" />
               <div className="flex flex-col leading-tight">
-                <span className="text-[11px] font-black tracking-widest text-white/80">PERFECT CLEANING</span>
-                <span className="text-[11px] font-black tracking-widest text-[#6BC043]">SOLUTIONS</span>
+                <span className="text-sm font-black tracking-widest text-white/80">PERFECT CLEANING</span>
+                <span className="text-sm font-black tracking-widest text-[#6BC043]">SOLUTIONS</span>
               </div>
             </div>
             <p className="text-gray-400 text-xs leading-relaxed mb-4">{tx.footer.desc}</p>
@@ -930,7 +944,6 @@ export const Home = () => {
               <MessageCircle size={13} fill="white" strokeWidth={0} /> WhatsApp
             </a>
           </div>
-
           <div>
             <h4 className="text-[10px] font-bold text-[#3AB5E5] uppercase tracking-widest mb-4">{tx.footer.services}</h4>
             <ul className="space-y-2">
@@ -941,10 +954,9 @@ export const Home = () => {
               ))}
             </ul>
           </div>
-
           <div>
             <h4 className="text-[10px] font-bold text-[#3AB5E5] uppercase tracking-widest mb-4">{tx.footer.contact}</h4>
-            <div className="space-y-3">
+            <div className="space-y-3 mb-6">
               <a href="tel:5618180778" className="flex items-center gap-2.5 text-gray-400 hover:text-white text-xs transition-colors">
                 <Phone size={12} className="text-[#3AB5E5] shrink-0" /> (561) 818-0778
               </a>
@@ -954,16 +966,13 @@ export const Home = () => {
               <div className="flex items-center gap-2.5 text-gray-400 text-xs">
                 <MapPin size={12} className="text-[#3AB5E5] shrink-0" /> Palm Beach County, FL
               </div>
-              <a
-                href="https://maps.google.com/?q=Ridge+Perfect+Cleaning+Palm+Beach+County+FL"
-                target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-2.5 text-gray-400 hover:text-white text-xs transition-colors">
-                <ExternalLink size={12} className="text-[#3AB5E5] shrink-0" /> {tx.contact.google}
-              </a>
             </div>
+            <h4 className="text-[10px] font-bold text-[#3AB5E5] uppercase tracking-widest mb-3">{tx.footer.legal}</h4>
+            <a href="/privacy" className="flex items-center gap-2 text-gray-400 hover:text-white text-xs transition-colors">
+              <ChevronRight size={11} className="text-[#6BC043] shrink-0" /> {tx.footer.privacy}
+            </a>
           </div>
         </div>
-
         <div className="max-w-6xl mx-auto pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
           <p className="text-gray-500">© {new Date().getFullYear()} Ridge Perfect Cleaning Solutions. {tx.footer.rights}</p>
           <p className="text-[#6BC043] font-semibold hidden sm:block">{tx.footer.tagline}</p>

@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorBoundary from "@/components/ErrorBoundary";
 
 import { Home } from "./pages/Home";
+import { PrivacyPolicy } from "./pages/PrivacyPolicy";
 
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -24,6 +25,7 @@ const App = () => (
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
