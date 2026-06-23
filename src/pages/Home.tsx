@@ -551,14 +551,14 @@ export const Home = () => {
         }} />
 
         {/* Buttons — desktop only */}
-        <div className="hidden sm:flex absolute bottom-14 left-20 lg:left-36 z-10 flex-row gap-2">
+        <div className="hidden sm:flex absolute bottom-20 left-20 lg:left-36 z-10 flex-row gap-3">
           <button onClick={() => scrollTo("contact")}
-            className="btn-p bg-[#3AB5E5] text-white px-5 py-2 rounded-full font-bold text-xs shadow-lg">
+            className="btn-p bg-[#3AB5E5] text-white px-7 py-3 rounded-full font-bold text-sm shadow-lg">
             {tx.hero.cta1}
           </button>
           <a href="tel:5618180778"
-            className="btn-o border-2 border-white/60 text-white px-5 py-2 rounded-full font-bold text-xs flex items-center gap-1.5 hover:bg-white hover:text-[#0D2B4E] hover:border-white backdrop-blur-sm bg-white/10">
-            <Phone size={12} /> {tx.hero.cta2}
+            className="btn-o border-2 border-white/60 text-white px-7 py-3 rounded-full font-bold text-sm flex items-center gap-2 hover:bg-white hover:text-[#0D2B4E] hover:border-white backdrop-blur-sm bg-white/10">
+            <Phone size={14} /> {tx.hero.cta2}
           </a>
         </div>
 
