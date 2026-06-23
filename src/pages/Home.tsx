@@ -535,93 +535,15 @@ export const Home = () => {
 
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
       <section
-        className="relative overflow-hidden bg-[#0D2B4E]"
+        className="relative overflow-hidden"
         style={{
           minHeight: "82vh",
           backgroundImage: "url('/Image4a.png')",
-          backgroundSize: "48% auto",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "right center",
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
         }}
       >
-        {/* Left side stays navy (no image there), light vignette on right edge for polish */}
-        <div className="absolute inset-0" style={{
-          background: "linear-gradient(to right, rgba(13,43,78,0) 0%, rgba(13,43,78,0) 50%, rgba(13,43,78,0.18) 85%, rgba(13,43,78,0.35) 100%)"
-        }} />
-
-        {/* Content — left aligned */}
-        <div
-          className="relative z-10 flex flex-col justify-center px-6 sm:px-10 lg:px-20 max-w-3xl"
-          style={{ minHeight: "82vh", paddingTop: 80, paddingBottom: 40 }}
-        >
-          {/* RIDGE — Orbitron bold italic */}
-          <div
-            className="leading-none text-[#3AB5E5] animate-shimmer-text mb-1"
-            style={{
-              fontFamily: "'Orbitron', sans-serif",
-              fontWeight: 900,
-              fontStyle: "italic",
-              fontSize: "clamp(4rem, 14vw, 10rem)",
-              letterSpacing: "-0.01em",
-              textShadow: "0 4px 32px rgba(58,181,229,0.35)",
-            }}
-          >
-            RIDGE
-          </div>
-
-          {/* Accent line */}
-          <div className="flex items-center gap-3 mb-2 max-w-xs">
-            <div className="h-px flex-1 bg-[#3AB5E5]/50" />
-            <div className="w-2 h-2 rounded-full bg-[#6BC043]" />
-            <div className="h-px flex-1 bg-[#6BC043]/50" />
-          </div>
-
-          {/* PERFECT CLEANING — Bebas Neue */}
-          <div
-            className="leading-none text-white mb-6"
-            style={{
-              fontFamily: "'Bebas Neue', sans-serif",
-              fontSize: "clamp(1.8rem, 6vw, 4rem)",
-              letterSpacing: "0.22em",
-              textShadow: "0 2px 16px rgba(0,0,0,0.4)",
-            }}
-          >
-            PERFECT CLEANING
-          </div>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-row gap-3 mb-8 flex-wrap">
-            <button onClick={() => scrollTo("contact")}
-              className="btn-p bg-[#3AB5E5] text-white px-8 py-3.5 rounded-full font-bold text-sm shadow-lg">
-              {tx.hero.cta1}
-            </button>
-            <a href="tel:5618180778"
-              className="btn-o border-2 border-white/40 text-white px-8 py-3.5 rounded-full font-bold text-sm flex items-center gap-2 hover:bg-white hover:text-[#0D2B4E] hover:border-white">
-              <Phone size={14} /> {tx.hero.cta2}
-            </a>
-          </div>
-
-          {/* Stats */}
-          <div className="flex gap-8 sm:gap-12">
-            {[
-              { v: 100, suf: "%", l: tx.hero.s1l },
-              { v: 8, suf: "+", l: tx.hero.s2l },
-              { l: tx.hero.s3l, raw: "24/7" },
-            ].map(({ v, suf, l, raw }) => (
-              <div key={l} className="text-left">
-                <div className="text-2xl sm:text-3xl font-black text-[#3AB5E5]">{raw ?? <CountUp end={v!} suffix={suf} />}</div>
-                <div className="text-[10px] text-white/45 uppercase tracking-widest mt-0.5">{l}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <button onClick={() => scrollTo("services")}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/30 hover:text-white/60 transition-colors float z-10">
-          <ArrowDown size={20} />
-        </button>
-
-        {/* Pronounced wave */}
+        {/* Wave */}
         <div className="absolute bottom-0 left-0 right-0 -mb-px z-10">
           <svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="w-full block">
             <path d="M0,0 C240,100 480,0 720,60 C960,100 1200,20 1440,70 L1440,100 L0,100 Z" fill="white" />
