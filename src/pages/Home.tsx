@@ -539,7 +539,7 @@ export const Home = () => {
         style={{
           minHeight: "82vh",
           backgroundImage: "url('/Image4a.png')",
-          backgroundSize: "auto 100%",
+          backgroundSize: "48% auto",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "right center",
         }}
@@ -578,7 +578,7 @@ export const Home = () => {
 
           {/* PERFECT CLEANING — Bebas Neue */}
           <div
-            className="leading-none text-white mb-4"
+            className="leading-none text-white mb-6"
             style={{
               fontFamily: "'Bebas Neue', sans-serif",
               fontSize: "clamp(1.8rem, 6vw, 4rem)",
@@ -589,17 +589,31 @@ export const Home = () => {
             PERFECT CLEANING
           </div>
 
-          <p className="text-white/75 italic text-sm sm:text-base mb-1">{tx.hero.subtitle}</p>
-          <p className="text-white/60 text-xs sm:text-sm max-w-md mb-3">{tx.hero.desc}</p>
+          {/* CTA Buttons */}
+          <div className="flex flex-row gap-3 mb-8 flex-wrap">
+            <button onClick={() => scrollTo("contact")}
+              className="btn-p bg-[#3AB5E5] text-white px-8 py-3.5 rounded-full font-bold text-sm shadow-lg">
+              {tx.hero.cta1}
+            </button>
+            <a href="tel:5618180778"
+              className="btn-o border-2 border-white/40 text-white px-8 py-3.5 rounded-full font-bold text-sm flex items-center gap-2 hover:bg-white hover:text-[#0D2B4E] hover:border-white">
+              <Phone size={14} /> {tx.hero.cta2}
+            </a>
+          </div>
 
-          {/* Tagline — 3 brand colors */}
-          <p className="text-xs font-bold uppercase tracking-widest">
-            <span className="text-[#3AB5E5]">{lang === "en" ? "Better Price" : "Mejor Precio"}</span>
-            <span className="text-white/40 mx-2">·</span>
-            <span className="text-[#6BC043]">{lang === "en" ? "Better Solutions" : "Mejores Soluciones"}</span>
-            <span className="text-white/40 mx-2">·</span>
-            <span className="text-white">{lang === "en" ? "Perfect Clean" : "Limpieza Perfecta"}</span>
-          </p>
+          {/* Stats */}
+          <div className="flex gap-8 sm:gap-12">
+            {[
+              { v: 100, suf: "%", l: tx.hero.s1l },
+              { v: 8, suf: "+", l: tx.hero.s2l },
+              { l: tx.hero.s3l, raw: "24/7" },
+            ].map(({ v, suf, l, raw }) => (
+              <div key={l} className="text-left">
+                <div className="text-2xl sm:text-3xl font-black text-[#3AB5E5]">{raw ?? <CountUp end={v!} suffix={suf} />}</div>
+                <div className="text-[10px] text-white/45 uppercase tracking-widest mt-0.5">{l}</div>
+              </div>
+            ))}
+          </div>
         </div>
 
         <button onClick={() => scrollTo("services")}
