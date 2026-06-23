@@ -272,7 +272,7 @@ const SectionHead = ({ label, title }: { label: string; title: string }) => (
 // ─── Logo ─────────────────────────────────────────────────────────────────────
 const Logo = () => (
   <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center select-none hover:opacity-90 transition-opacity">
-    <img src="/Logo_1.png" alt="Ridge Perfect Cleaning" className="h-12 sm:h-14 w-auto" />
+    <img src="/Logo_1.png" alt="Ridge Perfect Cleaning" className="h-14 sm:h-16 w-auto" />
   </button>
 );
 
@@ -538,7 +538,7 @@ export const Home = () => {
         className="relative overflow-hidden bg-[#0D2B4E]"
         style={{
           minHeight: "82vh",
-          backgroundImage: "url('/Image%204a.png')",
+          backgroundImage: "url('/Image4a.png')",
           backgroundSize: "auto 100%",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "right center",
@@ -593,38 +593,13 @@ export const Home = () => {
           <p className="text-white/60 text-xs sm:text-sm max-w-md mb-3">{tx.hero.desc}</p>
 
           {/* Tagline — 3 brand colors */}
-          <p className="text-xs font-bold uppercase tracking-widest mb-7">
+          <p className="text-xs font-bold uppercase tracking-widest">
             <span className="text-[#3AB5E5]">{lang === "en" ? "Better Price" : "Mejor Precio"}</span>
             <span className="text-white/40 mx-2">·</span>
             <span className="text-[#6BC043]">{lang === "en" ? "Better Solutions" : "Mejores Soluciones"}</span>
             <span className="text-white/40 mx-2">·</span>
             <span className="text-white">{lang === "en" ? "Perfect Clean" : "Limpieza Perfecta"}</span>
           </p>
-
-          <div className="flex flex-row gap-3 mb-10 flex-wrap">
-            <button onClick={() => scrollTo("contact")}
-              className="btn-p bg-[#3AB5E5] text-white px-8 py-3.5 rounded-full font-bold text-sm shadow-lg">
-              {tx.hero.cta1}
-            </button>
-            <a href="tel:5618180778"
-              className="btn-o border-2 border-white/40 text-white px-8 py-3.5 rounded-full font-bold text-sm flex items-center gap-2 hover:bg-white hover:text-[#0D2B4E] hover:border-white">
-              <Phone size={14} /> {tx.hero.cta2}
-            </a>
-          </div>
-
-          {/* Stats */}
-          <div className="flex gap-8 sm:gap-12">
-            {[
-              { v: 100, suf: "%", l: tx.hero.s1l },
-              { v: 8, suf: "+", l: tx.hero.s2l },
-              { l: tx.hero.s3l, raw: "24/7" },
-            ].map(({ v, suf, l, raw }) => (
-              <div key={l} className="text-left">
-                <div className="text-2xl sm:text-3xl font-black text-[#3AB5E5]">{raw ?? <CountUp end={v!} suffix={suf} />}</div>
-                <div className="text-[10px] text-white/45 uppercase tracking-widest mt-0.5">{l}</div>
-              </div>
-            ))}
-          </div>
         </div>
 
         <button onClick={() => scrollTo("services")}
@@ -852,7 +827,7 @@ export const Home = () => {
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
           <Reveal>
             <div className="img-zoom rounded-2xl overflow-hidden bg-gray-50 border border-gray-100 shadow-sm" style={{ aspectRatio: "4/3" }}>
-              <img src="/image-2a.png" alt="Cleaning service" className="w-full h-full object-contain" loading="lazy" />
+              <img src="/Image2.jpeg" alt="Cleaning service" className="w-full h-full object-contain" loading="lazy" />
             </div>
           </Reveal>
           <Reveal delay={100}>
@@ -1022,7 +997,7 @@ export const Home = () => {
         <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 mb-10">
           <div className="col-span-2 md:col-span-1">
             <div className="mb-4">
-              <img src="/Logo_1.png" alt="Ridge Perfect Cleaning" className="h-16 sm:h-18 w-auto" />
+              <img src="/Logo_1.png" alt="Ridge Perfect Cleaning" className="h-16 sm:h-20 w-auto" />
             </div>
             <p className="text-gray-400 text-xs leading-relaxed mb-4">{tx.footer.desc}</p>
             <a href="https://wa.me/15618180778" target="_blank" rel="noopener noreferrer"
