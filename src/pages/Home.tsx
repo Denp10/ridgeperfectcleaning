@@ -549,8 +549,8 @@ export const Home = () => {
         }} />
 
         {/* Buttons + stats — bottom left, above the wave */}
-        <div className="absolute bottom-20 left-6 sm:left-10 lg:left-20 z-10">
-          <div className="flex flex-row gap-3 mb-6 flex-wrap">
+        <div className="absolute bottom-20 left-6 sm:left-10 lg:left-20 z-10 flex flex-col items-center">
+          <div className="flex flex-row gap-3 mb-5 flex-wrap justify-center">
             <button onClick={() => scrollTo("contact")}
               className="btn-p bg-[#3AB5E5] text-white px-7 py-3 rounded-full font-bold text-sm shadow-lg">
               {tx.hero.cta1}
@@ -560,7 +560,7 @@ export const Home = () => {
               <Phone size={14} /> {tx.hero.cta2}
             </a>
           </div>
-          <div className="flex gap-12 sm:gap-16">
+          <div className="flex gap-12 sm:gap-16 justify-center">
             {[
               { v: 100, suf: "%", l: tx.hero.s1l },
               { v: 8,   suf: "+", l: tx.hero.s2l },
