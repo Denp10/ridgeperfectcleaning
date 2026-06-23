@@ -377,6 +377,9 @@ export const Home = () => {
   const [form, setForm] = useState({ name: "", phone: "", service: "", message: "" });
   const [showAllServices, setShowAllServices] = useState(false);
   const [activeReview, setActiveReview] = useState(0);
+  const [openBA,           setOpenBA]           = useState(false);
+  const [openTestimonials, setOpenTestimonials] = useState(false);
+  const [openFAQSection,   setOpenFAQSection]   = useState(false);
   const tx = t[lang];
 
   // Auto-advance carousel every 3.5s
@@ -629,25 +632,28 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* ── BEFORE & AFTER ───────────────────────────────────────────────────── */}
-      <section className="py-8 sm:py-14 px-4 sm:px-6 bg-[#F8FBFF]">
-        <div className="max-w-3xl mx-auto">
-          <SectionHead label={tx.beforeAfter.heading} title={tx.beforeAfter.sub} />
-          <div className="grid sm:grid-cols-3 gap-3">
-            {tx.beforeAfter.items.map(({ imgBefore, imgAfter, label }, i) => (
-              <Reveal key={label} delay={i * 70}>
-                <BeforeAfterCard
-                  imgBefore={imgBefore}
-                  imgAfter={imgAfter}
-                  label={label}
-                  before={tx.beforeAfter.before}
-                  after={tx.beforeAfter.after}
-                />
-              </Reveal>
-            ))}
+      {/* ── BEFORE & AFTER (mobile: collapsible) ───────────────────────────── */}
+      <div>
+        <button
+          className="sm:hidden w-full flex items-center justify-between px-4 py-3.5 bg-[#F8FBFF] border-y border-gray-100"
+          onClick={() => setOpenBA(o => !o)}
+        >
+          <span className="font-bold text-[#0D2B4E] text-sm">{lang === "en" ? "Before & After" : "Antes y Después"}</span>
+          <ChevronDown size={16} className={`text-[#3AB5E5] transition-transform duration-200 ${openBA ? "rotate-180" : ""}`} />
+        </button>
+        <section className={`py-8 sm:py-14 px-4 sm:px-6 bg-[#F8FBFF] ${openBA ? "" : "hidden sm:block"}`}>
+          <div className="max-w-3xl mx-auto">
+            <div className="hidden sm:block"><SectionHead label={tx.beforeAfter.heading} title={tx.beforeAfter.sub} /></div>
+            <div className="grid sm:grid-cols-3 gap-3">
+              {tx.beforeAfter.items.map(({ imgBefore, imgAfter, label }, i) => (
+                <Reveal key={label} delay={i * 70}>
+                  <BeforeAfterCard imgBefore={imgBefore} imgAfter={imgAfter} label={label} before={tx.beforeAfter.before} after={tx.beforeAfter.after} />
+                </Reveal>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* ── PRICING ──────────────────────────────────────────────────────────── */}
       <section className="py-8 sm:py-14 px-4 sm:px-6 bg-white">
@@ -685,10 +691,18 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* ── TESTIMONIALS CAROUSEL — 2 cards visible ──────────────────────────── */}
-      <section className="py-8 sm:py-14 px-4 sm:px-6 bg-[#F8FBFF]">
+      {/* ── TESTIMONIALS (mobile: collapsible) ───────────────────────────────── */}
+      <div>
+        <button
+          className="sm:hidden w-full flex items-center justify-between px-4 py-3.5 bg-[#F8FBFF] border-y border-gray-100"
+          onClick={() => setOpenTestimonials(o => !o)}
+        >
+          <span className="font-bold text-[#0D2B4E] text-sm">{lang === "en" ? "Google Reviews" : "Reseñas Google"}</span>
+          <ChevronDown size={16} className={`text-[#3AB5E5] transition-transform duration-200 ${openTestimonials ? "rotate-180" : ""}`} />
+        </button>
+      <section className={`py-8 sm:py-14 px-4 sm:px-6 bg-[#F8FBFF] ${openTestimonials ? "" : "hidden sm:block"}`}>
         <div className="max-w-3xl mx-auto">
-          <SectionHead label={tx.testimonials.heading} title={tx.testimonials.sub} />
+          <div className="hidden sm:block"><SectionHead label={tx.testimonials.heading} title={tx.testimonials.sub} /></div>
           <Reveal>
             {(() => {
               const items = tx.testimonials.items;
@@ -740,11 +754,13 @@ export const Home = () => {
           </Reveal>
         </div>
       </section>
+      </div>
 
-      {/* ── WHY US ───────────────────────────────────────────────────────────── */}
+      {/* ── WHY US + ABOUT (merged) ──────────────────────────────────────────── */}
       <section id="why-us" className="py-12 sm:py-20 px-4 sm:px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
+        <div id="about" className="max-w-6xl mx-auto">
           <SectionHead label={tx.why.heading} title={tx.why.sub} />
+          {/* Desktop: Why Us grid | Blue card */}
           <div className="grid md:grid-cols-2 gap-8 items-start">
             <div className="grid grid-cols-2 gap-3">
               {tx.why.items.map(({ title, desc }, i) => {
@@ -763,89 +779,86 @@ export const Home = () => {
               })}
             </div>
             <Reveal delay={80}>
-              <div className="bg-[#0D2B4E] rounded-2xl p-8 text-white">
-                <div className="w-10 h-10 bg-[#3AB5E5]/20 rounded-full flex items-center justify-center mb-5">
+              <div className="bg-[#0D2B4E] rounded-2xl p-5 sm:p-8 text-white">
+                <div className="w-10 h-10 bg-[#3AB5E5]/20 rounded-full flex items-center justify-center mb-4 sm:mb-5">
                   <ShieldCheck size={20} strokeWidth={1.7} className="text-[#3AB5E5]" />
                 </div>
-                <h3 className="text-xl sm:text-2xl font-black text-[#3AB5E5] mb-1">{tx.why.card.title}</h3>
-                <div className="w-8 h-0.5 bg-[#6BC043] mb-6 rounded-full" />
-                <div className="space-y-3 mb-8">
+                <h3 className="text-lg sm:text-2xl font-black text-[#3AB5E5] mb-1">{tx.why.card.title}</h3>
+                <div className="w-8 h-0.5 bg-[#6BC043] mb-4 sm:mb-6 rounded-full" />
+                <div className="space-y-2 sm:space-y-3 mb-5 sm:mb-8">
                   {tx.why.card.checks.map(item => (
                     <div key={item} className="flex items-center gap-3">
-                      <CheckCircle size={14} strokeWidth={2} className="text-[#6BC043] shrink-0" />
-                      <span className="text-gray-300 text-sm">{item}</span>
+                      <CheckCircle size={13} strokeWidth={2} className="text-[#6BC043] shrink-0" />
+                      <span className="text-gray-300 text-xs sm:text-sm">{item}</span>
                     </div>
                   ))}
                 </div>
+                {/* About text — mobile only, compact inside card */}
+                <p className="md:hidden text-gray-400 text-[11px] leading-relaxed mb-4 border-t border-white/10 pt-4">{tx.about.p1}</p>
                 <button onClick={() => scrollTo("contact")}
-                  className="btn-p w-full bg-[#3AB5E5] text-white py-3 rounded-full font-bold text-sm">
+                  className="btn-p w-full bg-[#3AB5E5] text-white py-2.5 sm:py-3 rounded-full font-bold text-sm">
                   {tx.why.card.cta}
                 </button>
               </div>
             </Reveal>
           </div>
-        </div>
-      </section>
-
-      {/* ── ABOUT ────────────────────────────────────────────────────────────── */}
-      <section id="about" className="py-12 sm:py-20 px-4 sm:px-6 bg-[#F8FBFF]">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
-          <Reveal>
-            <div className="img-zoom rounded-2xl overflow-hidden bg-gray-50 border border-gray-100 shadow-sm" style={{ aspectRatio: "4/3" }}>
-              <img src="/Image2.jpeg" alt="Cleaning service" className="w-full h-full object-contain" loading="lazy" />
-            </div>
-          </Reveal>
-          <Reveal delay={100}>
-            <p className="text-[#3AB5E5] text-xs font-bold uppercase tracking-widest mb-2">{tx.about.heading}</p>
-            <h2 className="text-3xl sm:text-4xl font-black text-[#0D2B4E] mb-2">{tx.about.sub}</h2>
-            <div className="w-10 h-1 bg-[#3AB5E5] rounded-full mb-6" />
-            <p className="text-gray-500 leading-relaxed mb-4 text-sm">{tx.about.p1}</p>
-            <p className="text-gray-500 leading-relaxed mb-8 text-sm">{tx.about.p2}</p>
-            <div className="grid grid-cols-3 gap-3 mb-8">
-              {[
-                { v: "8+",   l: lang === "en" ? "Services"  : "Servicios",  c: "text-[#3AB5E5]" },
-                { v: "100%", l: lang === "en" ? "Guarantee" : "Garantía",   c: "text-[#6BC043]" },
-              ].map(({ v, l, c }) => (
-                <div key={l} className="bg-white rounded-xl p-3 text-center border border-gray-100 shadow-sm">
-                  <div className={`text-xl font-black ${c}`}>{v}</div>
-                  <div className="text-[10px] text-gray-400 mt-0.5">{l}</div>
-                </div>
-              ))}
-            </div>
-            <p className="font-bold text-sm">
-              <span className="text-[#3AB5E5]">Better Price · </span>
-              <span className="text-[#0D2B4E]">Better Solutions · </span>
-              <span className="text-[#6BC043]">Perfect Clean</span>
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ── FAQ ──────────────────────────────────────────────────────────────── */}
-      <section className="py-12 sm:py-20 px-4 sm:px-6 bg-white">
-        <div className="max-w-3xl mx-auto">
-          <SectionHead label={tx.faq.heading} title={tx.faq.sub} />
-          <div className="space-y-3">
-            {tx.faq.items.map(({ q, a }, i) => (
-              <Reveal key={i} delay={i * 40}>
-                <div className="border border-gray-100 rounded-xl overflow-hidden bg-white shadow-sm">
-                  <button onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-gray-50 transition-colors">
-                    <span className="font-bold text-[#0D2B4E] text-sm pr-4">{q}</span>
-                    <ChevronDown size={18} className="text-[#3AB5E5] shrink-0 transition-transform duration-200"
-                      style={{ transform: openFaq === i ? "rotate(180deg)" : "rotate(0deg)" }} />
-                  </button>
-                  {openFaq === i && (
-                    <div className="px-6 pb-5 border-t border-gray-50">
-                      <p className="text-gray-500 text-sm leading-relaxed pt-3">{a}</p>
-                    </div>
-                  )}
-                </div>
-              </Reveal>
-            ))}
+          {/* About — desktop only, below the grid */}
+          <div className="hidden md:grid md:grid-cols-2 gap-8 sm:gap-12 items-center mt-14">
+            <Reveal>
+              <div className="img-zoom rounded-2xl overflow-hidden bg-gray-50 border border-gray-100 shadow-sm" style={{ aspectRatio: "4/3" }}>
+                <img src="/Image2.jpeg" alt="Cleaning service" className="w-full h-full object-contain" loading="lazy" />
+              </div>
+            </Reveal>
+            <Reveal delay={100}>
+              <p className="text-[#3AB5E5] text-xs font-bold uppercase tracking-widest mb-2">{tx.about.heading}</p>
+              <h2 className="text-3xl sm:text-4xl font-black text-[#0D2B4E] mb-2">{tx.about.sub}</h2>
+              <div className="w-10 h-1 bg-[#3AB5E5] rounded-full mb-6" />
+              <p className="text-gray-500 leading-relaxed mb-4 text-sm">{tx.about.p1}</p>
+              <p className="text-gray-500 leading-relaxed mb-8 text-sm">{tx.about.p2}</p>
+              <p className="font-bold text-sm">
+                <span className="text-[#3AB5E5]">Better Price · </span>
+                <span className="text-[#0D2B4E]">Better Solutions · </span>
+                <span className="text-[#6BC043]">Perfect Clean</span>
+              </p>
+            </Reveal>
           </div>
         </div>
       </section>
+
+      {/* ── FAQ (mobile: collapsible) ─────────────────────────────────────────── */}
+      <div>
+        <button
+          className="sm:hidden w-full flex items-center justify-between px-4 py-3.5 bg-white border-y border-gray-100"
+          onClick={() => setOpenFAQSection(o => !o)}
+        >
+          <span className="font-bold text-[#0D2B4E] text-sm">{lang === "en" ? "FAQ" : "Preguntas Frecuentes"}</span>
+          <ChevronDown size={16} className={`text-[#3AB5E5] transition-transform duration-200 ${openFAQSection ? "rotate-180" : ""}`} />
+        </button>
+        <section className={`py-12 sm:py-20 px-4 sm:px-6 bg-white ${openFAQSection ? "" : "hidden sm:block"}`}>
+          <div className="max-w-3xl mx-auto">
+            <div className="hidden sm:block"><SectionHead label={tx.faq.heading} title={tx.faq.sub} /></div>
+            <div className="space-y-3">
+              {tx.faq.items.map(({ q, a }, i) => (
+                <Reveal key={i} delay={i * 40}>
+                  <div className="border border-gray-100 rounded-xl overflow-hidden bg-white shadow-sm">
+                    <button onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                      className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-gray-50 transition-colors">
+                      <span className="font-bold text-[#0D2B4E] text-sm pr-4">{q}</span>
+                      <ChevronDown size={18} className="text-[#3AB5E5] shrink-0 transition-transform duration-200"
+                        style={{ transform: openFaq === i ? "rotate(180deg)" : "rotate(0deg)" }} />
+                    </button>
+                    {openFaq === i && (
+                      <div className="px-6 pb-5 border-t border-gray-50">
+                        <p className="text-gray-500 text-sm leading-relaxed pt-3">{a}</p>
+                      </div>
+                    )}
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      </div>
 
       {/* ── CONTACT + FORM ───────────────────────────────────────────────────── */}
       <section id="contact" className="py-12 sm:py-20 px-4 sm:px-6 bg-[#F8FBFF]">
