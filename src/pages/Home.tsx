@@ -550,29 +550,29 @@ export const Home = () => {
           background: "linear-gradient(to top, rgba(13,43,78,0.75) 0%, rgba(13,43,78,0.3) 28%, rgba(13,43,78,0) 50%)"
         }} />
 
-        {/* Buttons — desktop only */}
-        <div className="hidden sm:flex absolute bottom-20 left-20 lg:left-36 z-10 flex-row gap-3">
-          <button onClick={() => scrollTo("contact")}
-            className="btn-p bg-[#3AB5E5] text-white px-7 py-3 rounded-full font-bold text-sm shadow-lg">
-            {tx.hero.cta1}
-          </button>
-          <a href="tel:5618180778"
-            className="btn-o border-2 border-white/60 text-white px-7 py-3 rounded-full font-bold text-sm flex items-center gap-2 hover:bg-white hover:text-[#0D2B4E] hover:border-white backdrop-blur-sm bg-white/10">
-            <Phone size={14} /> {tx.hero.cta2}
-          </a>
-        </div>
-
-        {/* Stats — very bottom, always visible, small */}
-        <div className="absolute bottom-2 sm:bottom-4 left-8 sm:left-20 lg:left-36 z-10 flex gap-6 sm:gap-10">
-          {[
-            { v: 100, suf: "%", l: tx.hero.s1l },
-            { v: 8,   suf: "+", l: tx.hero.s2l },
-          ].map(({ v, suf, l }) => (
-            <div key={l} className="text-center">
-              <div className="text-base sm:text-xl font-black text-[#3AB5E5]"><CountUp end={v} suffix={suf} /></div>
-              <div className="text-[8px] sm:text-[9px] text-white/60 uppercase tracking-widest">{l}</div>
-            </div>
-          ))}
+        {/* Buttons + Stats — desktop only, grouped above the wave */}
+        <div className="hidden sm:flex flex-col absolute bottom-28 left-20 lg:left-36 z-10 gap-5">
+          <div className="flex flex-row gap-3">
+            <button onClick={() => scrollTo("contact")}
+              className="btn-p bg-[#3AB5E5] text-white px-7 py-3 rounded-full font-bold text-sm shadow-lg">
+              {tx.hero.cta1}
+            </button>
+            <a href="tel:5618180778"
+              className="btn-o border-2 border-white/60 text-white px-7 py-3 rounded-full font-bold text-sm flex items-center gap-2 hover:bg-white hover:text-[#0D2B4E] hover:border-white backdrop-blur-sm bg-white/10">
+              <Phone size={14} /> {tx.hero.cta2}
+            </a>
+          </div>
+          <div className="flex gap-12 sm:gap-16">
+            {[
+              { v: 100, suf: "%", l: tx.hero.s1l },
+              { v: 8,   suf: "+", l: tx.hero.s2l },
+            ].map(({ v, suf, l }) => (
+              <div key={l} className="text-center">
+                <div className="text-2xl sm:text-3xl font-black text-[#3AB5E5]"><CountUp end={v} suffix={suf} /></div>
+                <div className="text-[10px] text-white/60 uppercase tracking-widest mt-0.5">{l}</div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Wave */}
