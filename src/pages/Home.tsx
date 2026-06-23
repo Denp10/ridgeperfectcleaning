@@ -543,6 +543,37 @@ export const Home = () => {
           backgroundPosition: "center center",
         }}
       >
+        {/* Bottom-left overlay: dark gradient so buttons are readable */}
+        <div className="absolute inset-0" style={{
+          background: "linear-gradient(to top, rgba(13,43,78,0.72) 0%, rgba(13,43,78,0.3) 30%, rgba(13,43,78,0) 55%)"
+        }} />
+
+        {/* Buttons + stats — bottom left, above the wave */}
+        <div className="absolute bottom-20 left-6 sm:left-10 lg:left-20 z-10">
+          <div className="flex flex-row gap-3 mb-6 flex-wrap">
+            <button onClick={() => scrollTo("contact")}
+              className="btn-p bg-[#3AB5E5] text-white px-7 py-3 rounded-full font-bold text-sm shadow-lg">
+              {tx.hero.cta1}
+            </button>
+            <a href="tel:5618180778"
+              className="btn-o border-2 border-white/60 text-white px-7 py-3 rounded-full font-bold text-sm flex items-center gap-2 hover:bg-white hover:text-[#0D2B4E] hover:border-white backdrop-blur-sm bg-white/10">
+              <Phone size={14} /> {tx.hero.cta2}
+            </a>
+          </div>
+          <div className="flex gap-8 sm:gap-12">
+            {[
+              { v: 100, suf: "%", l: tx.hero.s1l },
+              { v: 8,   suf: "+", l: tx.hero.s2l },
+              { l: tx.hero.s3l, raw: "24/7" },
+            ].map(({ v, suf, l, raw }) => (
+              <div key={l} className="text-left">
+                <div className="text-2xl sm:text-3xl font-black text-[#3AB5E5]">{raw ?? <CountUp end={v!} suffix={suf} />}</div>
+                <div className="text-[10px] text-white/60 uppercase tracking-widest mt-0.5">{l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Wave */}
         <div className="absolute bottom-0 left-0 right-0 -mb-px z-10">
           <svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="w-full block">
