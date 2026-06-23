@@ -26,7 +26,7 @@ const t = {
       s1v: "100%", s1l: "Satisfaction", s2v: "8+", s2l: "Service Types", s3v: "24/7", s3l: "Scheduling",
     },
     services: {
-      heading: "Our Services", sub: "Everything your space needs — handled with care",
+      heading: "Our Services", sub: "Professional cleaning for every space",
       items: [
         { title: "Residential Cleaning", desc: "Tailored home cleaning for every room" },
         { title: "Commercial Cleaning", desc: "Professional office & business solutions" },
@@ -40,7 +40,7 @@ const t = {
     },
     beforeAfter: {
       heading: "Before & After",
-      sub: "The Ridge difference — visible results every time",
+      sub: "Visible results, every time",
       before: "Before", after: "After",
       items: [
         { img: "/image-1a.png", label: "Kitchen Deep Clean" },
@@ -49,7 +49,7 @@ const t = {
       ],
     },
     pricing: {
-      heading: "Pricing", sub: "Transparent rates, no hidden fees",
+      heading: "Pricing", sub: "Clear rates, no surprises",
       note: "* Final price depends on property size and condition. Free estimate always included.",
       cta: "Get a Quote",
       plans: [
@@ -69,7 +69,7 @@ const t = {
       ],
     },
     why: {
-      heading: "Why Choose Us", sub: "Trusted by hundreds of clients across Palm Beach County",
+      heading: "Why Choose Us", sub: "Trusted by hundreds across Palm Beach County",
       items: [
         { title: "Experienced Team", desc: "Years of professional cleaning expertise" },
         { title: "Affordable Pricing", desc: "Competitive rates with no hidden fees" },
@@ -132,7 +132,7 @@ const t = {
       s1v: "100%", s1l: "Satisfacción", s2v: "8+", s2l: "Tipos de Servicio", s3v: "24/7", s3l: "Disponibilidad",
     },
     services: {
-      heading: "Nuestros Servicios", sub: "Todo lo que tu espacio necesita — con cuidado y profesionalismo",
+      heading: "Nuestros Servicios", sub: "Limpieza profesional para cada espacio",
       items: [
         { title: "Limpieza Residencial", desc: "Limpieza del hogar adaptada a cada habitación" },
         { title: "Limpieza Comercial", desc: "Soluciones profesionales para oficinas y negocios" },
@@ -146,7 +146,7 @@ const t = {
     },
     beforeAfter: {
       heading: "Antes & Después",
-      sub: "La diferencia Ridge — resultados visibles en cada limpieza",
+      sub: "Resultados visibles en cada limpieza",
       before: "Antes", after: "Después",
       items: [
         { img: "/image-1a.png", label: "Limpieza Profunda de Cocina" },
@@ -155,7 +155,7 @@ const t = {
       ],
     },
     pricing: {
-      heading: "Precios", sub: "Tarifas transparentes, sin costos ocultos",
+      heading: "Precios", sub: "Tarifas claras, sin sorpresas",
       note: "* El precio final depende del tamaño y condición de la propiedad. Siempre incluye estimado gratuito.",
       cta: "Obtén Cotización",
       plans: [
@@ -175,7 +175,7 @@ const t = {
       ],
     },
     why: {
-      heading: "Por Qué Elegirnos", sub: "La confianza de cientos de clientes en Palm Beach County",
+      heading: "Por Qué Elegirnos", sub: "La confianza de cientos en Palm Beach County",
       items: [
         { title: "Equipo Experimentado", desc: "Años de experiencia en limpieza profesional" },
         { title: "Precios Accesibles", desc: "Tarifas competitivas sin costos ocultos" },
@@ -272,11 +272,9 @@ const SectionHead = ({ label, title }: { label: string; title: string }) => (
 // ─── Logo ─────────────────────────────────────────────────────────────────────
 const Logo = () => (
   <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center select-none group">
-    <img
-      src="/logo.png"
-      alt="Ridge Perfect Cleaning"
-      className="h-12 sm:h-14 w-auto group-hover:scale-105 transition-transform duration-200"
-    />
+    <div className="bg-[#0D2B4E] rounded-2xl px-1.5 py-1 group-hover:scale-105 transition-transform duration-200">
+      <img src="/Logo_1.png" alt="Ridge Perfect Cleaning" className="h-10 sm:h-12 w-auto" />
+    </div>
   </button>
 );
 
