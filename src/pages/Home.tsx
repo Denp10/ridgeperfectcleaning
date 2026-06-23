@@ -537,7 +537,7 @@ export const Home = () => {
       </nav>
 
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-[#0D2B4E]">
+      <section className="relative overflow-hidden bg-[#0D2B4E] pt-20">
         {/* Natural-size image — no crop, no repeat, shows complete photo */}
         <img
           src="/Image4a.png"
