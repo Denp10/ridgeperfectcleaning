@@ -375,14 +375,6 @@ export const Home = () => {
   const [openFaq,  setOpenFaq]  = useState<number | null>(null);
   const [formState, setFormState] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [form, setForm] = useState({ name: "", phone: "", service: "", message: "" });
-  const [activeReview, setActiveReview] = useState(0);
-
-  // Auto-advance carousel every 3s
-  useEffect(() => {
-    const items = t[lang].testimonials.items;
-    const id = setInterval(() => setActiveReview(i => (i + 1) % items.length), 3000);
-    return () => clearInterval(id);
-  }, [lang]);
   const tx = t[lang];
 
   useEffect(() => { document.documentElement.lang = lang; }, [lang]);
@@ -449,8 +441,6 @@ export const Home = () => {
         .animate-shimmer-text { animation:shimmer-text 3.5s ease-in-out infinite; }
         .animate-tilt         { animation:tilt 6s ease-in-out infinite; }
         .animate-fade-in      { animation:fade-in .8s ease-out; }
-        .hero-section { background-size: cover; background-position: center center; background-repeat: no-repeat; }
-        @media (max-width: 640px) { .hero-section { background-size: 100% auto; background-position: top center; background-repeat: no-repeat; min-height: 58vw !important; } }
         .card-lift { transition:transform .22s ease,box-shadow .22s ease; }
         .card-lift:hover { transform:translateY(-5px); box-shadow:0 16px 36px rgba(13,43,78,.10); }
         .icon-wrap { transition:background .2s ease,transform .2s ease; }
@@ -536,14 +526,16 @@ export const Home = () => {
       </nav>
 
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
-      <section
-        className="relative overflow-hidden hero-section"
-        style={{
-          minHeight: "82vh",
-          backgroundImage: "url('/Image4a.png')",
-        }}
-      >
-        {/* Bottom-left overlay: dark gradient so buttons are readable */}
+      <section className="relative overflow-hidden bg-[#0D2B4E]" style={{ minHeight: "82vh" }}>
+        {/* Real img — no repeat possible, cover on desktop, contain on mobile */}
+        <img
+          src="/Image4a.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover sm:object-cover object-contain object-top"
+          style={{ objectPosition: "center center" }}
+        />
+        {/* Bottom gradient for button legibility */}
         <div className="absolute inset-0" style={{
           background: "linear-gradient(to top, rgba(13,43,78,0.72) 0%, rgba(13,43,78,0.3) 30%, rgba(13,43,78,0) 55%)"
         }} />
@@ -585,7 +577,7 @@ export const Home = () => {
       <section id="services" className="py-12 sm:py-20 px-4 sm:px-6 bg-white">
         <div className="max-w-6xl mx-auto">
           <SectionHead label={tx.services.heading} title={tx.services.sub} />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             {tx.services.items.map(({ title, desc }, i) => {
               const Icon = serviceIcons[i];
               const accents = [
@@ -600,18 +592,14 @@ export const Home = () => {
               ];
               const a = accents[i % accents.length];
               return (
-                <Reveal key={title} delay={i * 55}>
-                  <div className={`card-lift group relative bg-white border-l-4 ${a.border} rounded-2xl p-6 h-full cursor-default shadow-sm hover:shadow-md`}>
-                    {/* Number */}
-                    <span className="absolute top-4 right-4 text-xs font-black text-gray-200">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    {/* Icon */}
-                    <div className={`w-12 h-12 ${a.bg} ${a.hover} rounded-xl flex items-center justify-center mb-4 transition-colors duration-200`}>
-                      <Icon size={22} strokeWidth={1.6} className={`${a.icon} group-hover:text-white transition-colors duration-200`} />
+                <Reveal key={title} delay={i * 40}>
+                  <div className={`card-lift group relative bg-white border-l-4 ${a.border} rounded-xl p-4 h-full cursor-default shadow-sm hover:shadow-md`}>
+                    <span className="absolute top-2 right-2 text-[10px] font-black text-gray-200">{String(i + 1).padStart(2, "0")}</span>
+                    <div className={`w-9 h-9 ${a.bg} ${a.hover} rounded-lg flex items-center justify-center mb-3 transition-colors duration-200`}>
+                      <Icon size={17} strokeWidth={1.6} className={`${a.icon} group-hover:text-white transition-colors duration-200`} />
                     </div>
-                    <h3 className="font-black text-[#0D2B4E] text-sm mb-1.5 leading-snug">{title}</h3>
-                    <p className="text-gray-400 text-xs leading-relaxed">{desc}</p>
+                    <h3 className="font-black text-[#0D2B4E] text-xs mb-1 leading-snug">{title}</h3>
+                    <p className="text-gray-400 text-[11px] leading-relaxed">{desc}</p>
                   </div>
                 </Reveal>
               );
@@ -621,10 +609,10 @@ export const Home = () => {
       </section>
 
       {/* ── BEFORE & AFTER ───────────────────────────────────────────────────── */}
-      <section className="py-12 sm:py-20 px-4 sm:px-6 bg-[#F8FBFF]">
-        <div className="max-w-5xl mx-auto">
+      <section className="py-8 sm:py-14 px-4 sm:px-6 bg-[#F8FBFF]">
+        <div className="max-w-3xl mx-auto">
           <SectionHead label={tx.beforeAfter.heading} title={tx.beforeAfter.sub} />
-          <div className="grid sm:grid-cols-3 gap-5">
+          <div className="grid sm:grid-cols-3 gap-3">
             {tx.beforeAfter.items.map(({ imgBefore, imgAfter, label }, i) => (
               <Reveal key={label} delay={i * 70}>
                 <BeforeAfterCard
@@ -641,29 +629,29 @@ export const Home = () => {
       </section>
 
       {/* ── PRICING ──────────────────────────────────────────────────────────── */}
-      <section className="py-12 sm:py-20 px-4 sm:px-6 bg-white">
-        <div className="max-w-5xl mx-auto">
+      <section className="py-8 sm:py-14 px-4 sm:px-6 bg-white">
+        <div className="max-w-4xl mx-auto">
           <SectionHead label={tx.pricing.heading} title={tx.pricing.sub} />
-          <div className="grid sm:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-3 gap-4">
             {tx.pricing.plans.map(({ name, price, color, badge, features }, i) => (
               <Reveal key={name} delay={i * 80}>
-                <div className={`card-lift relative border-2 ${color} rounded-2xl p-7 h-full flex flex-col bg-white`}>
+                <div className={`card-lift relative border-2 ${color} rounded-xl p-5 h-full flex flex-col bg-white`}>
                   {badge && (
                     <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#0D2B4E] text-white text-[10px] font-bold px-3 py-1 rounded-full whitespace-nowrap">
                       {badge}
                     </span>
                   )}
-                  <h3 className="font-black text-[#0D2B4E] text-lg mb-1">{name}</h3>
-                  <p className="text-2xl font-black text-[#3AB5E5] mb-5">{price}</p>
-                  <ul className="space-y-2.5 flex-1">
+                  <h3 className="font-black text-[#0D2B4E] text-sm mb-1">{name}</h3>
+                  <p className="text-xl font-black text-[#3AB5E5] mb-3">{price}</p>
+                  <ul className="space-y-1.5 flex-1">
                     {features.map(f => (
-                      <li key={f} className="flex items-start gap-2 text-sm text-gray-600">
-                        <CheckCircle size={15} strokeWidth={2} className="text-[#6BC043] shrink-0 mt-0.5" /> {f}
+                      <li key={f} className="flex items-start gap-2 text-xs text-gray-600">
+                        <CheckCircle size={13} strokeWidth={2} className="text-[#6BC043] shrink-0 mt-0.5" /> {f}
                       </li>
                     ))}
                   </ul>
                   <button onClick={() => scrollTo("contact")}
-                    className="btn-p mt-7 w-full bg-[#3AB5E5] text-white py-2.5 rounded-full font-bold text-sm hover:bg-[#2aa0d0]">
+                    className="btn-p mt-4 w-full bg-[#3AB5E5] text-white py-2 rounded-full font-bold text-xs hover:bg-[#2aa0d0]">
                     {tx.pricing.cta}
                   </button>
                 </div>
@@ -674,69 +662,41 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* ── TESTIMONIALS CAROUSEL ────────────────────────────────────────────── */}
-      <section className="py-12 sm:py-20 px-4 sm:px-6 bg-[#F8FBFF]">
-        <div className="max-w-2xl mx-auto">
+      {/* ── TESTIMONIALS GRID ────────────────────────────────────────────────── */}
+      <section className="py-8 sm:py-14 px-4 sm:px-6 bg-[#F8FBFF]">
+        <div className="max-w-5xl mx-auto">
           <SectionHead label={tx.testimonials.heading} title={tx.testimonials.sub} />
-          <Reveal>
-            <div className="relative overflow-hidden">
-              {tx.testimonials.items.map(({ name, area, date, text, stars, service }, i) => (
-                <div
-                  key={name}
-                  className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm flex flex-col"
-                  style={{
-                    display: i === activeReview ? "flex" : "none",
-                    animation: i === activeReview ? "fade-in 0.4s ease" : "none",
-                  }}
-                >
-                  <div className="flex items-center justify-between mb-5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {tx.testimonials.items.map(({ name, area, date, text, stars, service }, i) => (
+              <Reveal key={name} delay={i * 50}>
+                <div className="bg-white border border-gray-100 rounded-xl p-4 shadow-sm flex flex-col h-full">
+                  <div className="flex items-center justify-between mb-3">
                     <div className="flex gap-0.5">
                       {Array.from({ length: 5 }).map((_, s) => (
-                        <Star key={s} size={16} fill={s < stars ? "#FBBF24" : "#E5E7EB"} strokeWidth={0} />
+                        <Star key={s} size={12} fill={s < stars ? "#FBBF24" : "#E5E7EB"} strokeWidth={0} />
                       ))}
                     </div>
-                    {/* Google G */}
-                    <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="14" height="14" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
                       <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
                       <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
                       <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
                     </svg>
                   </div>
-                  <p className="text-gray-600 text-base leading-relaxed mb-6">"{text}"</p>
-                  <div className="flex items-center gap-3 mt-auto">
-                    <div className="w-10 h-10 rounded-full bg-[#3AB5E5] flex items-center justify-center text-white font-black shrink-0">
+                  <p className="text-gray-600 text-[11px] leading-relaxed mb-3 flex-1">"{text}"</p>
+                  <div className="flex items-center gap-2 mt-auto">
+                    <div className="w-7 h-7 rounded-full bg-[#3AB5E5] flex items-center justify-center text-white font-black text-xs shrink-0">
                       {name.charAt(0)}
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="font-bold text-[#0D2B4E] text-sm">{name}</div>
-                      <div className="text-gray-400 text-xs">{area}</div>
-                    </div>
-                    <div className="flex flex-col items-end gap-1">
-                      <span className="text-[10px] bg-[#EEF8FD] text-[#3AB5E5] font-semibold px-2.5 py-0.5 rounded-full">{service}</span>
-                      <span className="text-[10px] text-gray-400">{date}</span>
+                    <div className="min-w-0">
+                      <div className="font-bold text-[#0D2B4E] text-[11px] truncate">{name}</div>
+                      <div className="text-gray-400 text-[10px]">{date}</div>
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-
-            {/* Dots */}
-            <div className="flex justify-center gap-2 mt-5">
-              {tx.testimonials.items.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveReview(i)}
-                  className="rounded-full transition-all duration-300"
-                  style={{
-                    width: i === activeReview ? 24 : 8,
-                    height: 8,
-                    background: i === activeReview ? "#3AB5E5" : "#CBD5E1",
-                  }}
-                />
-              ))}
-            </div>
-          </Reveal>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -855,33 +815,8 @@ export const Home = () => {
           <SectionHead label={tx.contact.heading} title={tx.contact.sub} />
           <div className="grid lg:grid-cols-2 gap-10 items-start">
 
-            {/* Left */}
-            <div className="space-y-4">
-              {[
-                { href: "tel:5618180778", Icon: Phone, bg: "bg-[#3AB5E5]", label: tx.contact.call, value: "(561) 818-0778", hc: "group-hover:text-[#3AB5E5]" },
-                { href: "mailto:info@ridgeperfectcleaning.com", Icon: Mail, bg: "bg-[#6BC043]", label: tx.contact.email, value: "info@ridgeperfectcleaning.com", hc: "group-hover:text-[#6BC043]" },
-              ].map(({ href, Icon, bg, label, value, hc }) => (
-                <a key={label} href={href} className="card-lift group flex items-center gap-4 bg-white border border-gray-100 rounded-xl p-5 block">
-                  <div className={`${bg} w-12 h-12 rounded-xl flex items-center justify-center shrink-0`}>
-                    <Icon size={19} strokeWidth={1.8} className="text-white" />
-                  </div>
-                  <div className="min-w-0">
-                    <div className="text-[10px] text-gray-400 font-semibold uppercase tracking-widest">{label}</div>
-                    <div className={`font-bold text-[#0D2B4E] text-sm sm:text-base truncate transition-colors ${hc}`}>{value}</div>
-                  </div>
-                  <ChevronRight size={14} className="text-gray-300 ml-auto shrink-0 group-hover:text-[#3AB5E5] transition-colors" />
-                </a>
-              ))}
-              <div className="flex items-center gap-4 bg-white border border-gray-100 rounded-xl p-5">
-                <div className="bg-[#0D2B4E] w-12 h-12 rounded-xl flex items-center justify-center shrink-0">
-                  <MapPin size={19} strokeWidth={1.8} className="text-white" />
-                </div>
-                <div>
-                  <div className="text-[10px] text-gray-400 font-semibold uppercase tracking-widest">{tx.contact.area}</div>
-                  <div className="font-bold text-[#0D2B4E] text-base">{tx.contact.areaVal}</div>
-                </div>
-              </div>
-
+            {/* Left — form only */}
+            <div>
               {/* Real contact form — Formspree */}
               <form onSubmit={handleForm} className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm space-y-4">
                 <h3 className="font-black text-[#0D2B4E] text-base">
