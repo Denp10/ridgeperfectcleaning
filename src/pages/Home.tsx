@@ -537,7 +537,7 @@ export const Home = () => {
       </nav>
 
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-[#0D2B4E] pt-20">
+      <section className="relative overflow-hidden bg-[#0D2B4E] pt-24">
         {/* Natural-size image — no crop, no repeat, shows complete photo */}
         <img
           src="/Image4a.png"
@@ -552,24 +552,24 @@ export const Home = () => {
 
         {/* Buttons + stats — bottom left */}
         <div className="absolute bottom-12 sm:bottom-16 left-8 sm:left-20 lg:left-36 z-10 flex flex-col items-center">
-          <div className="flex flex-row gap-3 mb-5 flex-wrap justify-center">
+          <div className="flex flex-row gap-2 mb-3 flex-wrap justify-center">
             <button onClick={() => scrollTo("contact")}
-              className="btn-p bg-[#3AB5E5] text-white px-7 py-3 rounded-full font-bold text-sm shadow-lg">
+              className="btn-p bg-[#3AB5E5] text-white px-5 py-2 rounded-full font-bold text-xs shadow-lg">
               {tx.hero.cta1}
             </button>
             <a href="tel:5618180778"
-              className="btn-o border-2 border-white/60 text-white px-7 py-3 rounded-full font-bold text-sm flex items-center gap-2 hover:bg-white hover:text-[#0D2B4E] hover:border-white backdrop-blur-sm bg-white/10">
-              <Phone size={14} /> {tx.hero.cta2}
+              className="btn-o border-2 border-white/60 text-white px-5 py-2 rounded-full font-bold text-xs flex items-center gap-1.5 hover:bg-white hover:text-[#0D2B4E] hover:border-white backdrop-blur-sm bg-white/10">
+              <Phone size={12} /> {tx.hero.cta2}
             </a>
           </div>
-          <div className="flex gap-12 sm:gap-16 justify-center">
+          <div className="flex gap-8 sm:gap-12 justify-center">
             {[
               { v: 100, suf: "%", l: tx.hero.s1l },
               { v: 8,   suf: "+", l: tx.hero.s2l },
             ].map(({ v, suf, l }) => (
               <div key={l} className="text-center">
-                <div className="text-2xl sm:text-3xl font-black text-[#3AB5E5]"><CountUp end={v} suffix={suf} /></div>
-                <div className="text-[10px] text-white/60 uppercase tracking-widest mt-0.5">{l}</div>
+                <div className="text-lg sm:text-2xl font-black text-[#3AB5E5]"><CountUp end={v} suffix={suf} /></div>
+                <div className="text-[9px] text-white/60 uppercase tracking-widest mt-0.5">{l}</div>
               </div>
             ))}
           </div>
@@ -603,13 +603,15 @@ export const Home = () => {
               const a = accents[i % accents.length];
               return (
                 <Reveal key={title} delay={i * 40}>
-                  <div className={`card-lift group relative bg-white border-l-4 ${a.border} rounded-xl p-4 h-full cursor-default shadow-sm hover:shadow-md`}>
+                  <div className={`card-lift group relative bg-white border-l-4 ${a.border} rounded-xl p-3 h-full cursor-default shadow-sm hover:shadow-md`}>
                     <span className="absolute top-2 right-2 text-[10px] font-black text-gray-200">{String(i + 1).padStart(2, "0")}</span>
-                    <div className={`w-9 h-9 ${a.bg} ${a.hover} rounded-lg flex items-center justify-center mb-3 transition-colors duration-200`}>
-                      <Icon size={17} strokeWidth={1.6} className={`${a.icon} group-hover:text-white transition-colors duration-200`} />
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <div className={`w-7 h-7 shrink-0 ${a.bg} ${a.hover} rounded-md flex items-center justify-center transition-colors duration-200`}>
+                        <Icon size={14} strokeWidth={1.6} className={`${a.icon} group-hover:text-white transition-colors duration-200`} />
+                      </div>
+                      <h3 className="font-black text-[#0D2B4E] text-xs leading-snug">{title}</h3>
                     </div>
-                    <h3 className="font-black text-[#0D2B4E] text-xs mb-1 leading-snug">{title}</h3>
-                    <p className="text-gray-400 text-[11px] leading-relaxed">{desc}</p>
+                    <p className="text-gray-400 text-[11px] leading-relaxed pl-9">{desc}</p>
                   </div>
                 </Reveal>
               );
