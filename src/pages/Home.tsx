@@ -449,6 +449,8 @@ export const Home = () => {
         .animate-shimmer-text { animation:shimmer-text 3.5s ease-in-out infinite; }
         .animate-tilt         { animation:tilt 6s ease-in-out infinite; }
         .animate-fade-in      { animation:fade-in .8s ease-out; }
+        .hero-section { background-size: cover; background-position: center center; }
+        @media (max-width: 640px) { .hero-section { background-size: 100% auto; background-position: center top; } }
         .card-lift { transition:transform .22s ease,box-shadow .22s ease; }
         .card-lift:hover { transform:translateY(-5px); box-shadow:0 16px 36px rgba(13,43,78,.10); }
         .icon-wrap { transition:background .2s ease,transform .2s ease; }
@@ -535,12 +537,10 @@ export const Home = () => {
 
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
       <section
-        className="relative overflow-hidden"
+        className="relative overflow-hidden hero-section"
         style={{
           minHeight: "82vh",
           backgroundImage: "url('/Image4a.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center center",
         }}
       >
         {/* Bottom-left overlay: dark gradient so buttons are readable */}
