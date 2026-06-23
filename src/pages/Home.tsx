@@ -449,8 +449,8 @@ export const Home = () => {
         .animate-shimmer-text { animation:shimmer-text 3.5s ease-in-out infinite; }
         .animate-tilt         { animation:tilt 6s ease-in-out infinite; }
         .animate-fade-in      { animation:fade-in .8s ease-out; }
-        .hero-section { background-size: cover; background-position: center center; }
-        @media (max-width: 640px) { .hero-section { background-size: 100% auto; background-position: center top; } }
+        .hero-section { background-size: cover; background-position: center center; background-repeat: no-repeat; }
+        @media (max-width: 640px) { .hero-section { background-size: 100% auto; background-position: top center; background-repeat: no-repeat; min-height: 58vw !important; } }
         .card-lift { transition:transform .22s ease,box-shadow .22s ease; }
         .card-lift:hover { transform:translateY(-5px); box-shadow:0 16px 36px rgba(13,43,78,.10); }
         .icon-wrap { transition:background .2s ease,transform .2s ease; }
@@ -549,7 +549,7 @@ export const Home = () => {
         }} />
 
         {/* Buttons + stats — bottom left, above the wave */}
-        <div className="absolute bottom-20 left-14 sm:left-20 lg:left-36 z-10 flex flex-col items-center">
+        <div className="absolute bottom-4 sm:bottom-20 left-14 sm:left-20 lg:left-36 z-10 flex flex-col items-center">
           <div className="flex flex-row gap-3 mb-5 flex-wrap justify-center">
             <button onClick={() => scrollTo("contact")}
               className="btn-p bg-[#3AB5E5] text-white px-7 py-3 rounded-full font-bold text-sm shadow-lg">
