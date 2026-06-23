@@ -655,26 +655,28 @@ export const Home = () => {
       <section className="py-8 sm:py-14 px-4 sm:px-6 bg-white">
         <div className="max-w-4xl mx-auto">
           <SectionHead label={tx.pricing.heading} title={tx.pricing.sub} />
-          <div className="grid sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-2 sm:gap-4">
             {tx.pricing.plans.map(({ name, price, color, badge, features }, i) => (
               <Reveal key={name} delay={i * 80}>
-                <div className={`card-lift relative border-2 ${color} rounded-xl p-5 h-full flex flex-col bg-white`}>
+                <div className={`card-lift relative border-2 ${color} rounded-xl p-2.5 sm:p-5 h-full flex flex-col bg-white`}>
                   {badge && (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#0D2B4E] text-white text-[10px] font-bold px-3 py-1 rounded-full whitespace-nowrap">
+                    <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-[#0D2B4E] text-white text-[8px] sm:text-[10px] font-bold px-2 sm:px-3 py-0.5 sm:py-1 rounded-full whitespace-nowrap">
                       {badge}
                     </span>
                   )}
-                  <h3 className="font-black text-[#0D2B4E] text-sm mb-1">{name}</h3>
-                  <p className="text-xl font-black text-[#3AB5E5] mb-3">{price}</p>
-                  <ul className="space-y-1.5 flex-1">
+                  <h3 className="font-black text-[#0D2B4E] text-[10px] sm:text-sm mb-0.5 sm:mb-1 leading-snug">{name}</h3>
+                  <p className="text-sm sm:text-xl font-black text-[#3AB5E5] mb-1.5 sm:mb-3">{price}</p>
+                  <ul className="space-y-1 sm:space-y-1.5 flex-1">
                     {features.map(f => (
-                      <li key={f} className="flex items-start gap-2 text-xs text-gray-600">
-                        <CheckCircle size={13} strokeWidth={2} className="text-[#6BC043] shrink-0 mt-0.5" /> {f}
+                      <li key={f} className="flex items-start gap-1 sm:gap-2 text-[9px] sm:text-xs text-gray-600 leading-snug">
+                        <CheckCircle size={10} strokeWidth={2} className="text-[#6BC043] shrink-0 mt-0.5 sm:hidden" />
+                        <CheckCircle size={13} strokeWidth={2} className="text-[#6BC043] shrink-0 mt-0.5 hidden sm:block" />
+                        {f}
                       </li>
                     ))}
                   </ul>
                   <button onClick={() => scrollTo("contact")}
-                    className="btn-p mt-4 w-full bg-[#3AB5E5] text-white py-2 rounded-full font-bold text-xs hover:bg-[#2aa0d0]">
+                    className="btn-p mt-2 sm:mt-4 w-full bg-[#3AB5E5] text-white py-1.5 sm:py-2 rounded-full font-bold text-[9px] sm:text-xs hover:bg-[#2aa0d0]">
                     {tx.pricing.cta}
                   </button>
                 </div>
