@@ -275,8 +275,8 @@ const Logo = ({ scrolled }: { scrolled: boolean }) => (
     <img
       src="/Logocomplet_1.png"
       alt="Ridge Perfect Cleaning"
-      className={`w-auto transition-all duration-300 group-hover:scale-105 ${scrolled ? "h-14 sm:h-16" : "h-16 sm:h-20 lg:h-24"}`}
-      style={{ mixBlendMode: "multiply" }}
+      className={`w-auto transition-all duration-300 group-hover:scale-105 rounded-xl ${scrolled ? "h-14 sm:h-16" : "h-16 sm:h-20 lg:h-24"}`}
+      style={{ mixBlendMode: scrolled ? "normal" : "multiply" }}
     />
   </button>
 );
@@ -542,15 +542,17 @@ export const Home = () => {
       </nav>
 
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden" style={{ minHeight: "100vh" }}>
-        {/* Background photo */}
-        <img
-          src="/Image4.jpeg"
-          alt="Ridge Perfect Cleaning Solutions"
-          className="absolute inset-0 w-full h-full object-cover object-center"
-        />
+      <section
+        className="relative overflow-hidden bg-[#0D2B4E]"
+        style={{
+          minHeight: "100vh",
+          backgroundImage: "url('/Image4.jpeg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         {/* Overlay */}
-        <div className="absolute inset-0 bg-[#0D2B4E]/68" />
+        <div className="absolute inset-0" style={{ background: "rgba(13,43,78,0.68)" }} />
 
         {/* Content */}
         <div
