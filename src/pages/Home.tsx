@@ -550,29 +550,29 @@ export const Home = () => {
           background: "linear-gradient(to top, rgba(13,43,78,0.75) 0%, rgba(13,43,78,0.3) 28%, rgba(13,43,78,0) 50%)"
         }} />
 
-        {/* Buttons + stats — bottom left */}
-        <div className="absolute bottom-12 sm:bottom-16 left-8 sm:left-20 lg:left-36 z-10 flex flex-col items-center">
-          <div className="flex flex-row gap-2 mb-3 flex-wrap justify-center">
-            <button onClick={() => scrollTo("contact")}
-              className="btn-p bg-[#3AB5E5] text-white px-5 py-2 rounded-full font-bold text-xs shadow-lg">
-              {tx.hero.cta1}
-            </button>
-            <a href="tel:5618180778"
-              className="btn-o border-2 border-white/60 text-white px-5 py-2 rounded-full font-bold text-xs flex items-center gap-1.5 hover:bg-white hover:text-[#0D2B4E] hover:border-white backdrop-blur-sm bg-white/10">
-              <Phone size={12} /> {tx.hero.cta2}
-            </a>
-          </div>
-          <div className="flex gap-8 sm:gap-12 justify-center">
-            {[
-              { v: 100, suf: "%", l: tx.hero.s1l },
-              { v: 8,   suf: "+", l: tx.hero.s2l },
-            ].map(({ v, suf, l }) => (
-              <div key={l} className="text-center">
-                <div className="text-lg sm:text-2xl font-black text-[#3AB5E5]"><CountUp end={v} suffix={suf} /></div>
-                <div className="text-[9px] text-white/60 uppercase tracking-widest mt-0.5">{l}</div>
-              </div>
-            ))}
-          </div>
+        {/* Buttons — desktop only */}
+        <div className="hidden sm:flex absolute bottom-14 left-20 lg:left-36 z-10 flex-row gap-2">
+          <button onClick={() => scrollTo("contact")}
+            className="btn-p bg-[#3AB5E5] text-white px-5 py-2 rounded-full font-bold text-xs shadow-lg">
+            {tx.hero.cta1}
+          </button>
+          <a href="tel:5618180778"
+            className="btn-o border-2 border-white/60 text-white px-5 py-2 rounded-full font-bold text-xs flex items-center gap-1.5 hover:bg-white hover:text-[#0D2B4E] hover:border-white backdrop-blur-sm bg-white/10">
+            <Phone size={12} /> {tx.hero.cta2}
+          </a>
+        </div>
+
+        {/* Stats — very bottom, always visible, small */}
+        <div className="absolute bottom-2 sm:bottom-4 left-8 sm:left-20 lg:left-36 z-10 flex gap-6 sm:gap-10">
+          {[
+            { v: 100, suf: "%", l: tx.hero.s1l },
+            { v: 8,   suf: "+", l: tx.hero.s2l },
+          ].map(({ v, suf, l }) => (
+            <div key={l} className="text-center">
+              <div className="text-base sm:text-xl font-black text-[#3AB5E5]"><CountUp end={v} suffix={suf} /></div>
+              <div className="text-[8px] sm:text-[9px] text-white/60 uppercase tracking-widest">{l}</div>
+            </div>
+          ))}
         </div>
 
         {/* Wave */}
