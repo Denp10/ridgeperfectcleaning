@@ -548,34 +548,63 @@ export const Home = () => {
           minHeight: "100vh",
           backgroundImage: "url('/Image4.jpeg')",
           backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundPosition: "center top",
         }}
       >
-        {/* Overlay */}
-        <div className="absolute inset-0" style={{ background: "rgba(13,43,78,0.68)" }} />
+        {/* Gradient overlay — darker center/right where text sits, lets photo breathe on edges */}
+        <div className="absolute inset-0" style={{
+          background: "linear-gradient(135deg, rgba(13,43,78,0.55) 0%, rgba(13,43,78,0.78) 50%, rgba(13,43,78,0.82) 100%)"
+        }} />
 
         {/* Content */}
         <div
           className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6"
-          style={{ minHeight: "100vh", paddingTop: 100, paddingBottom: 80 }}
+          style={{ minHeight: "100vh", paddingTop: 110, paddingBottom: 90 }}
         >
-          <h1 className="leading-none mb-4" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
-            <span
-              className="block text-[#3AB5E5] animate-shimmer-text"
-              style={{ fontSize: "clamp(3.5rem, 10vw, 8rem)", letterSpacing: "0.04em" }}
-            >
-              {tx.hero.title1}
-            </span>
-            <span
-              className="block text-[#6BC043] animate-shimmer-text"
-              style={{ fontSize: "clamp(3.5rem, 10vw, 8rem)", letterSpacing: "0.04em", animationDelay: "0.4s" }}
-            >
-              {tx.hero.title2}
-            </span>
-          </h1>
-          <p className="text-white/80 italic text-base sm:text-lg mb-2">{tx.hero.subtitle}</p>
-          <p className="text-white/65 text-sm sm:text-base max-w-lg mb-2">{tx.hero.desc}</p>
-          <p className="text-[#3AB5E5] font-semibold text-xs mb-8 uppercase tracking-widest">{tx.hero.tagline}</p>
+          {/* Badge */}
+          <div className="flex items-center gap-2 bg-white/10 border border-white/20 backdrop-blur-sm text-white text-xs font-semibold px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest">
+            <Star size={11} fill="#FBBF24" strokeWidth={0} />
+            {lang === "en" ? "Palm Beach County's Trusted Cleaning" : "La Limpieza de Confianza en Palm Beach"}
+          </div>
+
+          {/* RIDGE — Orbitron bold italic */}
+          <div
+            className="leading-none text-[#3AB5E5] animate-shimmer-text mb-1"
+            style={{
+              fontFamily: "'Orbitron', sans-serif",
+              fontWeight: 900,
+              fontStyle: "italic",
+              fontSize: "clamp(4.5rem, 16vw, 11rem)",
+              letterSpacing: "-0.01em",
+              textShadow: "0 4px 32px rgba(58,181,229,0.35)",
+            }}
+          >
+            RIDGE
+          </div>
+
+          {/* Accent line */}
+          <div className="flex items-center gap-3 mb-2 w-full max-w-md justify-center">
+            <div className="h-px flex-1 bg-[#3AB5E5]/40" />
+            <div className="w-2 h-2 rounded-full bg-[#6BC043]" />
+            <div className="h-px flex-1 bg-[#6BC043]/40" />
+          </div>
+
+          {/* PERFECT CLEANING — Bebas Neue */}
+          <div
+            className="leading-none text-white mb-5"
+            style={{
+              fontFamily: "'Bebas Neue', sans-serif",
+              fontSize: "clamp(2rem, 7vw, 4.5rem)",
+              letterSpacing: "0.25em",
+              textShadow: "0 2px 16px rgba(0,0,0,0.4)",
+            }}
+          >
+            PERFECT CLEANING
+          </div>
+
+          <p className="text-white/70 italic text-sm sm:text-base mb-1">{tx.hero.subtitle}</p>
+          <p className="text-white/55 text-xs sm:text-sm max-w-md mb-7">{tx.hero.desc}</p>
+
           <div className="flex flex-col sm:flex-row gap-3 justify-center mb-10">
             <button onClick={() => scrollTo("contact")}
               className="btn-p bg-[#3AB5E5] text-white px-8 py-3.5 rounded-full font-bold text-sm shadow-lg">
@@ -586,15 +615,17 @@ export const Home = () => {
               <Phone size={14} /> {tx.hero.cta2}
             </a>
           </div>
-          <div className="flex justify-center gap-10">
+
+          {/* Stats */}
+          <div className="flex justify-center gap-8 sm:gap-14">
             {[
               { v: 100, suf: "%", l: tx.hero.s1l },
               { v: 8, suf: "+", l: tx.hero.s2l },
               { l: tx.hero.s3l, raw: "24/7" },
             ].map(({ v, suf, l, raw }) => (
               <div key={l} className="text-center">
-                <div className="text-3xl font-black text-[#3AB5E5]">{raw ?? <CountUp end={v!} suffix={suf} />}</div>
-                <div className="text-[10px] text-white/50 uppercase tracking-widest mt-0.5">{l}</div>
+                <div className="text-2xl sm:text-3xl font-black text-[#3AB5E5]">{raw ?? <CountUp end={v!} suffix={suf} />}</div>
+                <div className="text-[10px] text-white/45 uppercase tracking-widest mt-0.5">{l}</div>
               </div>
             ))}
           </div>
