@@ -66,6 +66,7 @@ const t = {
         { name: "Sandra R.", area: "Boynton Beach, FL", date: "3 weeks ago", text: "Great service, but the price is a bit high. Still, the results were worth it — spotless!", stars: 4, service: "Post-Construction" },
         { name: "Carlos M.", area: "Lake Worth, FL", date: "5 days ago", text: "Very professional. Arrived on time and left everything spotless. Will book again.", stars: 5, service: "Residential Cleaning" },
         { name: "Jennifer K.", area: "Delray Beach, FL", date: "2 months ago", text: "Best cleaning company in Palm Beach! Quick, thorough, and friendly staff.", stars: 5, service: "Commercial Cleaning" },
+        { name: "Pierre J.", area: "Lake Worth, FL", date: "3 weeks ago", text: "Nèg yo bon vre wi, men yo on tijan chè.", stars: 4, service: "Residential Cleaning" },
       ],
     },
     why: {
@@ -172,6 +173,7 @@ const t = {
         { name: "Sandra R.", area: "Boynton Beach, FL", date: "hace 3 semanas", text: "Muy buen servicio, pero el precio es un poco elevado. Aun así el resultado valió la pena — quedó perfecto.", stars: 4, service: "Post-Construcción" },
         { name: "Carlos M.", area: "Lake Worth, FL", date: "hace 5 días", text: "Muy profesionales. Llegaron a tiempo y dejaron todo impecable. Los volvería a contratar.", stars: 5, service: "Limpieza Residencial" },
         { name: "Jennifer K.", area: "Delray Beach, FL", date: "hace 2 meses", text: "¡La mejor empresa de limpieza en Palm Beach! Rápidos, completos y muy amables.", stars: 5, service: "Limpieza Comercial" },
+        { name: "Pierre J.", area: "Lake Worth, FL", date: "hace 3 semanas", text: "Nèg yo bon vre wi, men yo on tijan chè.", stars: 4, service: "Limpieza Residencial" },
       ],
     },
     why: {
@@ -375,7 +377,16 @@ export const Home = () => {
   const [openFaq,  setOpenFaq]  = useState<number | null>(null);
   const [formState, setFormState] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [form, setForm] = useState({ name: "", phone: "", service: "", message: "" });
+  const [showAllServices, setShowAllServices] = useState(false);
+  const [activeReview, setActiveReview] = useState(0);
   const tx = t[lang];
+
+  // Auto-advance carousel every 3.5s
+  useEffect(() => {
+    const items = t[lang].testimonials.items;
+    const id = setInterval(() => setActiveReview(i => (i + 1) % items.length), 3500);
+    return () => clearInterval(id);
+  }, [lang]);
 
   useEffect(() => { document.documentElement.lang = lang; }, [lang]);
   useEffect(() => {
@@ -526,22 +537,21 @@ export const Home = () => {
       </nav>
 
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-[#0D2B4E]" style={{ minHeight: "82vh" }}>
-        {/* Real img — no repeat possible, cover on desktop, contain on mobile */}
+      <section className="relative overflow-hidden bg-[#0D2B4E]">
+        {/* Natural-size image — no crop, no repeat, shows complete photo */}
         <img
           src="/Image4a.png"
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover sm:object-cover object-contain object-top"
-          style={{ objectPosition: "center center" }}
+          className="w-full h-auto block"
         />
         {/* Bottom gradient for button legibility */}
         <div className="absolute inset-0" style={{
-          background: "linear-gradient(to top, rgba(13,43,78,0.72) 0%, rgba(13,43,78,0.3) 30%, rgba(13,43,78,0) 55%)"
+          background: "linear-gradient(to top, rgba(13,43,78,0.75) 0%, rgba(13,43,78,0.3) 28%, rgba(13,43,78,0) 50%)"
         }} />
 
-        {/* Buttons + stats — bottom left, above the wave */}
-        <div className="absolute bottom-4 sm:bottom-20 left-14 sm:left-20 lg:left-36 z-10 flex flex-col items-center">
+        {/* Buttons + stats — bottom left */}
+        <div className="absolute bottom-12 sm:bottom-16 left-8 sm:left-20 lg:left-36 z-10 flex flex-col items-center">
           <div className="flex flex-row gap-3 mb-5 flex-wrap justify-center">
             <button onClick={() => scrollTo("contact")}
               className="btn-p bg-[#3AB5E5] text-white px-7 py-3 rounded-full font-bold text-sm shadow-lg">
@@ -578,7 +588,7 @@ export const Home = () => {
         <div className="max-w-6xl mx-auto">
           <SectionHead label={tx.services.heading} title={tx.services.sub} />
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-            {tx.services.items.map(({ title, desc }, i) => {
+            {(showAllServices ? tx.services.items : tx.services.items.slice(0, 4)).map(({ title, desc }, i) => {
               const Icon = serviceIcons[i];
               const accents = [
                 { bg: "bg-[#EEF8FD]", icon: "text-[#3AB5E5]", border: "border-[#3AB5E5]", hover: "group-hover:bg-[#3AB5E5]" },
@@ -605,6 +615,17 @@ export const Home = () => {
               );
             })}
           </div>
+          {!showAllServices && (
+            <Reveal>
+              <div className="text-center mt-5">
+                <button
+                  onClick={() => setShowAllServices(true)}
+                  className="text-[#3AB5E5] text-sm font-bold hover:underline flex items-center gap-1 mx-auto">
+                  {lang === "en" ? "See all services" : "Ver todos los servicios"} <ChevronRight size={15} />
+                </button>
+              </div>
+            </Reveal>
+          )}
         </div>
       </section>
 
@@ -662,18 +683,21 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* ── TESTIMONIALS GRID ────────────────────────────────────────────────── */}
+      {/* ── TESTIMONIALS CAROUSEL — 2 cards visible ──────────────────────────── */}
       <section className="py-8 sm:py-14 px-4 sm:px-6 bg-[#F8FBFF]">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           <SectionHead label={tx.testimonials.heading} title={tx.testimonials.sub} />
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {tx.testimonials.items.map(({ name, area, date, text, stars, service }, i) => (
-              <Reveal key={name} delay={i * 50}>
-                <div className="bg-white border border-gray-100 rounded-xl p-4 shadow-sm flex flex-col h-full">
-                  <div className="flex items-center justify-between mb-3">
+          <Reveal>
+            {(() => {
+              const items = tx.testimonials.items;
+              const a = activeReview;
+              const b = (activeReview + 1) % items.length;
+              const ReviewCard = ({ r }: { r: typeof items[0] }) => (
+                <div className="bg-white border border-gray-100 rounded-xl p-4 shadow-sm flex flex-col h-full animate-fade-in">
+                  <div className="flex items-center justify-between mb-2">
                     <div className="flex gap-0.5">
                       {Array.from({ length: 5 }).map((_, s) => (
-                        <Star key={s} size={12} fill={s < stars ? "#FBBF24" : "#E5E7EB"} strokeWidth={0} />
+                        <Star key={s} size={12} fill={s < r.stars ? "#FBBF24" : "#E5E7EB"} strokeWidth={0} />
                       ))}
                     </div>
                     <svg width="14" height="14" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -683,20 +707,35 @@ export const Home = () => {
                       <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
                     </svg>
                   </div>
-                  <p className="text-gray-600 text-[11px] leading-relaxed mb-3 flex-1">"{text}"</p>
+                  <p className="text-gray-600 text-[11px] leading-relaxed mb-3 flex-1">"{r.text}"</p>
                   <div className="flex items-center gap-2 mt-auto">
                     <div className="w-7 h-7 rounded-full bg-[#3AB5E5] flex items-center justify-center text-white font-black text-xs shrink-0">
-                      {name.charAt(0)}
+                      {r.name.charAt(0)}
                     </div>
                     <div className="min-w-0">
-                      <div className="font-bold text-[#0D2B4E] text-[11px] truncate">{name}</div>
-                      <div className="text-gray-400 text-[10px]">{date}</div>
+                      <div className="font-bold text-[#0D2B4E] text-[11px] truncate">{r.name}</div>
+                      <div className="text-gray-400 text-[10px]">{r.date}</div>
                     </div>
                   </div>
                 </div>
-              </Reveal>
-            ))}
-          </div>
+              );
+              return (
+                <div className="grid grid-cols-2 gap-3 mb-4" key={a}>
+                  <ReviewCard r={items[a]} />
+                  <ReviewCard r={items[b]} />
+                </div>
+              );
+            })()}
+            {/* Dots */}
+            <div className="flex justify-center gap-2">
+              {tx.testimonials.items.map((_, i) => (
+                <button key={i} onClick={() => setActiveReview(i)}
+                  className="rounded-full transition-all duration-300"
+                  style={{ width: i === activeReview ? 24 : 8, height: 8, background: i === activeReview ? "#3AB5E5" : "#CBD5E1" }}
+                />
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
