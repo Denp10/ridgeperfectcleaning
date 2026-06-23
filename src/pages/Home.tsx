@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import {
   HomeIcon, Building2, Sparkles, ArrowLeftRight, BedDouble,
-  HardHat, Car, Droplets, ShieldCheck, DollarSign, CalendarCheck,
+  HardHat, Car, Droplets, ShieldCheck, DollarSign,
   UserCheck, Star, Phone, Mail, MapPin, Menu, X, ChevronRight,
   Globe, CheckCircle, ArrowDown, MessageCircle, ChevronDown, Send,
   ExternalLink, Loader2,
@@ -74,7 +74,6 @@ const t = {
       items: [
         { title: "Experienced Team", desc: "Years of professional cleaning expertise" },
         { title: "Affordable Pricing", desc: "Competitive rates with no hidden fees" },
-        { title: "Flexible Scheduling", desc: "Book any time, flexible scheduling" },
         { title: "Reliable & Trusted", desc: "Background-checked, insured professionals" },
         { title: "100% Satisfaction", desc: "We're not done until you're happy" },
       ],
@@ -181,7 +180,6 @@ const t = {
       items: [
         { title: "Equipo Experimentado", desc: "Años de experiencia en limpieza profesional" },
         { title: "Precios Accesibles", desc: "Tarifas competitivas sin costos ocultos" },
-        { title: "Horarios Flexibles", desc: "Reserva en cualquier momento, horarios flexibles" },
         { title: "Confiables y Seguros", desc: "Profesionales asegurados y verificados" },
         { title: "100% Satisfacción", desc: "No terminamos hasta que estés feliz" },
       ],
@@ -232,7 +230,7 @@ const t = {
 };
 
 const serviceIcons = [HomeIcon, Building2, Sparkles, ArrowLeftRight, BedDouble, HardHat, Car, Droplets];
-const whyIcons    = [Star, DollarSign, CalendarCheck, ShieldCheck, UserCheck];
+const whyIcons    = [Star, DollarSign, ShieldCheck, UserCheck];
 
 // ─── Reveal on scroll ─────────────────────────────────────────────────────────
 function useReveal() {
