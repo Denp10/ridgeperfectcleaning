@@ -536,10 +536,10 @@ export const Home = () => {
       <section
         className="relative overflow-hidden bg-[#0D2B4E]"
         style={{
-          minHeight: "100vh",
+          minHeight: "82vh",
           backgroundImage: "url('/Image4.jpeg')",
           backgroundSize: "cover",
-          backgroundPosition: "center top",
+          backgroundPosition: "center 20%",
         }}
       >
         {/* Gradient overlay — darker center/right where text sits, lets photo breathe on edges */}
@@ -550,14 +550,8 @@ export const Home = () => {
         {/* Content — left aligned */}
         <div
           className="relative z-10 flex flex-col justify-center px-6 sm:px-10 lg:px-20 max-w-3xl"
-          style={{ minHeight: "100vh", paddingTop: 100, paddingBottom: 90 }}
+          style={{ minHeight: "82vh", paddingTop: 85, paddingBottom: 60 }}
         >
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 backdrop-blur-sm text-white text-xs font-semibold px-4 py-1.5 rounded-full mb-5 uppercase tracking-widest self-start">
-            <Star size={11} fill="#FBBF24" strokeWidth={0} />
-            {lang === "en" ? "Palm Beach County's Trusted Cleaning" : "La Limpieza de Confianza en Palm Beach"}
-          </div>
-
           {/* RIDGE — Orbitron bold italic */}
           <div
             className="leading-none text-[#3AB5E5] animate-shimmer-text mb-1"
@@ -648,16 +642,32 @@ export const Home = () => {
       <section id="services" className="py-20 px-4 sm:px-6 bg-white">
         <div className="max-w-6xl mx-auto">
           <SectionHead label={tx.services.heading} title={tx.services.sub} />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {tx.services.items.map(({ title, desc }, i) => {
               const Icon = serviceIcons[i];
+              const accents = [
+                { bg: "bg-[#EEF8FD]", icon: "text-[#3AB5E5]", border: "border-[#3AB5E5]", hover: "group-hover:bg-[#3AB5E5]" },
+                { bg: "bg-[#EDF6E8]", icon: "text-[#6BC043]", border: "border-[#6BC043]", hover: "group-hover:bg-[#6BC043]" },
+                { bg: "bg-[#EEF8FD]", icon: "text-[#3AB5E5]", border: "border-[#3AB5E5]", hover: "group-hover:bg-[#3AB5E5]" },
+                { bg: "bg-[#EDF6E8]", icon: "text-[#6BC043]", border: "border-[#6BC043]", hover: "group-hover:bg-[#6BC043]" },
+                { bg: "bg-[#EEF8FD]", icon: "text-[#3AB5E5]", border: "border-[#3AB5E5]", hover: "group-hover:bg-[#3AB5E5]" },
+                { bg: "bg-[#EDF6E8]", icon: "text-[#6BC043]", border: "border-[#6BC043]", hover: "group-hover:bg-[#6BC043]" },
+                { bg: "bg-[#EEF8FD]", icon: "text-[#3AB5E5]", border: "border-[#3AB5E5]", hover: "group-hover:bg-[#3AB5E5]" },
+                { bg: "bg-[#EDF6E8]", icon: "text-[#6BC043]", border: "border-[#6BC043]", hover: "group-hover:bg-[#6BC043]" },
+              ];
+              const a = accents[i % accents.length];
               return (
-                <Reveal key={title} delay={i * 50}>
-                  <div className="card-lift group bg-white border border-gray-100 rounded-2xl p-5 text-center h-full cursor-default">
-                    <div className="icon-wrap w-12 h-12 bg-[#EEF8FD] rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-[#3AB5E5]">
-                      <Icon size={20} strokeWidth={1.6} className="text-[#3AB5E5] group-hover:text-white transition-colors duration-200" />
+                <Reveal key={title} delay={i * 55}>
+                  <div className={`card-lift group relative bg-white border-l-4 ${a.border} rounded-2xl p-6 h-full cursor-default shadow-sm hover:shadow-md`}>
+                    {/* Number */}
+                    <span className="absolute top-4 right-4 text-xs font-black text-gray-200">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    {/* Icon */}
+                    <div className={`w-12 h-12 ${a.bg} ${a.hover} rounded-xl flex items-center justify-center mb-4 transition-colors duration-200`}>
+                      <Icon size={22} strokeWidth={1.6} className={`${a.icon} group-hover:text-white transition-colors duration-200`} />
                     </div>
-                    <h3 className="font-bold text-[#0D2B4E] text-sm mb-1 leading-snug">{title}</h3>
+                    <h3 className="font-black text-[#0D2B4E] text-sm mb-1.5 leading-snug">{title}</h3>
                     <p className="text-gray-400 text-xs leading-relaxed">{desc}</p>
                   </div>
                 </Reveal>
