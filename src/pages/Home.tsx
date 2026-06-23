@@ -43,9 +43,9 @@ const t = {
       sub: "The Ridge difference — visible results every time",
       before: "Before", after: "After",
       items: [
-        { img: "/image 1a.png", label: "Kitchen Deep Clean" },
-        { img: "/image 1c.png", label: "Living Room Carpet" },
-        { img: "/Image 2c.png", label: "Office Workspace" },
+        { img: "/image-1a.png", label: "Kitchen Deep Clean" },
+        { img: "/image-1c.png", label: "Living Room Carpet" },
+        { img: "/image-2c.png", label: "Office Workspace" },
       ],
     },
     pricing: {
@@ -147,9 +147,9 @@ const t = {
       sub: "La diferencia Ridge — resultados visibles en cada limpieza",
       before: "Antes", after: "Después",
       items: [
-        { img: "/image 1a.png", label: "Limpieza Profunda de Cocina" },
-        { img: "/image 1c.png", label: "Alfombra de Sala" },
-        { img: "/Image 2c.png", label: "Escritorio de Oficina" },
+        { img: "/image-1a.png", label: "Limpieza Profunda de Cocina" },
+        { img: "/image-1c.png", label: "Alfombra de Sala" },
+        { img: "/image-2c.png", label: "Escritorio de Oficina" },
       ],
     },
     pricing: {
@@ -268,7 +268,7 @@ const SectionHead = ({ label, title }: { label: string; title: string }) => (
 // ─── Logo ─────────────────────────────────────────────────────────────────────
 const Logo = ({ scrolled }: { scrolled: boolean }) => (
   <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-3 select-none">
-    <img src="/Logo sin fondo.png" alt="Ridge Perfect Cleaning" className="h-14 sm:h-16 w-auto" />
+    <img src="/logo.png" alt="Ridge Perfect Cleaning" className="h-14 sm:h-16 w-auto" />
     <div className="flex flex-col leading-tight">
       <span className={`text-sm font-black tracking-widest transition-colors ${scrolled ? "text-[#0D2B4E]" : "text-white/90"}`}>
         PERFECT CLEANING
@@ -736,10 +736,10 @@ export const Home = () => {
           <Reveal>
             <div className="grid grid-cols-2 gap-3">
               <div className="img-zoom rounded-2xl overflow-hidden row-span-2" style={{ aspectRatio: "3/4" }}>
-                <img src="/image 1a.png" alt="Residential cleaning" className="w-full h-full object-cover" loading="lazy" />
+                <img src="/image-1a.png" alt="Residential cleaning" className="w-full h-full object-cover" loading="lazy" />
               </div>
               <div className="img-zoom rounded-2xl overflow-hidden" style={{ aspectRatio: "1/1" }}>
-                <img src="/image 1b.png" alt="Our team" className="w-full h-full object-cover" loading="lazy" />
+                <img src="/image-1b.png" alt="Our team" className="w-full h-full object-cover" loading="lazy" />
               </div>
               <div className="bg-[#0D2B4E] rounded-2xl flex flex-col items-center justify-center" style={{ aspectRatio: "1/1" }}>
                 <div className="text-3xl font-black text-[#3AB5E5]">5★</div>
@@ -932,7 +932,7 @@ export const Home = () => {
         <div className="max-w-6xl mx-auto grid sm:grid-cols-2 md:grid-cols-3 gap-10 mb-10">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <img src="/Logo sin fondo.png" alt="Ridge Logo" className="h-12 w-auto" />
+              <img src="/logo.png" alt="Ridge Logo" className="h-12 w-auto" />
               <div className="flex flex-col leading-tight">
                 <span className="text-sm font-black tracking-widest text-white/80">PERFECT CLEANING</span>
                 <span className="text-sm font-black tracking-widest text-[#6BC043]">SOLUTIONS</span>
