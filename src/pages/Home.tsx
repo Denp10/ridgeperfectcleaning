@@ -267,16 +267,46 @@ const SectionHead = ({ label, title }: { label: string; title: string }) => (
 
 // ─── Logo ─────────────────────────────────────────────────────────────────────
 const Logo = ({ scrolled }: { scrolled: boolean }) => (
-  <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-3 select-none">
-    <img src="/logo.png" alt="Ridge Perfect Cleaning" className="h-14 sm:h-16 w-auto" />
+  <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-3 select-none group">
+    <img
+      src="/logo.png"
+      alt="Ridge Perfect Cleaning"
+      className={`w-auto transition-all duration-300 group-hover:scale-105 drop-shadow-lg ${scrolled ? "h-16 sm:h-20" : "h-20 sm:h-24 lg:h-28"}`}
+    />
     <div className="flex flex-col leading-tight">
-      <span className={`text-sm font-black tracking-widest transition-colors ${scrolled ? "text-[#0D2B4E]" : "text-white/90"}`}>
+      <span className={`font-black tracking-widest transition-all ${scrolled ? "text-base sm:text-lg text-[#0D2B4E]" : "text-lg sm:text-xl lg:text-2xl text-white/95"}`}>
         PERFECT CLEANING
       </span>
-      <span className="text-sm font-black tracking-widest text-[#6BC043]">SOLUTIONS</span>
+      <span className={`font-black tracking-widest text-[#6BC043] transition-all ${scrolled ? "text-base sm:text-lg" : "text-lg sm:text-xl lg:text-2xl"}`}>SOLUTIONS</span>
     </div>
   </button>
 );
+
+// ─── CountUp animation ────────────────────────────────────────────────────────
+const CountUp = ({ end, suffix = "", duration = 1800, className = "" }: { end: number; suffix?: string; duration?: number; className?: string }) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [val, setVal] = useState(0);
+  const started = useRef(false);
+  useEffect(() => {
+    const el = ref.current; if (!el) return;
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !started.current) {
+        started.current = true;
+        const startT = performance.now();
+        const tick = (now: number) => {
+          const p = Math.min(1, (now - startT) / duration);
+          const eased = 1 - Math.pow(1 - p, 3);
+          setVal(Math.round(end * eased));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }
+    }, { threshold: 0.3 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [end, duration]);
+  return <span ref={ref} className={className}>{val}{suffix}</span>;
+};
 
 // ─── Before/After card ────────────────────────────────────────────────────────
 const BeforeAfterCard = ({ img, label, before, after }: { img: string; label: string; before: string; after: string }) => {
