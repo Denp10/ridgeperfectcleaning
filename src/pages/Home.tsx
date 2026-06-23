@@ -43,9 +43,9 @@ const t = {
       sub: "Visible results, every time",
       before: "Before", after: "After",
       items: [
-        { img: "/image-1a.png", label: "Kitchen Deep Clean" },
-        { img: "/image-1c.png", label: "Living Room Carpet" },
-        { img: "/image-2c.png", label: "Office Workspace" },
+        { imgBefore: "/Estufa1.png", imgAfter: "/Estufa2.png", label: "Stove Deep Clean" },
+        { imgBefore: "/Coche1.png",  imgAfter: "/Coche2.png",  label: "Mobile Car Wash" },
+        { imgBefore: "/Tapete1.png", imgAfter: "/Tapete2.png", label: "Carpet Cleaning" },
       ],
     },
     pricing: {
@@ -149,9 +149,9 @@ const t = {
       sub: "Resultados visibles en cada limpieza",
       before: "Antes", after: "Después",
       items: [
-        { img: "/image-1a.png", label: "Limpieza Profunda de Cocina" },
-        { img: "/image-1c.png", label: "Alfombra de Sala" },
-        { img: "/image-2c.png", label: "Escritorio de Oficina" },
+        { imgBefore: "/Estufa1.png", imgAfter: "/Estufa2.png", label: "Limpieza de Estufa" },
+        { imgBefore: "/Coche1.png",  imgAfter: "/Coche2.png",  label: "Lavado de Auto Móvil" },
+        { imgBefore: "/Tapete1.png", imgAfter: "/Tapete2.png", label: "Limpieza de Tapete" },
       ],
     },
     pricing: {
@@ -271,10 +271,8 @@ const SectionHead = ({ label, title }: { label: string; title: string }) => (
 
 // ─── Logo ─────────────────────────────────────────────────────────────────────
 const Logo = () => (
-  <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center select-none group">
-    <div className="bg-[#0D2B4E] rounded-2xl px-1.5 py-1 group-hover:scale-105 transition-transform duration-200">
-      <img src="/Logo_1.png" alt="Ridge Perfect Cleaning" className="h-10 sm:h-12 w-auto" />
-    </div>
+  <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center select-none group-hover:opacity-90 transition-opacity">
+    <img src="/Logo_1.png" alt="Ridge Perfect Cleaning" className="h-10 sm:h-12 w-auto" />
   </button>
 );
 
@@ -305,8 +303,8 @@ const CountUp = ({ end, suffix = "", duration = 1800, className = "" }: { end: n
 };
 
 // ─── Before/After card ────────────────────────────────────────────────────────
-const BeforeAfterCard = ({ img, label, before, after }: { img: string; label: string; before: string; after: string }) => {
-  const [revealed, setRevealed] = useState(30);
+const BeforeAfterCard = ({ imgBefore, imgAfter, label, before, after }: { imgBefore: string; imgAfter: string; label: string; before: string; after: string }) => {
+  const [revealed, setRevealed] = useState(50);
   const dragging = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -316,6 +314,8 @@ const BeforeAfterCard = ({ img, label, before, after }: { img: string; label: st
     const pct = Math.min(100, Math.max(0, ((clientX - left) / width) * 100));
     setRevealed(pct);
   };
+
+  const beforeW = 100 - revealed;
 
   return (
     <div className="rounded-2xl overflow-hidden shadow-md border border-gray-100">
@@ -327,19 +327,22 @@ const BeforeAfterCard = ({ img, label, before, after }: { img: string; label: st
         onMouseMove={e => { if (dragging.current) update(e.clientX); }}
         onMouseUp={() => { dragging.current = false; }}
         onMouseLeave={() => { dragging.current = false; }}
+        onTouchStart={e => update(e.touches[0].clientX)}
         onTouchMove={e => update(e.touches[0].clientX)}
       >
-        {/* AFTER (clean) */}
-        <img src={img} alt={`${label} after`} className="absolute inset-0 w-full h-full object-cover" />
+        {/* AFTER (clean) — full background */}
+        <img src={imgAfter} alt={`${label} after`} className="absolute inset-0 w-full h-full object-cover" />
 
-        {/* BEFORE (dirty look via CSS) */}
-        <div className="absolute inset-0 overflow-hidden" style={{ width: `${100 - revealed}%`, right: 0, left: "auto" }}>
-          <img
-            src={img} alt={`${label} before`}
-            className="absolute inset-0 h-full object-cover"
-            style={{ width: `${10000 / (100 - revealed)}%`, maxWidth: "none", filter: "grayscale(0.7) brightness(0.65) contrast(1.1) sepia(0.2)", right: 0, left: "auto" }}
-          />
-        </div>
+        {/* BEFORE (dirty) — covers left portion, shrinks as user drags right */}
+        {beforeW > 0.5 && (
+          <div className="absolute inset-0 overflow-hidden" style={{ width: `${beforeW}%`, left: 0, right: "auto" }}>
+            <img
+              src={imgBefore} alt={`${label} before`}
+              className="absolute inset-0 h-full object-cover"
+              style={{ width: `${Math.round(10000 / beforeW)}%`, maxWidth: "none", left: 0 }}
+            />
+          </div>
+        )}
 
         {/* Divider */}
         <div className="absolute top-0 bottom-0 w-0.5 bg-white shadow-lg pointer-events-none" style={{ left: `${revealed}%` }}>
@@ -540,9 +543,9 @@ export const Home = () => {
           backgroundPosition: "center 20%",
         }}
       >
-        {/* Gradient overlay — darker center/right where text sits, lets photo breathe on edges */}
+        {/* Shine-style split: left half solid navy for text, right half shows photo clearly */}
         <div className="absolute inset-0" style={{
-          background: "linear-gradient(135deg, rgba(13,43,78,0.55) 0%, rgba(13,43,78,0.78) 50%, rgba(13,43,78,0.82) 100%)"
+          background: "linear-gradient(105deg, rgba(13,43,78,0.93) 45%, rgba(13,43,78,0.55) 58%, rgba(13,43,78,0.10) 72%)"
         }} />
 
         {/* Content — left aligned */}
@@ -680,10 +683,11 @@ export const Home = () => {
         <div className="max-w-5xl mx-auto">
           <SectionHead label={tx.beforeAfter.heading} title={tx.beforeAfter.sub} />
           <div className="grid sm:grid-cols-3 gap-5">
-            {tx.beforeAfter.items.map(({ img, label }, i) => (
+            {tx.beforeAfter.items.map(({ imgBefore, imgAfter, label }, i) => (
               <Reveal key={label} delay={i * 70}>
                 <BeforeAfterCard
-                  img={img}
+                  imgBefore={imgBefore}
+                  imgAfter={imgAfter}
                   label={label}
                   before={tx.beforeAfter.before}
                   after={tx.beforeAfter.after}
@@ -1044,7 +1048,7 @@ export const Home = () => {
         <div className="max-w-6xl mx-auto grid sm:grid-cols-2 md:grid-cols-3 gap-10 mb-10">
           <div>
             <div className="mb-4">
-              <img src="/Logocomplet_1.png" alt="Ridge Perfect Cleaning" className="h-14 w-auto" style={{ filter: "brightness(0) invert(1)" }} />
+              <img src="/Logo_1.png" alt="Ridge Perfect Cleaning" className="h-14 w-auto" />
             </div>
             <p className="text-gray-400 text-xs leading-relaxed mb-4">{tx.footer.desc}</p>
             <a href="https://wa.me/15618180778" target="_blank" rel="noopener noreferrer"
