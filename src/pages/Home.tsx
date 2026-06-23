@@ -43,9 +43,9 @@ const t = {
       sub: "The Ridge difference — visible results every time",
       before: "Before", after: "After",
       items: [
-        { img: "/image 1a.png", label: "Kitchen Deep Clean" },
-        { img: "/image 1c.png", label: "Living Room Carpet" },
-        { img: "/Image 2c.png", label: "Office Workspace" },
+        { img: "/image-1a.png", label: "Kitchen Deep Clean" },
+        { img: "/image-1c.png", label: "Living Room Carpet" },
+        { img: "/image-2c.png", label: "Office Workspace" },
       ],
     },
     pricing: {
@@ -147,9 +147,9 @@ const t = {
       sub: "La diferencia Ridge — resultados visibles en cada limpieza",
       before: "Antes", after: "Después",
       items: [
-        { img: "/image 1a.png", label: "Limpieza Profunda de Cocina" },
-        { img: "/image 1c.png", label: "Alfombra de Sala" },
-        { img: "/Image 2c.png", label: "Escritorio de Oficina" },
+        { img: "/image-1a.png", label: "Limpieza Profunda de Cocina" },
+        { img: "/image-1c.png", label: "Alfombra de Sala" },
+        { img: "/image-2c.png", label: "Escritorio de Oficina" },
       ],
     },
     pricing: {
@@ -267,16 +267,46 @@ const SectionHead = ({ label, title }: { label: string; title: string }) => (
 
 // ─── Logo ─────────────────────────────────────────────────────────────────────
 const Logo = ({ scrolled }: { scrolled: boolean }) => (
-  <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-3 select-none">
-    <img src="/Logo sin fondo.png" alt="Ridge Perfect Cleaning" className="h-14 sm:h-16 w-auto" />
+  <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-3 select-none group">
+    <img
+      src="/logo.png"
+      alt="Ridge Perfect Cleaning"
+      className={`w-auto transition-all duration-300 group-hover:scale-105 drop-shadow-lg ${scrolled ? "h-16 sm:h-20" : "h-20 sm:h-24 lg:h-28"}`}
+    />
     <div className="flex flex-col leading-tight">
-      <span className={`text-sm font-black tracking-widest transition-colors ${scrolled ? "text-[#0D2B4E]" : "text-white/90"}`}>
+      <span className={`font-black tracking-widest transition-all ${scrolled ? "text-base sm:text-lg text-[#0D2B4E]" : "text-lg sm:text-xl lg:text-2xl text-white/95"}`}>
         PERFECT CLEANING
       </span>
-      <span className="text-sm font-black tracking-widest text-[#6BC043]">SOLUTIONS</span>
+      <span className={`font-black tracking-widest text-[#6BC043] transition-all ${scrolled ? "text-base sm:text-lg" : "text-lg sm:text-xl lg:text-2xl"}`}>SOLUTIONS</span>
     </div>
   </button>
 );
+
+// ─── CountUp animation ────────────────────────────────────────────────────────
+const CountUp = ({ end, suffix = "", duration = 1800, className = "" }: { end: number; suffix?: string; duration?: number; className?: string }) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [val, setVal] = useState(0);
+  const started = useRef(false);
+  useEffect(() => {
+    const el = ref.current; if (!el) return;
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !started.current) {
+        started.current = true;
+        const startT = performance.now();
+        const tick = (now: number) => {
+          const p = Math.min(1, (now - startT) / duration);
+          const eased = 1 - Math.pow(1 - p, 3);
+          setVal(Math.round(end * eased));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }
+    }, { threshold: 0.3 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [end, duration]);
+  return <span ref={ref} className={className}>{val}{suffix}</span>;
+};
 
 // ─── Before/After card ────────────────────────────────────────────────────────
 const BeforeAfterCard = ({ img, label, before, after }: { img: string; label: string; before: string; after: string }) => {
@@ -398,14 +428,24 @@ export const Home = () => {
         @keyframes pring  { 0%{box-shadow:0 0 0 0 rgba(58,181,229,.5)} 70%{box-shadow:0 0 0 14px rgba(58,181,229,0)} 100%{box-shadow:0 0 0 0 rgba(58,181,229,0)} }
         @keyframes wpulse { 0%{box-shadow:0 0 0 0 rgba(37,211,102,.5)} 70%{box-shadow:0 0 0 14px rgba(37,211,102,0)} 100%{box-shadow:0 0 0 0 rgba(37,211,102,0)} }
         @keyframes cpulse { 0%{box-shadow:0 0 0 0 rgba(58,181,229,.5)} 70%{box-shadow:0 0 0 12px rgba(58,181,229,0)} 100%{box-shadow:0 0 0 0 rgba(58,181,229,0)} }
+        @keyframes blob   { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(30px,-40px) scale(1.1)} 66%{transform:translate(-20px,30px) scale(.95)} }
+        @keyframes shimmer-text { 0%,100%{filter:brightness(1) drop-shadow(0 0 0 rgba(58,181,229,0))} 50%{filter:brightness(1.2) drop-shadow(0 0 18px rgba(58,181,229,.55))} }
+        @keyframes tilt   { 0%,100%{transform:rotate(-.6deg)} 50%{transform:rotate(.6deg)} }
+        @keyframes fade-in { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
         .float   { animation:float 4s ease-in-out infinite; }
         .pring   { animation:pring 2.4s ease-out infinite; }
         .wpulse  { animation:wpulse 2.2s ease-out infinite; }
         .cpulse  { animation:cpulse 2s ease-out infinite; }
+        .animate-blob         { animation:blob 14s ease-in-out infinite; }
+        .animate-blob-slow    { animation:blob 20s ease-in-out infinite reverse; }
+        .animate-blob-delayed { animation:blob 18s ease-in-out infinite; animation-delay:-6s; }
+        .animate-shimmer-text { animation:shimmer-text 3.5s ease-in-out infinite; }
+        .animate-tilt         { animation:tilt 6s ease-in-out infinite; }
+        .animate-fade-in      { animation:fade-in .8s ease-out; }
         .card-lift { transition:transform .22s ease,box-shadow .22s ease; }
         .card-lift:hover { transform:translateY(-5px); box-shadow:0 16px 36px rgba(13,43,78,.10); }
         .icon-wrap { transition:background .2s ease,transform .2s ease; }
-        .icon-wrap:hover { transform:scale(1.07); }
+        .icon-wrap:hover { transform:scale(1.07) rotate(-4deg); }
         .btn-p { transition:transform .16s ease,box-shadow .16s ease; }
         .btn-p:hover { transform:translateY(-2px); box-shadow:0 8px 22px rgba(58,181,229,.38); }
         .btn-o { transition:transform .16s ease,background .16s ease,color .16s ease,border-color .16s ease; }
@@ -495,22 +535,23 @@ export const Home = () => {
       </nav>
 
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
-      <section className="relative bg-[#0D2B4E] overflow-hidden" style={{ minHeight: "85vh" }}>
-        <div className="absolute top-10 -left-24 w-72 h-72 rounded-full bg-[#3AB5E5]/10 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-10 right-0 w-80 h-80 rounded-full bg-[#6BC043]/8 blur-3xl pointer-events-none" />
+      <section className="relative bg-[#0D2B4E] overflow-hidden">
+        <div className="absolute top-10 -left-24 w-72 h-72 rounded-full bg-[#3AB5E5]/10 blur-3xl pointer-events-none animate-blob" />
+        <div className="absolute bottom-10 right-0 w-80 h-80 rounded-full bg-[#6BC043]/10 blur-3xl pointer-events-none animate-blob-slow" />
+        <div className="absolute top-1/3 left-1/2 w-96 h-96 rounded-full bg-[#3AB5E5]/5 blur-3xl pointer-events-none animate-blob-delayed" />
 
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-8 items-center pt-36 pb-20 lg:pt-40 lg:pb-16">
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-10 items-center pt-40 pb-20 lg:pt-44 lg:pb-24">
           <div className="text-center lg:text-left">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-none mb-3">
-              <span className="text-[#3AB5E5]">{tx.hero.title1}</span><br />
-              <span className="text-[#6BC043]">{tx.hero.title2}</span>
+              <span className="text-[#3AB5E5] inline-block animate-shimmer-text">{tx.hero.title1}</span><br />
+              <span className="text-[#6BC043] inline-block animate-shimmer-text" style={{ animationDelay: "0.4s" }}>{tx.hero.title2}</span>
             </h1>
-            <p className="text-base text-white/55 italic mb-3">{tx.hero.subtitle}</p>
+            <p className="text-base text-white/55 italic mb-3 animate-fade-in" style={{ animationDelay: "0.2s", animationFillMode: "backwards" }}>{tx.hero.subtitle}</p>
             <p className="text-white/70 mb-1.5 text-sm leading-relaxed max-w-md mx-auto lg:mx-0">{tx.hero.desc}</p>
             <p className="text-[#3AB5E5] font-semibold text-xs mb-7">{tx.hero.tagline}</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-9">
               <button onClick={() => scrollTo("contact")}
-                className="btn-p bg-[#3AB5E5] text-white px-7 py-3.5 rounded-full font-bold text-sm shadow-lg">
+                className="btn-p bg-[#3AB5E5] text-white px-7 py-3.5 rounded-full font-bold text-sm shadow-lg hover:shadow-[#3AB5E5]/50 hover:shadow-xl">
                 {tx.hero.cta1}
               </button>
               <a href="tel:5618180778"
@@ -519,10 +560,16 @@ export const Home = () => {
               </a>
             </div>
             <div className="flex justify-center lg:justify-start gap-8">
-              {[{ v: tx.hero.s1v, l: tx.hero.s1l }, { v: tx.hero.s2v, l: tx.hero.s2l }, { v: tx.hero.s3v, l: tx.hero.s3l }].map(({ v, l }) => (
-                <div key={l} className="text-center">
-                  <div className="text-2xl font-black text-[#3AB5E5]">{v}</div>
-                  <div className="text-[10px] text-white/40 uppercase tracking-widest mt-0.5">{l}</div>
+              {[
+                { v: 100, suf: "%", l: tx.hero.s1l },
+                { v: 8,   suf: "+", l: tx.hero.s2l },
+                { v: 24,  suf: "/7", l: tx.hero.s3l, raw: "24/7" },
+              ].map(({ v, suf, l, raw }) => (
+                <div key={l} className="text-center group cursor-default">
+                  <div className="text-3xl font-black text-[#3AB5E5] transition-transform group-hover:scale-110">
+                    {raw ? raw : <CountUp end={v} suffix={suf} />}
+                  </div>
+                  <div className="text-[10px] text-white/40 uppercase tracking-widest mt-0.5 group-hover:text-white/70 transition-colors">{l}</div>
                 </div>
               ))}
             </div>
@@ -530,8 +577,8 @@ export const Home = () => {
 
           {/* Video — landscape format, desktop */}
           <div className="hidden lg:flex justify-center items-center">
-            <div className="relative z-10 w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10" style={{ maxWidth: 520 }}>
-              <video autoPlay muted loop playsInline className="w-full h-auto block">
+            <div className="relative z-10 w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10 animate-tilt hover:scale-[1.02] transition-transform duration-500" style={{ maxWidth: 520 }}>
+              <video autoPlay muted loop playsInline preload="auto" className="w-full h-auto block">
                 <source src="/RidgeCleaning.mp4" type="video/mp4" />
               </video>
             </div>
@@ -540,17 +587,12 @@ export const Home = () => {
           {/* Video — mobile */}
           <div className="lg:hidden">
             <div className="rounded-2xl overflow-hidden shadow-xl border border-white/10">
-              <video autoPlay muted loop playsInline className="w-full h-auto block">
+              <video autoPlay muted loop playsInline preload="auto" className="w-full h-auto block">
                 <source src="/RidgeCleaning.mp4" type="video/mp4" />
               </video>
             </div>
           </div>
         </div>
-
-        <button onClick={() => scrollTo("services")}
-          className="absolute bottom-16 left-1/2 -translate-x-1/2 text-white/25 hover:text-white/50 transition-colors float z-10">
-          <ArrowDown size={18} />
-        </button>
 
         {/* Pronounced wave */}
         <div className="-mb-px">
@@ -736,10 +778,10 @@ export const Home = () => {
           <Reveal>
             <div className="grid grid-cols-2 gap-3">
               <div className="img-zoom rounded-2xl overflow-hidden row-span-2" style={{ aspectRatio: "3/4" }}>
-                <img src="/image 1a.png" alt="Residential cleaning" className="w-full h-full object-cover" loading="lazy" />
+                <img src="/image-1a.png" alt="Residential cleaning" className="w-full h-full object-cover" loading="lazy" />
               </div>
               <div className="img-zoom rounded-2xl overflow-hidden" style={{ aspectRatio: "1/1" }}>
-                <img src="/image 1b.png" alt="Our team" className="w-full h-full object-cover" loading="lazy" />
+                <img src="/image-1b.png" alt="Our team" className="w-full h-full object-cover" loading="lazy" />
               </div>
               <div className="bg-[#0D2B4E] rounded-2xl flex flex-col items-center justify-center" style={{ aspectRatio: "1/1" }}>
                 <div className="text-3xl font-black text-[#3AB5E5]">5★</div>
@@ -932,7 +974,7 @@ export const Home = () => {
         <div className="max-w-6xl mx-auto grid sm:grid-cols-2 md:grid-cols-3 gap-10 mb-10">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <img src="/Logo sin fondo.png" alt="Ridge Logo" className="h-12 w-auto" />
+              <img src="/logo.png" alt="Ridge Logo" className="h-12 w-auto" />
               <div className="flex flex-col leading-tight">
                 <span className="text-sm font-black tracking-widest text-white/80">PERFECT CLEANING</span>
                 <span className="text-sm font-black tracking-widest text-[#6BC043]">SOLUTIONS</span>
