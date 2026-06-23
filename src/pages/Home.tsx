@@ -560,14 +560,13 @@ export const Home = () => {
               <Phone size={14} /> {tx.hero.cta2}
             </a>
           </div>
-          <div className="flex gap-8 sm:gap-12">
+          <div className="flex gap-12 sm:gap-16">
             {[
               { v: 100, suf: "%", l: tx.hero.s1l },
               { v: 8,   suf: "+", l: tx.hero.s2l },
-              { l: tx.hero.s3l, raw: "24/7" },
-            ].map(({ v, suf, l, raw }) => (
-              <div key={l} className="text-left">
-                <div className="text-2xl sm:text-3xl font-black text-[#3AB5E5]">{raw ?? <CountUp end={v!} suffix={suf} />}</div>
+            ].map(({ v, suf, l }) => (
+              <div key={l} className="text-center">
+                <div className="text-2xl sm:text-3xl font-black text-[#3AB5E5]"><CountUp end={v} suffix={suf} /></div>
                 <div className="text-[10px] text-white/60 uppercase tracking-widest mt-0.5">{l}</div>
               </div>
             ))}
