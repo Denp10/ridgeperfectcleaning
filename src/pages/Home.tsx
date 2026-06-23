@@ -74,7 +74,7 @@ const t = {
       items: [
         { title: "Experienced Team", desc: "Years of professional cleaning expertise" },
         { title: "Affordable Pricing", desc: "Competitive rates with no hidden fees" },
-        { title: "Flexible Scheduling", desc: "Book any time — 24/7 availability" },
+        { title: "Flexible Scheduling", desc: "Book any time, flexible scheduling" },
         { title: "Reliable & Trusted", desc: "Background-checked, insured professionals" },
         { title: "100% Satisfaction", desc: "We're not done until you're happy" },
       ],
@@ -181,7 +181,7 @@ const t = {
       items: [
         { title: "Equipo Experimentado", desc: "Años de experiencia en limpieza profesional" },
         { title: "Precios Accesibles", desc: "Tarifas competitivas sin costos ocultos" },
-        { title: "Horarios Flexibles", desc: "Reserva en cualquier momento — disponibilidad 24/7" },
+        { title: "Horarios Flexibles", desc: "Reserva en cualquier momento, horarios flexibles" },
         { title: "Confiables y Seguros", desc: "Profesionales asegurados y verificados" },
         { title: "100% Satisfacción", desc: "No terminamos hasta que estés feliz" },
       ],
@@ -746,19 +746,17 @@ export const Home = () => {
         <div className="max-w-6xl mx-auto">
           <SectionHead label={tx.why.heading} title={tx.why.sub} />
           <div className="grid md:grid-cols-2 gap-8 items-start">
-            <div className="space-y-3">
+            <div className="grid grid-cols-2 gap-3">
               {tx.why.items.map(({ title, desc }, i) => {
                 const Icon = whyIcons[i];
                 return (
-                  <Reveal key={title} delay={i * 65}>
-                    <div className="card-lift group flex items-start gap-4 bg-white border border-gray-100 rounded-xl p-5 cursor-default">
-                      <div className="icon-wrap w-11 h-11 bg-[#EEF8FD] rounded-lg flex items-center justify-center shrink-0 group-hover:bg-[#3AB5E5]">
-                        <Icon size={18} strokeWidth={1.7} className="text-[#3AB5E5] group-hover:text-white transition-colors duration-200" />
+                  <Reveal key={title} delay={i * 55}>
+                    <div className="card-lift group bg-white border border-gray-100 rounded-xl p-3 cursor-default h-full">
+                      <div className="icon-wrap w-9 h-9 bg-[#EEF8FD] rounded-lg flex items-center justify-center mb-2 group-hover:bg-[#3AB5E5] transition-colors duration-200">
+                        <Icon size={16} strokeWidth={1.7} className="text-[#3AB5E5] group-hover:text-white transition-colors duration-200" />
                       </div>
-                      <div>
-                        <h3 className="font-bold text-[#0D2B4E] text-sm">{title}</h3>
-                        <p className="text-gray-400 text-xs mt-0.5">{desc}</p>
-                      </div>
+                      <h3 className="font-bold text-[#0D2B4E] text-xs mb-0.5">{title}</h3>
+                      <p className="text-gray-400 text-[11px] leading-relaxed">{desc}</p>
                     </div>
                   </Reveal>
                 );
@@ -806,8 +804,7 @@ export const Home = () => {
             <div className="grid grid-cols-3 gap-3 mb-8">
               {[
                 { v: "8+",   l: lang === "en" ? "Services"  : "Servicios",  c: "text-[#3AB5E5]" },
-                { v: "24/7", l: lang === "en" ? "Booking"   : "Reservas",   c: "text-[#6BC043]" },
-                { v: "100%", l: lang === "en" ? "Guarantee" : "Garantía",   c: "text-[#0D2B4E]" },
+                { v: "100%", l: lang === "en" ? "Guarantee" : "Garantía",   c: "text-[#6BC043]" },
               ].map(({ v, l, c }) => (
                 <div key={l} className="bg-white rounded-xl p-3 text-center border border-gray-100 shadow-sm">
                   <div className={`text-xl font-black ${c}`}>{v}</div>
