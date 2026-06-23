@@ -262,7 +262,7 @@ const Reveal = ({ children, delay = 0, className = "" }: { children: React.React
 };
 
 const SectionHead = ({ label, title }: { label: string; title: string }) => (
-  <Reveal className="text-center mb-12">
+  <Reveal className="text-center mb-8 sm:mb-12">
     <p className="text-[#3AB5E5] text-xs font-bold uppercase tracking-widest mb-2">{label}</p>
     <h2 className="text-3xl sm:text-4xl font-black text-[#0D2B4E] mb-3">{title}</h2>
     <div className="w-10 h-1 bg-[#3AB5E5] mx-auto rounded-full" />
@@ -271,8 +271,8 @@ const SectionHead = ({ label, title }: { label: string; title: string }) => (
 
 // ─── Logo ─────────────────────────────────────────────────────────────────────
 const Logo = () => (
-  <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center select-none group-hover:opacity-90 transition-opacity">
-    <img src="/Logo_1.png" alt="Ridge Perfect Cleaning" className="h-10 sm:h-12 w-auto" />
+  <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center select-none hover:opacity-90 transition-opacity">
+    <img src="/Logo_1.png" alt="Ridge Perfect Cleaning" className="h-12 sm:h-14 w-auto" />
   </button>
 );
 
@@ -538,20 +538,21 @@ export const Home = () => {
         className="relative overflow-hidden bg-[#0D2B4E]"
         style={{
           minHeight: "82vh",
-          backgroundImage: "url('/Image4.jpeg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center 20%",
+          backgroundImage: "url('/Image%204a.png')",
+          backgroundSize: "auto 100%",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "right center",
         }}
       >
-        {/* Shine-style split: left half solid navy for text, right half shows photo clearly */}
+        {/* Left side stays navy (no image there), light vignette on right edge for polish */}
         <div className="absolute inset-0" style={{
-          background: "linear-gradient(105deg, rgba(13,43,78,0.93) 45%, rgba(13,43,78,0.55) 58%, rgba(13,43,78,0.10) 72%)"
+          background: "linear-gradient(to right, rgba(13,43,78,0) 0%, rgba(13,43,78,0) 50%, rgba(13,43,78,0.18) 85%, rgba(13,43,78,0.35) 100%)"
         }} />
 
         {/* Content — left aligned */}
         <div
           className="relative z-10 flex flex-col justify-center px-6 sm:px-10 lg:px-20 max-w-3xl"
-          style={{ minHeight: "82vh", paddingTop: 85, paddingBottom: 60 }}
+          style={{ minHeight: "82vh", paddingTop: 80, paddingBottom: 40 }}
         >
           {/* RIDGE — Orbitron bold italic */}
           <div
@@ -640,7 +641,7 @@ export const Home = () => {
       </section>
 
       {/* ── SERVICES ─────────────────────────────────────────────────────────── */}
-      <section id="services" className="py-20 px-4 sm:px-6 bg-white">
+      <section id="services" className="py-12 sm:py-20 px-4 sm:px-6 bg-white">
         <div className="max-w-6xl mx-auto">
           <SectionHead label={tx.services.heading} title={tx.services.sub} />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -679,7 +680,7 @@ export const Home = () => {
       </section>
 
       {/* ── BEFORE & AFTER ───────────────────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 bg-[#F8FBFF]">
+      <section className="py-12 sm:py-20 px-4 sm:px-6 bg-[#F8FBFF]">
         <div className="max-w-5xl mx-auto">
           <SectionHead label={tx.beforeAfter.heading} title={tx.beforeAfter.sub} />
           <div className="grid sm:grid-cols-3 gap-5">
@@ -699,7 +700,7 @@ export const Home = () => {
       </section>
 
       {/* ── PRICING ──────────────────────────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 bg-white">
+      <section className="py-12 sm:py-20 px-4 sm:px-6 bg-white">
         <div className="max-w-5xl mx-auto">
           <SectionHead label={tx.pricing.heading} title={tx.pricing.sub} />
           <div className="grid sm:grid-cols-3 gap-6">
@@ -733,7 +734,7 @@ export const Home = () => {
       </section>
 
       {/* ── TESTIMONIALS CAROUSEL ────────────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 bg-[#F8FBFF]">
+      <section className="py-12 sm:py-20 px-4 sm:px-6 bg-[#F8FBFF]">
         <div className="max-w-2xl mx-auto">
           <SectionHead label={tx.testimonials.heading} title={tx.testimonials.sub} />
           <Reveal>
@@ -799,7 +800,7 @@ export const Home = () => {
       </section>
 
       {/* ── WHY US ───────────────────────────────────────────────────────────── */}
-      <section id="why-us" className="py-20 px-4 sm:px-6 bg-white">
+      <section id="why-us" className="py-12 sm:py-20 px-4 sm:px-6 bg-white">
         <div className="max-w-6xl mx-auto">
           <SectionHead label={tx.why.heading} title={tx.why.sub} />
           <div className="grid md:grid-cols-2 gap-8 items-start">
@@ -847,22 +848,11 @@ export const Home = () => {
       </section>
 
       {/* ── ABOUT ────────────────────────────────────────────────────────────── */}
-      <section id="about" className="py-20 px-4 sm:px-6 bg-[#F8FBFF]">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <section id="about" className="py-12 sm:py-20 px-4 sm:px-6 bg-[#F8FBFF]">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
           <Reveal>
-            <div className="grid grid-cols-2 gap-3">
-              <div className="img-zoom rounded-2xl overflow-hidden row-span-2" style={{ aspectRatio: "3/4" }}>
-                <img src="/image-1a.png" alt="Residential cleaning" className="w-full h-full object-cover" loading="lazy" />
-              </div>
-              <div className="img-zoom rounded-2xl overflow-hidden" style={{ aspectRatio: "1/1" }}>
-                <img src="/image-1b.png" alt="Our team" className="w-full h-full object-cover" loading="lazy" />
-              </div>
-              <div className="bg-[#0D2B4E] rounded-2xl flex flex-col items-center justify-center" style={{ aspectRatio: "1/1" }}>
-                <div className="text-3xl font-black text-[#3AB5E5]">5★</div>
-                <div className="text-[10px] text-white/50 mt-1 uppercase tracking-wider">
-                  {lang === "en" ? "Client Rated" : "Valoración"}
-                </div>
-              </div>
+            <div className="img-zoom rounded-2xl overflow-hidden bg-gray-50 border border-gray-100 shadow-sm" style={{ aspectRatio: "4/3" }}>
+              <img src="/image-2a.png" alt="Cleaning service" className="w-full h-full object-contain" loading="lazy" />
             </div>
           </Reveal>
           <Reveal delay={100}>
@@ -893,7 +883,7 @@ export const Home = () => {
       </section>
 
       {/* ── FAQ ──────────────────────────────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 bg-white">
+      <section className="py-12 sm:py-20 px-4 sm:px-6 bg-white">
         <div className="max-w-3xl mx-auto">
           <SectionHead label={tx.faq.heading} title={tx.faq.sub} />
           <div className="space-y-3">
@@ -918,24 +908,8 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* ── SERVICE AREAS ────────────────────────────────────────────────────── */}
-      <section className="py-14 px-4 sm:px-6 bg-gradient-to-br from-[#0D2B4E] via-[#0a3565] to-[#1a6a9e]">
-        <Reveal>
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-2xl sm:text-3xl font-black text-white mb-8">{tx.areas.heading}</h2>
-            <div className="flex flex-wrap justify-center gap-3">
-              {tx.areas.list.map(area => (
-                <span key={area} className="bg-white/10 text-white px-5 py-2.5 rounded-full text-sm font-semibold border border-white/20 hover:bg-white/20 transition-colors cursor-default backdrop-blur-sm">
-                  {area}
-                </span>
-              ))}
-            </div>
-          </div>
-        </Reveal>
-      </section>
-
       {/* ── CONTACT + FORM ───────────────────────────────────────────────────── */}
-      <section id="contact" className="py-20 px-4 sm:px-6 bg-[#F8FBFF]">
+      <section id="contact" className="py-12 sm:py-20 px-4 sm:px-6 bg-[#F8FBFF]">
         <div className="max-w-6xl mx-auto">
           <SectionHead label={tx.contact.heading} title={tx.contact.sub} />
           <div className="grid lg:grid-cols-2 gap-10 items-start">
@@ -1044,11 +1018,11 @@ export const Home = () => {
       </section>
 
       {/* ── FOOTER ───────────────────────────────────────────────────────────── */}
-      <footer className="bg-[#0D2B4E] text-white pt-14 pb-8 px-4 sm:px-6">
-        <div className="max-w-6xl mx-auto grid sm:grid-cols-2 md:grid-cols-3 gap-10 mb-10">
-          <div>
+      <footer className="bg-[#0D2B4E] text-white pt-10 sm:pt-14 pb-8 px-4 sm:px-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 mb-10">
+          <div className="col-span-2 md:col-span-1">
             <div className="mb-4">
-              <img src="/Logo_1.png" alt="Ridge Perfect Cleaning" className="h-14 w-auto" />
+              <img src="/Logo_1.png" alt="Ridge Perfect Cleaning" className="h-16 sm:h-18 w-auto" />
             </div>
             <p className="text-gray-400 text-xs leading-relaxed mb-4">{tx.footer.desc}</p>
             <a href="https://wa.me/15618180778" target="_blank" rel="noopener noreferrer"
