@@ -61,9 +61,11 @@ const t = {
     testimonials: {
       heading: "Google Reviews", sub: "What our clients say",
       items: [
-        { name: "Maria L.", area: "West Palm Beach, FL", date: "2 weeks ago", text: "I hired Ridge for a deep clean before listing my home. Every cabinet, every corner — spotless. The team was professional, thorough, and arrived on time. Highly recommend to anyone in Palm Beach County!", stars: 5, service: "Deep Cleaning" },
-        { name: "James T.", area: "Boca Raton, FL", date: "1 month ago", text: "They handle my Airbnb turnovers every week without fail. My guests consistently rate cleanliness 5 stars. Scheduling is easy and the team communicates well. Worth every penny.", stars: 5, service: "Airbnb Cleaning" },
-        { name: "Sandra R.", area: "Boynton Beach, FL", date: "3 weeks ago", text: "After our kitchen renovation there was dust everywhere. Ridge came in and made it look brand new. The post-construction cleaning was thorough and they even cleaned things I hadn't thought to mention. Excellent service.", stars: 5, service: "Post-Construction" },
+        { name: "Maria L.", area: "West Palm Beach, FL", date: "2 weeks ago", text: "Excellent service! Super clean and on time.", stars: 5, service: "Deep Cleaning" },
+        { name: "James T.", area: "Boca Raton, FL", date: "1 month ago", text: "They handle my Airbnb every week. Guests always rate cleanliness 5 stars. Reliable team.", stars: 5, service: "Airbnb Cleaning" },
+        { name: "Sandra R.", area: "Boynton Beach, FL", date: "3 weeks ago", text: "Great service, but the price is a bit high. Still, the results were worth it — spotless!", stars: 4, service: "Post-Construction" },
+        { name: "Carlos M.", area: "Lake Worth, FL", date: "5 days ago", text: "Very professional. Arrived on time and left everything spotless. Will book again.", stars: 5, service: "Residential Cleaning" },
+        { name: "Jennifer K.", area: "Delray Beach, FL", date: "2 months ago", text: "Best cleaning company in Palm Beach! Quick, thorough, and friendly staff.", stars: 5, service: "Commercial Cleaning" },
       ],
     },
     why: {
@@ -165,9 +167,11 @@ const t = {
     testimonials: {
       heading: "Reseñas de Google", sub: "Lo que dicen nuestros clientes",
       items: [
-        { name: "María L.", area: "West Palm Beach, FL", date: "hace 2 semanas", text: "Contraté a Ridge para una limpieza profunda antes de listar mi casa. Cada gabinete, cada rincón — impecable. El equipo fue profesional, minucioso y llegó puntual. ¡Los recomiendo mucho!", stars: 5, service: "Limpieza Profunda" },
-        { name: "James T.", area: "Boca Raton, FL", date: "hace 1 mes", text: "Manejan mis turnos de Airbnb cada semana sin falta. Mis huéspedes califican constantemente la limpieza con 5 estrellas. La programación es fácil y el equipo se comunica muy bien.", stars: 5, service: "Limpieza Airbnb" },
-        { name: "Sandra R.", area: "Boynton Beach, FL", date: "hace 3 semanas", text: "Después de nuestra remodelación de cocina había polvo en todas partes. Ridge llegó y dejó todo como nuevo. La limpieza post-construcción fue completa y limpiaron cosas que yo no había pedido. Excelente servicio.", stars: 5, service: "Post-Construcción" },
+        { name: "María L.", area: "West Palm Beach, FL", date: "hace 2 semanas", text: "¡Excelente servicio! Todo impecable y puntuales.", stars: 5, service: "Limpieza Profunda" },
+        { name: "James T.", area: "Boca Raton, FL", date: "hace 1 mes", text: "Manejan mis Airbnb cada semana. Mis huéspedes siempre califican la limpieza con 5 estrellas. Muy confiables.", stars: 5, service: "Limpieza Airbnb" },
+        { name: "Sandra R.", area: "Boynton Beach, FL", date: "hace 3 semanas", text: "Muy buen servicio, pero el precio es un poco elevado. Aun así el resultado valió la pena — quedó perfecto.", stars: 4, service: "Post-Construcción" },
+        { name: "Carlos M.", area: "Lake Worth, FL", date: "hace 5 días", text: "Muy profesionales. Llegaron a tiempo y dejaron todo impecable. Los volvería a contratar.", stars: 5, service: "Limpieza Residencial" },
+        { name: "Jennifer K.", area: "Delray Beach, FL", date: "hace 2 meses", text: "¡La mejor empresa de limpieza en Palm Beach! Rápidos, completos y muy amables.", stars: 5, service: "Limpieza Comercial" },
       ],
     },
     why: {
@@ -267,18 +271,13 @@ const SectionHead = ({ label, title }: { label: string; title: string }) => (
 
 // ─── Logo ─────────────────────────────────────────────────────────────────────
 const Logo = ({ scrolled }: { scrolled: boolean }) => (
-  <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-3 select-none group">
+  <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center select-none group">
     <img
-      src="/logo.png"
+      src="/Logocomplet_1.png"
       alt="Ridge Perfect Cleaning"
-      className={`w-auto transition-all duration-300 group-hover:scale-105 drop-shadow-lg ${scrolled ? "h-16 sm:h-20" : "h-20 sm:h-24 lg:h-28"}`}
+      className={`w-auto transition-all duration-300 group-hover:scale-105 ${scrolled ? "h-14 sm:h-16" : "h-16 sm:h-20 lg:h-24"}`}
+      style={{ mixBlendMode: "multiply" }}
     />
-    <div className="flex flex-col leading-tight">
-      <span className={`font-black tracking-widest transition-all ${scrolled ? "text-base sm:text-lg text-[#0D2B4E]" : "text-lg sm:text-xl lg:text-2xl text-white/95"}`}>
-        PERFECT CLEANING
-      </span>
-      <span className={`font-black tracking-widest text-[#6BC043] transition-all ${scrolled ? "text-base sm:text-lg" : "text-lg sm:text-xl lg:text-2xl"}`}>SOLUTIONS</span>
-    </div>
   </button>
 );
 
@@ -376,6 +375,14 @@ export const Home = () => {
   const [openFaq,  setOpenFaq]  = useState<number | null>(null);
   const [formState, setFormState] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [form, setForm] = useState({ name: "", phone: "", service: "", message: "" });
+  const [activeReview, setActiveReview] = useState(0);
+
+  // Auto-advance carousel every 3s
+  useEffect(() => {
+    const items = t[lang].testimonials.items;
+    const id = setInterval(() => setActiveReview(i => (i + 1) % items.length), 3000);
+    return () => clearInterval(id);
+  }, [lang]);
   const tx = t[lang];
 
   useEffect(() => { document.documentElement.lang = lang; }, [lang]);
@@ -535,67 +542,69 @@ export const Home = () => {
       </nav>
 
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
-      <section className="relative bg-[#0D2B4E] overflow-hidden">
-        <div className="absolute top-10 -left-24 w-72 h-72 rounded-full bg-[#3AB5E5]/10 blur-3xl pointer-events-none animate-blob" />
-        <div className="absolute bottom-10 right-0 w-80 h-80 rounded-full bg-[#6BC043]/10 blur-3xl pointer-events-none animate-blob-slow" />
-        <div className="absolute top-1/3 left-1/2 w-96 h-96 rounded-full bg-[#3AB5E5]/5 blur-3xl pointer-events-none animate-blob-delayed" />
+      <section className="relative overflow-hidden" style={{ minHeight: "100vh" }}>
+        {/* Background photo */}
+        <img
+          src="/Image4.jpeg"
+          alt="Ridge Perfect Cleaning Solutions"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-[#0D2B4E]/68" />
 
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-10 items-center pt-40 pb-20 lg:pt-44 lg:pb-24">
-          <div className="text-center lg:text-left">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-none mb-3">
-              <span className="text-[#3AB5E5] inline-block animate-shimmer-text">{tx.hero.title1}</span><br />
-              <span className="text-[#6BC043] inline-block animate-shimmer-text" style={{ animationDelay: "0.4s" }}>{tx.hero.title2}</span>
-            </h1>
-            <p className="text-base text-white/55 italic mb-3 animate-fade-in" style={{ animationDelay: "0.2s", animationFillMode: "backwards" }}>{tx.hero.subtitle}</p>
-            <p className="text-white/70 mb-1.5 text-sm leading-relaxed max-w-md mx-auto lg:mx-0">{tx.hero.desc}</p>
-            <p className="text-[#3AB5E5] font-semibold text-xs mb-7">{tx.hero.tagline}</p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-9">
-              <button onClick={() => scrollTo("contact")}
-                className="btn-p bg-[#3AB5E5] text-white px-7 py-3.5 rounded-full font-bold text-sm shadow-lg hover:shadow-[#3AB5E5]/50 hover:shadow-xl">
-                {tx.hero.cta1}
-              </button>
-              <a href="tel:5618180778"
-                className="btn-o border-2 border-white/35 text-white px-7 py-3.5 rounded-full font-bold text-sm flex items-center justify-center gap-2 hover:bg-white hover:text-[#0D2B4E] hover:border-white">
-                <Phone size={14} /> {tx.hero.cta2}
-              </a>
-            </div>
-            <div className="flex justify-center lg:justify-start gap-8">
-              {[
-                { v: 100, suf: "%", l: tx.hero.s1l },
-                { v: 8,   suf: "+", l: tx.hero.s2l },
-                { v: 24,  suf: "/7", l: tx.hero.s3l, raw: "24/7" },
-              ].map(({ v, suf, l, raw }) => (
-                <div key={l} className="text-center group cursor-default">
-                  <div className="text-3xl font-black text-[#3AB5E5] transition-transform group-hover:scale-110">
-                    {raw ? raw : <CountUp end={v} suffix={suf} />}
-                  </div>
-                  <div className="text-[10px] text-white/40 uppercase tracking-widest mt-0.5 group-hover:text-white/70 transition-colors">{l}</div>
-                </div>
-              ))}
-            </div>
+        {/* Content */}
+        <div
+          className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6"
+          style={{ minHeight: "100vh", paddingTop: 100, paddingBottom: 80 }}
+        >
+          <h1 className="leading-none mb-4" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
+            <span
+              className="block text-[#3AB5E5] animate-shimmer-text"
+              style={{ fontSize: "clamp(3.5rem, 10vw, 8rem)", letterSpacing: "0.04em" }}
+            >
+              {tx.hero.title1}
+            </span>
+            <span
+              className="block text-[#6BC043] animate-shimmer-text"
+              style={{ fontSize: "clamp(3.5rem, 10vw, 8rem)", letterSpacing: "0.04em", animationDelay: "0.4s" }}
+            >
+              {tx.hero.title2}
+            </span>
+          </h1>
+          <p className="text-white/80 italic text-base sm:text-lg mb-2">{tx.hero.subtitle}</p>
+          <p className="text-white/65 text-sm sm:text-base max-w-lg mb-2">{tx.hero.desc}</p>
+          <p className="text-[#3AB5E5] font-semibold text-xs mb-8 uppercase tracking-widest">{tx.hero.tagline}</p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center mb-10">
+            <button onClick={() => scrollTo("contact")}
+              className="btn-p bg-[#3AB5E5] text-white px-8 py-3.5 rounded-full font-bold text-sm shadow-lg">
+              {tx.hero.cta1}
+            </button>
+            <a href="tel:5618180778"
+              className="btn-o border-2 border-white/40 text-white px-8 py-3.5 rounded-full font-bold text-sm flex items-center justify-center gap-2 hover:bg-white hover:text-[#0D2B4E] hover:border-white">
+              <Phone size={14} /> {tx.hero.cta2}
+            </a>
           </div>
-
-          {/* Video — landscape format, desktop */}
-          <div className="hidden lg:flex justify-center items-center">
-            <div className="relative z-10 w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10 animate-tilt hover:scale-[1.02] transition-transform duration-500" style={{ maxWidth: 520 }}>
-              <video autoPlay muted loop playsInline preload="auto" className="w-full h-auto block">
-                <source src="/RidgeCleaning.mp4" type="video/mp4" />
-              </video>
-            </div>
-          </div>
-
-          {/* Video — mobile */}
-          <div className="lg:hidden">
-            <div className="rounded-2xl overflow-hidden shadow-xl border border-white/10">
-              <video autoPlay muted loop playsInline preload="auto" className="w-full h-auto block">
-                <source src="/RidgeCleaning.mp4" type="video/mp4" />
-              </video>
-            </div>
+          <div className="flex justify-center gap-10">
+            {[
+              { v: 100, suf: "%", l: tx.hero.s1l },
+              { v: 8, suf: "+", l: tx.hero.s2l },
+              { l: tx.hero.s3l, raw: "24/7" },
+            ].map(({ v, suf, l, raw }) => (
+              <div key={l} className="text-center">
+                <div className="text-3xl font-black text-[#3AB5E5]">{raw ?? <CountUp end={v!} suffix={suf} />}</div>
+                <div className="text-[10px] text-white/50 uppercase tracking-widest mt-0.5">{l}</div>
+              </div>
+            ))}
           </div>
         </div>
 
+        <button onClick={() => scrollTo("services")}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/30 hover:text-white/60 transition-colors float z-10">
+          <ArrowDown size={20} />
+        </button>
+
         {/* Pronounced wave */}
-        <div className="-mb-px">
+        <div className="absolute bottom-0 left-0 right-0 -mb-px z-10">
           <svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="w-full block">
             <path d="M0,0 C240,100 480,0 720,60 C960,100 1200,20 1440,70 L1440,100 L0,100 Z" fill="white" />
           </svg>
@@ -678,49 +687,69 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* ── TESTIMONIALS ─────────────────────────────────────────────────────── */}
+      {/* ── TESTIMONIALS CAROUSEL ────────────────────────────────────────────── */}
       <section className="py-20 px-4 sm:px-6 bg-[#F8FBFF]">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-2xl mx-auto">
           <SectionHead label={tx.testimonials.heading} title={tx.testimonials.sub} />
-          <div className="grid sm:grid-cols-3 gap-6">
-            {tx.testimonials.items.map(({ name, area, date, text, stars, service }, i) => (
-              <Reveal key={name} delay={i * 80}>
-                <div className="card-lift bg-white border border-gray-100 rounded-2xl p-6 h-full flex flex-col">
-                  {/* Google logo + stars */}
-                  <div className="flex items-center justify-between mb-4">
+          <Reveal>
+            <div className="relative overflow-hidden">
+              {tx.testimonials.items.map(({ name, area, date, text, stars, service }, i) => (
+                <div
+                  key={name}
+                  className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm flex flex-col"
+                  style={{
+                    display: i === activeReview ? "flex" : "none",
+                    animation: i === activeReview ? "fade-in 0.4s ease" : "none",
+                  }}
+                >
+                  <div className="flex items-center justify-between mb-5">
                     <div className="flex gap-0.5">
-                      {Array.from({ length: stars }).map((_, s) => (
-                        <Star key={s} size={14} fill="#FBBF24" strokeWidth={0} className="text-yellow-400" />
+                      {Array.from({ length: 5 }).map((_, s) => (
+                        <Star key={s} size={16} fill={s < stars ? "#FBBF24" : "#E5E7EB"} strokeWidth={0} />
                       ))}
                     </div>
                     {/* Google G */}
-                    <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
                       <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
                       <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
                       <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
                     </svg>
                   </div>
-                  <p className="text-gray-600 text-sm leading-relaxed flex-1 mb-5">"{text}"</p>
-                  <div>
-                    <div className="flex items-center gap-3 mb-1">
-                      <div className="w-9 h-9 rounded-full bg-[#3AB5E5] flex items-center justify-center text-white font-black text-sm shrink-0">
-                        {name.charAt(0)}
-                      </div>
-                      <div>
-                        <div className="font-bold text-[#0D2B4E] text-sm">{name}</div>
-                        <div className="text-gray-400 text-xs">{area}</div>
-                      </div>
+                  <p className="text-gray-600 text-base leading-relaxed mb-6">"{text}"</p>
+                  <div className="flex items-center gap-3 mt-auto">
+                    <div className="w-10 h-10 rounded-full bg-[#3AB5E5] flex items-center justify-center text-white font-black shrink-0">
+                      {name.charAt(0)}
                     </div>
-                    <div className="flex items-center justify-between mt-2 pl-12">
-                      <span className="text-[10px] bg-[#EEF8FD] text-[#3AB5E5] font-semibold px-2 py-0.5 rounded-full">{service}</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-bold text-[#0D2B4E] text-sm">{name}</div>
+                      <div className="text-gray-400 text-xs">{area}</div>
+                    </div>
+                    <div className="flex flex-col items-end gap-1">
+                      <span className="text-[10px] bg-[#EEF8FD] text-[#3AB5E5] font-semibold px-2.5 py-0.5 rounded-full">{service}</span>
                       <span className="text-[10px] text-gray-400">{date}</span>
                     </div>
                   </div>
                 </div>
-              </Reveal>
-            ))}
-          </div>
+              ))}
+            </div>
+
+            {/* Dots */}
+            <div className="flex justify-center gap-2 mt-5">
+              {tx.testimonials.items.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveReview(i)}
+                  className="rounded-full transition-all duration-300"
+                  style={{
+                    width: i === activeReview ? 24 : 8,
+                    height: 8,
+                    background: i === activeReview ? "#3AB5E5" : "#CBD5E1",
+                  }}
+                />
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -973,12 +1002,8 @@ export const Home = () => {
       <footer className="bg-[#0D2B4E] text-white pt-14 pb-8 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto grid sm:grid-cols-2 md:grid-cols-3 gap-10 mb-10">
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <img src="/logo.png" alt="Ridge Logo" className="h-12 w-auto" />
-              <div className="flex flex-col leading-tight">
-                <span className="text-sm font-black tracking-widest text-white/80">PERFECT CLEANING</span>
-                <span className="text-sm font-black tracking-widest text-[#6BC043]">SOLUTIONS</span>
-              </div>
+            <div className="mb-4">
+              <img src="/Logocomplet_1.png" alt="Ridge Perfect Cleaning" className="h-14 w-auto" style={{ filter: "brightness(0) invert(1)" }} />
             </div>
             <p className="text-gray-400 text-xs leading-relaxed mb-4">{tx.footer.desc}</p>
             <a href="https://wa.me/15618180778" target="_blank" rel="noopener noreferrer"
