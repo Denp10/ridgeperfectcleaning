@@ -428,14 +428,24 @@ export const Home = () => {
         @keyframes pring  { 0%{box-shadow:0 0 0 0 rgba(58,181,229,.5)} 70%{box-shadow:0 0 0 14px rgba(58,181,229,0)} 100%{box-shadow:0 0 0 0 rgba(58,181,229,0)} }
         @keyframes wpulse { 0%{box-shadow:0 0 0 0 rgba(37,211,102,.5)} 70%{box-shadow:0 0 0 14px rgba(37,211,102,0)} 100%{box-shadow:0 0 0 0 rgba(37,211,102,0)} }
         @keyframes cpulse { 0%{box-shadow:0 0 0 0 rgba(58,181,229,.5)} 70%{box-shadow:0 0 0 12px rgba(58,181,229,0)} 100%{box-shadow:0 0 0 0 rgba(58,181,229,0)} }
+        @keyframes blob   { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(30px,-40px) scale(1.1)} 66%{transform:translate(-20px,30px) scale(.95)} }
+        @keyframes shimmer-text { 0%,100%{filter:brightness(1) drop-shadow(0 0 0 rgba(58,181,229,0))} 50%{filter:brightness(1.2) drop-shadow(0 0 18px rgba(58,181,229,.55))} }
+        @keyframes tilt   { 0%,100%{transform:rotate(-.6deg)} 50%{transform:rotate(.6deg)} }
+        @keyframes fade-in { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
         .float   { animation:float 4s ease-in-out infinite; }
         .pring   { animation:pring 2.4s ease-out infinite; }
         .wpulse  { animation:wpulse 2.2s ease-out infinite; }
         .cpulse  { animation:cpulse 2s ease-out infinite; }
+        .animate-blob         { animation:blob 14s ease-in-out infinite; }
+        .animate-blob-slow    { animation:blob 20s ease-in-out infinite reverse; }
+        .animate-blob-delayed { animation:blob 18s ease-in-out infinite; animation-delay:-6s; }
+        .animate-shimmer-text { animation:shimmer-text 3.5s ease-in-out infinite; }
+        .animate-tilt         { animation:tilt 6s ease-in-out infinite; }
+        .animate-fade-in      { animation:fade-in .8s ease-out; }
         .card-lift { transition:transform .22s ease,box-shadow .22s ease; }
         .card-lift:hover { transform:translateY(-5px); box-shadow:0 16px 36px rgba(13,43,78,.10); }
         .icon-wrap { transition:background .2s ease,transform .2s ease; }
-        .icon-wrap:hover { transform:scale(1.07); }
+        .icon-wrap:hover { transform:scale(1.07) rotate(-4deg); }
         .btn-p { transition:transform .16s ease,box-shadow .16s ease; }
         .btn-p:hover { transform:translateY(-2px); box-shadow:0 8px 22px rgba(58,181,229,.38); }
         .btn-o { transition:transform .16s ease,background .16s ease,color .16s ease,border-color .16s ease; }
