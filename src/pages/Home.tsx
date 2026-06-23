@@ -549,7 +549,7 @@ export const Home = () => {
         }} />
 
         {/* Buttons + stats — bottom left, above the wave */}
-        <div className="absolute bottom-20 left-6 sm:left-10 lg:left-20 z-10 flex flex-col items-center">
+        <div className="absolute bottom-20 left-14 sm:left-20 lg:left-36 z-10 flex flex-col items-center">
           <div className="flex flex-row gap-3 mb-5 flex-wrap justify-center">
             <button onClick={() => scrollTo("contact")}
               className="btn-p bg-[#3AB5E5] text-white px-7 py-3 rounded-full font-bold text-sm shadow-lg">
