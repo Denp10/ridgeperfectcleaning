@@ -270,13 +270,12 @@ const SectionHead = ({ label, title }: { label: string; title: string }) => (
 );
 
 // ─── Logo ─────────────────────────────────────────────────────────────────────
-const Logo = ({ scrolled }: { scrolled: boolean }) => (
+const Logo = () => (
   <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center select-none group">
     <img
-      src="/Logocomplet_1.png"
+      src="/logo.png"
       alt="Ridge Perfect Cleaning"
-      className={`w-auto transition-all duration-300 group-hover:scale-105 rounded-xl ${scrolled ? "h-14 sm:h-16" : "h-16 sm:h-20 lg:h-24"}`}
-      style={{ mixBlendMode: scrolled ? "normal" : "multiply" }}
+      className="h-12 sm:h-14 w-auto group-hover:scale-105 transition-transform duration-200"
     />
   </button>
 );
@@ -482,27 +481,21 @@ export const Home = () => {
         </a>
       </div>
 
-      {/* ── NAVBAR ───────────────────────────────────────────────────────────── */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-white/97 backdrop-blur-md shadow-md border-b border-gray-100 py-3" : "bg-transparent py-5"
-      }`}>
+      {/* ── NAVBAR — always white, always same height ────────────────────────── */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 shadow-sm py-3">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
-          <Logo scrolled={scrolled} />
+          <Logo />
 
           {/* Desktop links */}
           <div className="hidden md:flex items-center gap-6 lg:gap-8">
             {navLinks.map(({ id, label }) => (
               <button key={id} onClick={() => scrollTo(id)}
-                className={`ul-fx text-sm font-semibold tracking-wide transition-colors hover:text-[#3AB5E5] ${
-                  scrolled ? "text-[#0D2B4E]" : "text-white/90"
-                }`}>
+                className="ul-fx text-sm font-semibold tracking-wide text-[#0D2B4E] hover:text-[#3AB5E5] transition-colors">
                 {label}
               </button>
             ))}
             <button onClick={() => setLang(l => l === "en" ? "es" : "en")}
-              className={`flex items-center gap-1.5 text-sm font-bold px-3 py-1.5 rounded-full border transition-all ${
-                scrolled ? "border-[#3AB5E5] text-[#3AB5E5] hover:bg-[#3AB5E5] hover:text-white" : "border-white/50 text-white/80 hover:border-white hover:text-white"
-              }`}>
+              className="flex items-center gap-1.5 text-sm font-bold px-3 py-1.5 rounded-full border border-[#3AB5E5] text-[#3AB5E5] hover:bg-[#3AB5E5] hover:text-white transition-all">
               <Globe size={14} /> {lang === "en" ? "ES" : "EN"}
             </button>
             <a href="tel:5618180778"
@@ -514,12 +507,10 @@ export const Home = () => {
           {/* Mobile right */}
           <div className="md:hidden flex items-center gap-2">
             <button onClick={() => setLang(l => l === "en" ? "es" : "en")}
-              className={`flex items-center gap-1 text-sm font-bold px-2.5 py-1.5 rounded-full border ${
-                scrolled ? "border-[#3AB5E5] text-[#3AB5E5]" : "border-white/50 text-white/80"
-              }`}>
+              className="flex items-center gap-1 text-sm font-bold px-2.5 py-1.5 rounded-full border border-[#3AB5E5] text-[#3AB5E5]">
               <Globe size={13} /> {lang === "en" ? "ES" : "EN"}
             </button>
-            <button onClick={() => setMenuOpen(!menuOpen)} className={`p-1 ${scrolled ? "text-[#0D2B4E]" : "text-white"}`}>
+            <button onClick={() => setMenuOpen(!menuOpen)} className="p-1 text-[#0D2B4E]">
               {menuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
@@ -556,13 +547,13 @@ export const Home = () => {
           background: "linear-gradient(135deg, rgba(13,43,78,0.55) 0%, rgba(13,43,78,0.78) 50%, rgba(13,43,78,0.82) 100%)"
         }} />
 
-        {/* Content */}
+        {/* Content — left aligned */}
         <div
-          className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6"
-          style={{ minHeight: "100vh", paddingTop: 110, paddingBottom: 90 }}
+          className="relative z-10 flex flex-col justify-center px-6 sm:px-10 lg:px-20 max-w-3xl"
+          style={{ minHeight: "100vh", paddingTop: 100, paddingBottom: 90 }}
         >
           {/* Badge */}
-          <div className="flex items-center gap-2 bg-white/10 border border-white/20 backdrop-blur-sm text-white text-xs font-semibold px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest">
+          <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 backdrop-blur-sm text-white text-xs font-semibold px-4 py-1.5 rounded-full mb-5 uppercase tracking-widest self-start">
             <Star size={11} fill="#FBBF24" strokeWidth={0} />
             {lang === "en" ? "Palm Beach County's Trusted Cleaning" : "La Limpieza de Confianza en Palm Beach"}
           </div>
@@ -574,7 +565,7 @@ export const Home = () => {
               fontFamily: "'Orbitron', sans-serif",
               fontWeight: 900,
               fontStyle: "italic",
-              fontSize: "clamp(4.5rem, 16vw, 11rem)",
+              fontSize: "clamp(4rem, 14vw, 10rem)",
               letterSpacing: "-0.01em",
               textShadow: "0 4px 32px rgba(58,181,229,0.35)",
             }}
@@ -583,47 +574,56 @@ export const Home = () => {
           </div>
 
           {/* Accent line */}
-          <div className="flex items-center gap-3 mb-2 w-full max-w-md justify-center">
-            <div className="h-px flex-1 bg-[#3AB5E5]/40" />
+          <div className="flex items-center gap-3 mb-2 max-w-xs">
+            <div className="h-px flex-1 bg-[#3AB5E5]/50" />
             <div className="w-2 h-2 rounded-full bg-[#6BC043]" />
-            <div className="h-px flex-1 bg-[#6BC043]/40" />
+            <div className="h-px flex-1 bg-[#6BC043]/50" />
           </div>
 
           {/* PERFECT CLEANING — Bebas Neue */}
           <div
-            className="leading-none text-white mb-5"
+            className="leading-none text-white mb-4"
             style={{
               fontFamily: "'Bebas Neue', sans-serif",
-              fontSize: "clamp(2rem, 7vw, 4.5rem)",
-              letterSpacing: "0.25em",
+              fontSize: "clamp(1.8rem, 6vw, 4rem)",
+              letterSpacing: "0.22em",
               textShadow: "0 2px 16px rgba(0,0,0,0.4)",
             }}
           >
             PERFECT CLEANING
           </div>
 
-          <p className="text-white/70 italic text-sm sm:text-base mb-1">{tx.hero.subtitle}</p>
-          <p className="text-white/55 text-xs sm:text-sm max-w-md mb-7">{tx.hero.desc}</p>
+          <p className="text-white/75 italic text-sm sm:text-base mb-1">{tx.hero.subtitle}</p>
+          <p className="text-white/60 text-xs sm:text-sm max-w-md mb-3">{tx.hero.desc}</p>
 
-          <div className="flex flex-col sm:flex-row gap-3 justify-center mb-10">
+          {/* Tagline — 3 brand colors */}
+          <p className="text-xs font-bold uppercase tracking-widest mb-7">
+            <span className="text-[#3AB5E5]">{lang === "en" ? "Better Price" : "Mejor Precio"}</span>
+            <span className="text-white/40 mx-2">·</span>
+            <span className="text-[#6BC043]">{lang === "en" ? "Better Solutions" : "Mejores Soluciones"}</span>
+            <span className="text-white/40 mx-2">·</span>
+            <span className="text-white">{lang === "en" ? "Perfect Clean" : "Limpieza Perfecta"}</span>
+          </p>
+
+          <div className="flex flex-row gap-3 mb-10 flex-wrap">
             <button onClick={() => scrollTo("contact")}
               className="btn-p bg-[#3AB5E5] text-white px-8 py-3.5 rounded-full font-bold text-sm shadow-lg">
               {tx.hero.cta1}
             </button>
             <a href="tel:5618180778"
-              className="btn-o border-2 border-white/40 text-white px-8 py-3.5 rounded-full font-bold text-sm flex items-center justify-center gap-2 hover:bg-white hover:text-[#0D2B4E] hover:border-white">
+              className="btn-o border-2 border-white/40 text-white px-8 py-3.5 rounded-full font-bold text-sm flex items-center gap-2 hover:bg-white hover:text-[#0D2B4E] hover:border-white">
               <Phone size={14} /> {tx.hero.cta2}
             </a>
           </div>
 
           {/* Stats */}
-          <div className="flex justify-center gap-8 sm:gap-14">
+          <div className="flex gap-8 sm:gap-12">
             {[
               { v: 100, suf: "%", l: tx.hero.s1l },
               { v: 8, suf: "+", l: tx.hero.s2l },
               { l: tx.hero.s3l, raw: "24/7" },
             ].map(({ v, suf, l, raw }) => (
-              <div key={l} className="text-center">
+              <div key={l} className="text-left">
                 <div className="text-2xl sm:text-3xl font-black text-[#3AB5E5]">{raw ?? <CountUp end={v!} suffix={suf} />}</div>
                 <div className="text-[10px] text-white/45 uppercase tracking-widest mt-0.5">{l}</div>
               </div>
