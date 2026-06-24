@@ -377,9 +377,6 @@ export const Home = () => {
   const [form, setForm] = useState({ name: "", phone: "", service: "", message: "" });
   const [showAllServices, setShowAllServices] = useState(false);
   const [activeReview, setActiveReview] = useState(0);
-  const [openBA,           setOpenBA]           = useState(false);
-  const [openTestimonials, setOpenTestimonials] = useState(false);
-  const [openFAQSection,   setOpenFAQSection]   = useState(false);
   const tx = t[lang];
 
   // Auto-advance carousel every 3.5s
@@ -662,28 +659,19 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* ── BEFORE & AFTER (mobile: collapsible) ───────────────────────────── */}
-      <div>
-        <button
-          className="sm:hidden w-full flex items-center justify-between px-4 py-3.5 bg-[#F8FBFF] border-y border-gray-100"
-          onClick={() => setOpenBA(o => !o)}
-        >
-          <span className="font-bold text-[#0D2B4E] text-sm">{lang === "en" ? "Before & After" : "Antes y Después"}</span>
-          <ChevronDown size={16} className={`text-[#3AB5E5] transition-transform duration-200 ${openBA ? "rotate-180" : ""}`} />
-        </button>
-        <section className={`py-8 sm:py-14 px-4 sm:px-6 bg-[#F8FBFF] ${openBA ? "" : "hidden sm:block"}`}>
-          <div className="max-w-3xl mx-auto">
-            <div className="hidden sm:block"><SectionHead label={tx.beforeAfter.heading} title={tx.beforeAfter.sub} /></div>
-            <div className="grid sm:grid-cols-3 gap-3">
-              {tx.beforeAfter.items.map(({ imgBefore, imgAfter, label }, i) => (
-                <Reveal key={label} delay={i * 70}>
-                  <BeforeAfterCard imgBefore={imgBefore} imgAfter={imgAfter} label={label} before={tx.beforeAfter.before} after={tx.beforeAfter.after} />
-                </Reveal>
-              ))}
-            </div>
+      {/* ── BEFORE & AFTER ───────────────────────────────────────────────────── */}
+      <section className="py-8 sm:py-14 px-4 sm:px-6 bg-[#F8FBFF]">
+        <div className="max-w-3xl mx-auto">
+          <SectionHead label={tx.beforeAfter.heading} title={tx.beforeAfter.sub} />
+          <div className="grid sm:grid-cols-3 gap-3">
+            {tx.beforeAfter.items.map(({ imgBefore, imgAfter, label }, i) => (
+              <Reveal key={label} delay={i * 70}>
+                <BeforeAfterCard imgBefore={imgBefore} imgAfter={imgAfter} label={label} before={tx.beforeAfter.before} after={tx.beforeAfter.after} />
+              </Reveal>
+            ))}
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
 
       {/* ── PRICING ──────────────────────────────────────────────────────────── */}
       <section className="py-8 sm:py-14 px-4 sm:px-6 bg-white">
@@ -721,18 +709,10 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* ── TESTIMONIALS (mobile: collapsible) ───────────────────────────────── */}
-      <div>
-        <button
-          className="sm:hidden w-full flex items-center justify-between px-4 py-3.5 bg-[#F8FBFF] border-y border-gray-100"
-          onClick={() => setOpenTestimonials(o => !o)}
-        >
-          <span className="font-bold text-[#0D2B4E] text-sm">{lang === "en" ? "Google Reviews" : "Reseñas Google"}</span>
-          <ChevronDown size={16} className={`text-[#3AB5E5] transition-transform duration-200 ${openTestimonials ? "rotate-180" : ""}`} />
-        </button>
-      <section className={`py-8 sm:py-14 px-4 sm:px-6 bg-[#F8FBFF] ${openTestimonials ? "" : "hidden sm:block"}`}>
+      {/* ── TESTIMONIALS CAROUSEL — 2 cards visible ──────────────────────────── */}
+      <section className="py-8 sm:py-14 px-4 sm:px-6 bg-[#F8FBFF]">
         <div className="max-w-3xl mx-auto">
-          <div className="hidden sm:block"><SectionHead label={tx.testimonials.heading} title={tx.testimonials.sub} /></div>
+          <SectionHead label={tx.testimonials.heading} title={tx.testimonials.sub} />
           <Reveal>
             {(() => {
               const items = tx.testimonials.items;
@@ -784,7 +764,6 @@ export const Home = () => {
           </Reveal>
         </div>
       </section>
-      </div>
 
       {/* ── WHY US + ABOUT (merged) ──────────────────────────────────────────── */}
       <section id="why-us" className="py-12 sm:py-20 px-4 sm:px-6 bg-white">
@@ -875,40 +854,31 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* ── FAQ (mobile: collapsible) ─────────────────────────────────────────── */}
-      <div>
-        <button
-          className="sm:hidden w-full flex items-center justify-between px-4 py-3.5 bg-white border-y border-gray-100"
-          onClick={() => setOpenFAQSection(o => !o)}
-        >
-          <span className="font-bold text-[#0D2B4E] text-sm">{lang === "en" ? "FAQ" : "Preguntas Frecuentes"}</span>
-          <ChevronDown size={16} className={`text-[#3AB5E5] transition-transform duration-200 ${openFAQSection ? "rotate-180" : ""}`} />
-        </button>
-        <section className={`py-12 sm:py-20 px-4 sm:px-6 bg-white ${openFAQSection ? "" : "hidden sm:block"}`}>
-          <div className="max-w-3xl mx-auto">
-            <div className="hidden sm:block"><SectionHead label={tx.faq.heading} title={tx.faq.sub} /></div>
-            <div className="space-y-3">
-              {tx.faq.items.map(({ q, a }, i) => (
-                <Reveal key={i} delay={i * 40}>
-                  <div className="border border-gray-100 rounded-xl overflow-hidden bg-white shadow-sm">
-                    <button onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                      className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-gray-50 transition-colors">
-                      <span className="font-bold text-[#0D2B4E] text-sm pr-4">{q}</span>
-                      <ChevronDown size={18} className="text-[#3AB5E5] shrink-0 transition-transform duration-200"
-                        style={{ transform: openFaq === i ? "rotate(180deg)" : "rotate(0deg)" }} />
-                    </button>
-                    {openFaq === i && (
-                      <div className="px-6 pb-5 border-t border-gray-50">
-                        <p className="text-gray-500 text-sm leading-relaxed pt-3">{a}</p>
-                      </div>
-                    )}
-                  </div>
-                </Reveal>
-              ))}
-            </div>
+      {/* ── FAQ ──────────────────────────────────────────────────────────────── */}
+      <section className="py-12 sm:py-20 px-4 sm:px-6 bg-white">
+        <div className="max-w-3xl mx-auto">
+          <SectionHead label={tx.faq.heading} title={tx.faq.sub} />
+          <div className="space-y-3">
+            {tx.faq.items.map(({ q, a }, i) => (
+              <Reveal key={i} delay={i * 40}>
+                <div className="border border-gray-100 rounded-xl overflow-hidden bg-white shadow-sm">
+                  <button onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                    className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-gray-50 transition-colors">
+                    <span className="font-bold text-[#0D2B4E] text-sm pr-4">{q}</span>
+                    <ChevronDown size={18} className="text-[#3AB5E5] shrink-0 transition-transform duration-200"
+                      style={{ transform: openFaq === i ? "rotate(180deg)" : "rotate(0deg)" }} />
+                  </button>
+                  {openFaq === i && (
+                    <div className="px-6 pb-5 border-t border-gray-50">
+                      <p className="text-gray-500 text-sm leading-relaxed pt-3">{a}</p>
+                    </div>
+                  )}
+                </div>
+              </Reveal>
+            ))}
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
 
       {/* ── CONTACT + FORM ───────────────────────────────────────────────────── */}
       <section id="contact" className="py-12 sm:py-20 px-4 sm:px-6 bg-[#F8FBFF]">
