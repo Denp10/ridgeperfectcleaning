@@ -150,7 +150,7 @@ const t = {
       before: "Antes", after: "Después",
       items: [
         { imgBefore: "/Estufa1.png", imgAfter: "/Estufa2.png", label: "Limpieza de Estufa" },
-        { imgBefore: "/Coche3.png",  imgAfter: "/Coche4.png",  label: "Lavado de Auto Móvil" },
+        { imgBefore: "/Coche1.png",  imgAfter: "/Coche2.png",  label: "Lavado de Auto Móvil" },
         { imgBefore: "/Tapete1.png", imgAfter: "/Tapete2.png", label: "Limpieza de Tapete" },
       ],
     },
