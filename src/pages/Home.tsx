@@ -588,7 +588,8 @@ export const Home = () => {
       <section id="services" className="py-12 sm:py-20 px-4 sm:px-6 bg-white">
         <div className="max-w-6xl mx-auto">
           <SectionHead label={tx.services.heading} title={tx.services.sub} />
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          {/* Mobile: compact 2-col, icon beside title, 4 items + see more */}
+          <div className="grid grid-cols-2 gap-3 lg:hidden">
             {(showAllServices ? tx.services.items : tx.services.items.slice(0, 4)).map(({ title, desc }, i) => {
               const Icon = serviceIcons[i];
               const accents = [
@@ -620,7 +621,7 @@ export const Home = () => {
           </div>
           {!showAllServices && (
             <Reveal>
-              <div className="text-center mt-5">
+              <div className="text-center mt-5 lg:hidden">
                 <button
                   onClick={() => setShowAllServices(true)}
                   className="text-[#3AB5E5] text-sm font-bold hover:underline flex items-center gap-1 mx-auto">
@@ -629,6 +630,35 @@ export const Home = () => {
               </div>
             </Reveal>
           )}
+          {/* Desktop: icon above title, all 8 services, 4-col grid */}
+          <div className="hidden lg:grid lg:grid-cols-4 gap-4">
+            {tx.services.items.map(({ title, desc }, i) => {
+              const Icon = serviceIcons[i];
+              const accents = [
+                { bg: "bg-[#EEF8FD]", icon: "text-[#3AB5E5]", border: "border-[#3AB5E5]", hover: "group-hover:bg-[#3AB5E5]" },
+                { bg: "bg-[#EDF6E8]", icon: "text-[#6BC043]", border: "border-[#6BC043]", hover: "group-hover:bg-[#6BC043]" },
+                { bg: "bg-[#EEF8FD]", icon: "text-[#3AB5E5]", border: "border-[#3AB5E5]", hover: "group-hover:bg-[#3AB5E5]" },
+                { bg: "bg-[#EDF6E8]", icon: "text-[#6BC043]", border: "border-[#6BC043]", hover: "group-hover:bg-[#6BC043]" },
+                { bg: "bg-[#EEF8FD]", icon: "text-[#3AB5E5]", border: "border-[#3AB5E5]", hover: "group-hover:bg-[#3AB5E5]" },
+                { bg: "bg-[#EDF6E8]", icon: "text-[#6BC043]", border: "border-[#6BC043]", hover: "group-hover:bg-[#6BC043]" },
+                { bg: "bg-[#EEF8FD]", icon: "text-[#3AB5E5]", border: "border-[#3AB5E5]", hover: "group-hover:bg-[#3AB5E5]" },
+                { bg: "bg-[#EDF6E8]", icon: "text-[#6BC043]", border: "border-[#6BC043]", hover: "group-hover:bg-[#6BC043]" },
+              ];
+              const a = accents[i % accents.length];
+              return (
+                <Reveal key={title} delay={i * 40}>
+                  <div className={`card-lift group relative bg-white border-l-4 ${a.border} rounded-xl p-5 h-full cursor-default shadow-sm hover:shadow-md`}>
+                    <span className="absolute top-3 right-3 text-[11px] font-black text-gray-200">{String(i + 1).padStart(2, "0")}</span>
+                    <div className={`w-12 h-12 ${a.bg} ${a.hover} rounded-xl flex items-center justify-center mb-4 transition-colors duration-200`}>
+                      <Icon size={22} strokeWidth={1.5} className={`${a.icon} group-hover:text-white transition-colors duration-200`} />
+                    </div>
+                    <h3 className="font-black text-[#0D2B4E] text-sm mb-1.5 leading-snug">{title}</h3>
+                    <p className="text-gray-400 text-xs leading-relaxed">{desc}</p>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
         </div>
       </section>
 
