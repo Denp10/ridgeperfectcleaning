@@ -808,10 +808,6 @@ export const Home = () => {
                     ))}
                   </div>
                 </div>
-                <button onClick={() => scrollTo("contact")}
-                  className="btn-p w-full bg-[#3AB5E5] text-white py-2.5 sm:py-3 rounded-full font-bold text-sm">
-                  {tx.why.card.cta}
-                </button>
               </div>
             </Reveal>
           </div>
@@ -839,15 +835,11 @@ export const Home = () => {
                   </div>
                 ))}
               </div>
-              <p className="font-bold text-sm mb-6">
+              <p className="font-bold text-sm">
                 <span className="text-[#3AB5E5]">Better Price · </span>
                 <span className="text-[#0D2B4E]">Better Solutions · </span>
                 <span className="text-[#6BC043]">Perfect Clean</span>
               </p>
-              <button onClick={() => scrollTo("contact")}
-                className="btn-p bg-[#3AB5E5] text-white px-8 py-3 rounded-full font-bold text-sm shadow-lg">
-                {tx.why.card.cta}
-              </button>
             </Reveal>
           </div>
         </div>
