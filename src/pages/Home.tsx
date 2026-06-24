@@ -793,8 +793,21 @@ export const Home = () => {
                     </div>
                   ))}
                 </div>
-                {/* About text — mobile only, compact inside card */}
-                <p className="md:hidden text-gray-400 text-[11px] leading-relaxed mb-4 border-t border-white/10 pt-4">{tx.about.p1}</p>
+                {/* About text + stats + CTA — mobile only, inside card */}
+                <div className="md:hidden border-t border-white/10 pt-4 mt-1">
+                  <p className="text-gray-400 text-[11px] leading-relaxed mb-4">{tx.about.p1}</p>
+                  <div className="flex gap-4 mb-4">
+                    {[
+                      { v: "8+",   l: lang === "en" ? "Services"  : "Servicios",  c: "text-[#3AB5E5]" },
+                      { v: "100%", l: lang === "en" ? "Guarantee" : "Garantía",   c: "text-[#6BC043]" },
+                    ].map(({ v, l, c }) => (
+                      <div key={l} className="bg-white/10 rounded-xl px-4 py-2 text-center">
+                        <div className={`text-lg font-black ${c}`}>{v}</div>
+                        <div className="text-[10px] text-gray-400 mt-0.5">{l}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
                 <button onClick={() => scrollTo("contact")}
                   className="btn-p w-full bg-[#3AB5E5] text-white py-2.5 sm:py-3 rounded-full font-bold text-sm">
                   {tx.why.card.cta}
@@ -815,11 +828,26 @@ export const Home = () => {
               <div className="w-10 h-1 bg-[#3AB5E5] rounded-full mb-6" />
               <p className="text-gray-500 leading-relaxed mb-4 text-sm">{tx.about.p1}</p>
               <p className="text-gray-500 leading-relaxed mb-8 text-sm">{tx.about.p2}</p>
-              <p className="font-bold text-sm">
+              <div className="flex gap-4 mb-6">
+                {[
+                  { v: "8+",   l: lang === "en" ? "Services"  : "Servicios",  c: "text-[#3AB5E5]" },
+                  { v: "100%", l: lang === "en" ? "Guarantee" : "Garantía",   c: "text-[#6BC043]" },
+                ].map(({ v, l, c }) => (
+                  <div key={l} className="bg-white rounded-xl p-3 text-center border border-gray-100 shadow-sm min-w-[72px]">
+                    <div className={`text-xl font-black ${c}`}>{v}</div>
+                    <div className="text-[10px] text-gray-400 mt-0.5">{l}</div>
+                  </div>
+                ))}
+              </div>
+              <p className="font-bold text-sm mb-6">
                 <span className="text-[#3AB5E5]">Better Price · </span>
                 <span className="text-[#0D2B4E]">Better Solutions · </span>
                 <span className="text-[#6BC043]">Perfect Clean</span>
               </p>
+              <button onClick={() => scrollTo("contact")}
+                className="btn-p bg-[#3AB5E5] text-white px-8 py-3 rounded-full font-bold text-sm shadow-lg">
+                {tx.why.card.cta}
+              </button>
             </Reveal>
           </div>
         </div>
