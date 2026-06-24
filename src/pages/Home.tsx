@@ -945,21 +945,17 @@ export const Home = () => {
       </section>
 
       {/* ── FOOTER ───────────────────────────────────────────────────────────── */}
-      <footer className="bg-[#0D2B4E] text-white pt-10 sm:pt-14 pb-8 px-4 sm:px-6">
-        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 mb-10">
+      <footer className="bg-[#0D2B4E] text-white pt-7 sm:pt-10 pb-5 px-4 sm:px-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-5 sm:gap-8 mb-6">
           <div className="col-span-2 md:col-span-1">
-            <div className="mb-4">
-              <img src="/Logo_1.png" alt="Ridge Perfect Cleaning" className="h-16 sm:h-20 w-auto" />
+            <div className="mb-2">
+              <img src="/Logo_1.png" alt="Ridge Perfect Cleaning" className="h-12 sm:h-16 w-auto" />
             </div>
-            <p className="text-gray-400 text-xs leading-relaxed mb-4">{tx.footer.desc}</p>
-            <a href="https://wa.me/15618180778" target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#25D366] text-white px-4 py-2 rounded-full text-xs font-bold hover:bg-[#20c05a] transition-colors">
-              <MessageCircle size={13} fill="white" strokeWidth={0} /> WhatsApp
-            </a>
+            <p className="text-gray-400 text-xs leading-relaxed">{tx.footer.desc}</p>
           </div>
           <div>
-            <h4 className="text-[10px] font-bold text-[#3AB5E5] uppercase tracking-widest mb-4">{tx.footer.services}</h4>
-            <ul className="space-y-2">
+            <h4 className="text-[10px] font-bold text-[#3AB5E5] uppercase tracking-widest mb-3">{tx.footer.services}</h4>
+            <ul className="space-y-1.5">
               {tx.services.items.map(({ title }) => (
                 <li key={title} className="flex items-center gap-2 text-gray-400 text-xs hover:text-white transition-colors cursor-default">
                   <ChevronRight size={11} className="text-[#6BC043] shrink-0" /> {title}
@@ -968,8 +964,8 @@ export const Home = () => {
             </ul>
           </div>
           <div>
-            <h4 className="text-[10px] font-bold text-[#3AB5E5] uppercase tracking-widest mb-4">{tx.footer.contact}</h4>
-            <div className="space-y-3 mb-6">
+            <h4 className="text-[10px] font-bold text-[#3AB5E5] uppercase tracking-widest mb-3">{tx.footer.contact}</h4>
+            <div className="space-y-2 mb-4">
               <a href="tel:5618180778" className="flex items-center gap-2.5 text-gray-400 hover:text-white text-xs transition-colors">
                 <Phone size={12} className="text-[#3AB5E5] shrink-0" /> (561) 818-0778
               </a>
@@ -980,13 +976,13 @@ export const Home = () => {
                 <MapPin size={12} className="text-[#3AB5E5] shrink-0" /> Palm Beach County, FL
               </div>
             </div>
-            <h4 className="text-[10px] font-bold text-[#3AB5E5] uppercase tracking-widest mb-3">{tx.footer.legal}</h4>
+            <h4 className="text-[10px] font-bold text-[#3AB5E5] uppercase tracking-widest mb-2">{tx.footer.legal}</h4>
             <a href="/privacy" className="flex items-center gap-2 text-gray-400 hover:text-white text-xs transition-colors">
               <ChevronRight size={11} className="text-[#6BC043] shrink-0" /> {tx.footer.privacy}
             </a>
           </div>
         </div>
-        <div className="max-w-6xl mx-auto pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
+        <div className="max-w-6xl mx-auto pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-1.5 text-xs">
           <p className="text-gray-500">© {new Date().getFullYear()} Ridge Perfect Cleaning Solutions. {tx.footer.rights}</p>
           <p className="text-[#6BC043] font-semibold hidden sm:block">{tx.footer.tagline}</p>
           <p className="text-gray-500">
