@@ -44,7 +44,7 @@ const t = {
       before: "Before", after: "After",
       items: [
         { imgBefore: "/Estufa1.png", imgAfter: "/Estufa2.png", label: "Stove Deep Clean" },
-        { imgBefore: "/Coche1.png",  imgAfter: "/Coche2.png",  label: "Mobile Car Wash" },
+        { imgBefore: "/coche3.jpg",  imgAfter: "/coche4.jpeg",  label: "Mobile Car Wash" },
         { imgBefore: "/Tapete1.png", imgAfter: "/Tapete2.png", label: "Carpet Cleaning" },
       ],
     },
@@ -150,7 +150,7 @@ const t = {
       before: "Antes", after: "Después",
       items: [
         { imgBefore: "/Estufa1.png", imgAfter: "/Estufa2.png", label: "Limpieza de Estufa" },
-        { imgBefore: "/Coche1.png",  imgAfter: "/Coche2.png",  label: "Lavado de Auto Móvil" },
+        { imgBefore: "/coche3.jpg",  imgAfter: "/coche4.jpeg",  label: "Lavado de Auto Móvil" },
         { imgBefore: "/Tapete1.png", imgAfter: "/Tapete2.png", label: "Limpieza de Tapete" },
       ],
     },
