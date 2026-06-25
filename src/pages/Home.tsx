@@ -920,7 +920,7 @@ export const Home = () => {
                   </div>
                 ) : (
                   <button type="submit" disabled={formState === "sending"}
-                    className="btn-p flex items-center gap-2 bg-[#0D2B4E] text-white px-6 py-3 rounded-full font-bold text-sm disabled:opacity-60">
+                    className="btn-p flex items-center justify-center gap-2 bg-[#0D2B4E] text-white px-6 py-3 rounded-full font-bold text-sm disabled:opacity-60 w-full sm:w-auto">
                     {formState === "sending"
                       ? <><Loader2 size={14} className="animate-spin" /> {tx.contact.form.sending}</>
                       : <><Send size={14} /> {tx.contact.form.send}</>
@@ -951,11 +951,6 @@ export const Home = () => {
                   <a href="https://wa.me/15618180778" target="_blank" rel="noopener noreferrer"
                     className="btn-o flex items-center justify-center gap-2 bg-[#25D366] text-white py-3 rounded-full font-bold text-sm hover:bg-[#20c05a]">
                     <MessageCircle size={14} fill="white" strokeWidth={0} /> {tx.contact.card.cta2}
-                  </a>
-                  <a href="https://maps.google.com/?q=Ridge+Perfect+Cleaning+Palm+Beach+County+FL"
-                    target="_blank" rel="noopener noreferrer"
-                    className="btn-o flex items-center justify-center gap-2 border border-white/20 text-white/70 py-2.5 rounded-full text-xs font-semibold hover:border-white/50 hover:text-white">
-                    <ExternalLink size={12} /> {tx.contact.google}
                   </a>
                 </div>
               </div>
