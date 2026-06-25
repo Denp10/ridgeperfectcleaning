@@ -153,6 +153,7 @@ const t = {
         { imgBefore: "/Estufa1.png", imgAfter: "/Estufa2.png", label: "Limpieza de Estufa" },
         { imgBefore: "/coche3.jpg",  imgAfter: "/coche4.jpeg",  label: "Lavado de Auto Móvil" },
         { imgBefore: "/Tapete1.png", imgAfter: "/Tapete2.png", label: "Limpieza de Tapete" },
+        { imgBefore: "/couch-before.png", imgAfter: "/couch-after.png", label: "Limpieza de Tapicería" },
       ],
     },
     pricing: {
