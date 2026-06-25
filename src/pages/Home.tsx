@@ -46,6 +46,7 @@ const t = {
         { imgBefore: "/Estufa1.png", imgAfter: "/Estufa2.png", label: "Stove Deep Clean" },
         { imgBefore: "/coche3.jpg",  imgAfter: "/coche4.jpeg",  label: "Mobile Car Wash" },
         { imgBefore: "/Tapete1.png", imgAfter: "/Tapete2.png", label: "Carpet Cleaning" },
+        { imgBefore: "/couch-before.png", imgAfter: "/couch-after.png", label: "Upholstery Cleaning" },
       ],
     },
     pricing: {
