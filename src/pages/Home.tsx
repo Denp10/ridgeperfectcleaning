@@ -46,6 +46,7 @@ const t = {
         { imgBefore: "/Estufa1.png", imgAfter: "/Estufa2.png", label: "Stove Deep Clean" },
         { imgBefore: "/coche3.jpg",  imgAfter: "/coche4.jpeg",  label: "Mobile Car Wash" },
         { imgBefore: "/Tapete1.png", imgAfter: "/Tapete2.png", label: "Carpet Cleaning" },
+        { imgBefore: "/couch-before.png", imgAfter: "/couch-after.png", label: "Upholstery Cleaning" },
       ],
     },
     pricing: {
@@ -152,6 +153,7 @@ const t = {
         { imgBefore: "/Estufa1.png", imgAfter: "/Estufa2.png", label: "Limpieza de Estufa" },
         { imgBefore: "/coche3.jpg",  imgAfter: "/coche4.jpeg",  label: "Lavado de Auto Móvil" },
         { imgBefore: "/Tapete1.png", imgAfter: "/Tapete2.png", label: "Limpieza de Tapete" },
+        { imgBefore: "/couch-before.png", imgAfter: "/couch-after.png", label: "Limpieza de Tapicería" },
       ],
     },
     pricing: {
@@ -663,7 +665,7 @@ export const Home = () => {
       <section className="py-8 sm:py-14 px-4 sm:px-6 bg-[#F8FBFF]">
         <div className="max-w-3xl mx-auto">
           <SectionHead label={tx.beforeAfter.heading} title={tx.beforeAfter.sub} />
-          <div className="grid sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {tx.beforeAfter.items.map(({ imgBefore, imgAfter, label }, i) => (
               <Reveal key={label} delay={i * 70}>
                 <BeforeAfterCard imgBefore={imgBefore} imgAfter={imgAfter} label={label} before={tx.beforeAfter.before} after={tx.beforeAfter.after} />
