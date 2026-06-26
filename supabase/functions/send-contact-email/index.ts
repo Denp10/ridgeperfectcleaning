@@ -2,6 +2,11 @@ import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors';
 
 const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY');
 
+// Verified domain addresses (requires ridgeperfectcleaning.com verified in Resend)
+const FROM_NOTIFY = 'Ridge Perfect Cleaning <noreply@ridgeperfectcleaning.com>';
+const FROM_ACK = 'Ridge Perfect Cleaning <info@ridgeperfectcleaning.com>';
+const TO_BUSINESS = 'info@ridgeperfectcleaning.com';
+
 interface ContactPayload {
   name?: string;
   phone?: string;
@@ -14,6 +19,19 @@ const escapeHtml = (s: string) =>
   s.replace(/[&<>"']/g, (c) =>
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!)
   );
+
+async function sendEmail(payload: Record<string, unknown>) {
+  const resp = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${RESEND_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+  const data = await resp.json().catch(() => ({}));
+  return { ok: resp.ok, status: resp.status, data };
+}
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders });
@@ -40,8 +58,9 @@ Deno.serve(async (req) => {
       });
     }
 
+    // ── 1. Notification email to the business ──────────────────────────────────
     const subject = `New Cleaning Request – ${service || 'General'} – ${name}`;
-    const html = `
+    const notifyHtml = `
       <div style="font-family:Arial,sans-serif;color:#0d2b4e;max-width:600px;margin:auto">
         <h2 style="color:#3AB5E5;margin-bottom:8px">New Contact Form Submission</h2>
         <p style="color:#555;margin-top:0">From ridgeperfectcleaning.com</p>
@@ -55,33 +74,61 @@ Deno.serve(async (req) => {
       </div>
     `;
 
-    const replyTo = email || undefined;
-
-    const resp = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${RESEND_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: 'Ridge Perfect Cleaning <onboarding@resend.dev>',
-        to: ['info@ridgeperfectcleaning.com'],
-        subject,
-        html,
-        reply_to: replyTo,
-      }),
+    const notify = await sendEmail({
+      from: FROM_NOTIFY,
+      to: [TO_BUSINESS],
+      subject,
+      html: notifyHtml,
+      reply_to: email || undefined,
     });
 
-    const data = await resp.json().catch(() => ({}));
-    if (!resp.ok) {
-      console.error('Resend error', resp.status, data);
-      return new Response(JSON.stringify({ error: 'Failed to send', details: data }), {
+    if (!notify.ok) {
+      console.error('Resend notify error', notify.status, notify.data);
+      return new Response(JSON.stringify({ error: 'Failed to send', details: notify.data }), {
         status: 502,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
-    return new Response(JSON.stringify({ ok: true, id: data?.id }), {
+    // ── 2. Acknowledgment email to the customer (best-effort) ──────────────────
+    let ackSent = false;
+    if (email) {
+      const ackHtml = `
+        <div style="font-family:Arial,sans-serif;color:#0d2b4e;max-width:600px;margin:auto">
+          <h2 style="color:#3AB5E5;margin-bottom:4px">Thank you, ${escapeHtml(name)}!</h2>
+          <p style="color:#333;line-height:1.6">
+            We've received your request and a member of the Ridge Perfect Cleaning team
+            will contact you shortly with your free quote.
+          </p>
+          <div style="background:#F8FBFF;border-left:4px solid #3AB5E5;padding:12px 16px;margin:18px 0;border-radius:6px">
+            <p style="margin:0;color:#555"><b>Service requested:</b> ${escapeHtml(service || 'General inquiry')}</p>
+            <p style="margin:8px 0 0;color:#555;white-space:pre-wrap"><b>Your message:</b> ${escapeHtml(message)}</p>
+          </div>
+          <p style="color:#333;line-height:1.6">
+            Need us sooner? Call us at <a href="tel:+15618180778" style="color:#3AB5E5;font-weight:bold">(561) 818-0778</a>
+            or message us on WhatsApp.
+          </p>
+          <p style="color:#0d2b4e;font-weight:bold;margin-top:24px">
+            Ridge Perfect Cleaning Solutions<br/>
+            <span style="color:#6BC043;font-weight:normal">Better Price · Better Solutions · Perfect Clean</span>
+          </p>
+          <p style="color:#999;font-size:12px;margin-top:18px">
+            Serving all of Palm Beach County, FL · ridgeperfectcleaning.com
+          </p>
+        </div>
+      `;
+      const ack = await sendEmail({
+        from: FROM_ACK,
+        to: [email],
+        subject: 'We received your request – Ridge Perfect Cleaning',
+        html: ackHtml,
+        reply_to: TO_BUSINESS,
+      });
+      ackSent = ack.ok;
+      if (!ack.ok) console.error('Resend ack error', ack.status, ack.data);
+    }
+
+    return new Response(JSON.stringify({ ok: true, id: notify.data?.id, ackSent }), {
       status: 200,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
