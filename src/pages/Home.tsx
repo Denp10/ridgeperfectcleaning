@@ -322,28 +322,24 @@ const BeforeAfterCard = ({ imgBefore, imgAfter, label, before, after }: { imgBef
     <div className="rounded-2xl overflow-hidden shadow-md border border-gray-100">
       <div
         ref={containerRef}
-        className="relative select-none cursor-col-resize touch-none"
+        className="relative select-none cursor-col-resize"
         style={{ aspectRatio: "4/3" }}
-        onPointerDown={e => {
-          dragging.current = true;
-          e.currentTarget.setPointerCapture(e.pointerId);
-        }}
-        onPointerMove={e => { if (dragging.current) update(e.clientX); }}
-        onPointerUp={e => {
-          dragging.current = false;
-          e.currentTarget.releasePointerCapture(e.pointerId);
-        }}
-        onPointerCancel={() => { dragging.current = false; }}
+        onMouseDown={() => { dragging.current = true; }}
+        onMouseMove={e => { if (dragging.current) update(e.clientX); }}
+        onMouseUp={() => { dragging.current = false; }}
+        onMouseLeave={() => { dragging.current = false; }}
+        onTouchStart={e => update(e.touches[0].clientX)}
+        onTouchMove={e => update(e.touches[0].clientX)}
       >
         {/* AFTER (clean) — full background */}
-        <img src={imgAfter} alt={`${label} after`} draggable={false} className="absolute inset-0 w-full h-full object-cover pointer-events-none" />
+        <img src={imgAfter} alt={`${label} after`} className="absolute inset-0 w-full h-full object-cover" />
 
         {/* BEFORE (dirty) — covers left portion, shrinks as user drags right */}
         {beforeW > 0.5 && (
-          <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ width: `${beforeW}%`, left: 0, right: "auto" }}>
+          <div className="absolute inset-0 overflow-hidden" style={{ width: `${beforeW}%`, left: 0, right: "auto" }}>
             <img
-              src={imgBefore} alt={`${label} before`} draggable={false}
-              className="absolute inset-0 h-full object-cover pointer-events-none"
+              src={imgBefore} alt={`${label} before`}
+              className="absolute inset-0 h-full object-cover"
               style={{ width: `${Math.round(10000 / beforeW)}%`, maxWidth: "none", left: 0 }}
             />
           </div>
