@@ -3,8 +3,7 @@ import {
   HomeIcon, Building2, Sparkles, ArrowLeftRight, BedDouble,
   HardHat, Car, Droplets, ShieldCheck, DollarSign,
   UserCheck, Star, Phone, Mail, MapPin, Menu, X, ChevronRight,
-  Globe, CheckCircle, ArrowDown, MessageCircle, ChevronDown, Send,
-  ExternalLink, Loader2,
+  Globe, CheckCircle, MessageCircle, ChevronDown, Send, Loader2,
 } from "lucide-react";
 
 // ─── Browser language ─────────────────────────────────────────────────────────
@@ -46,7 +45,7 @@ const t = {
         { imgBefore: "/Estufa1.png", imgAfter: "/Estufa2.png", label: "Stove Deep Clean" },
         { imgBefore: "/coche3.jpg",  imgAfter: "/coche4.jpeg",  label: "Mobile Car Wash" },
         { imgBefore: "/Tapete1.png", imgAfter: "/Tapete2.png", label: "Carpet Cleaning" },
-        { imgBefore: "/couch-before.png", imgAfter: "/couch-after.png", label: "Upholstery Cleaning" },
+        { imgBefore: "/couch-before.jpg", imgAfter: "/couch-after.jpg", label: "Upholstery Cleaning" },
       ],
     },
     pricing: {
@@ -153,7 +152,7 @@ const t = {
         { imgBefore: "/Estufa1.png", imgAfter: "/Estufa2.png", label: "Limpieza de Estufa" },
         { imgBefore: "/coche3.jpg",  imgAfter: "/coche4.jpeg",  label: "Lavado de Auto Móvil" },
         { imgBefore: "/Tapete1.png", imgAfter: "/Tapete2.png", label: "Limpieza de Tapete" },
-        { imgBefore: "/couch-before.png", imgAfter: "/couch-after.png", label: "Limpieza de Tapicería" },
+        { imgBefore: "/couch-before.jpg", imgAfter: "/couch-after.jpg", label: "Limpieza de Tapicería" },
       ],
     },
     pricing: {
@@ -540,9 +539,12 @@ export const Home = () => {
       <section className="relative overflow-hidden bg-[#0D2B4E] pt-24">
         {/* Natural-size image — no crop, no repeat, shows complete photo */}
         <img
-          src="/Image4a.png"
+          src="/Image4a.jpg"
           alt=""
           aria-hidden="true"
+          width={1535}
+          height={717}
+          fetchPriority="high"
           className="w-full h-auto block"
         />
         {/* Bottom gradient for button legibility */}
@@ -807,14 +809,15 @@ export const Home = () => {
                 {/* About text + stats + CTA — mobile only, inside card */}
                 <div className="md:hidden border-t border-white/10 pt-4 mt-1">
                   <p className="text-gray-400 text-[11px] leading-relaxed mb-4">{tx.about.p1}</p>
-                  <div className="flex gap-4 mb-4">
+                  <div className="flex gap-2.5 mb-4">
                     {[
-                      { v: "8+",   l: lang === "en" ? "Services"  : "Servicios",  c: "text-[#3AB5E5]" },
-                      { v: "100%", l: lang === "en" ? "Guarantee" : "Garantía",   c: "text-[#6BC043]" },
+                      { v: "8+",   l: lang === "en" ? "Services" : "Servicios", c: "text-[#3AB5E5]" },
+                      { v: "100%", l: lang === "en" ? "Guarantee" : "Garantía", c: "text-[#6BC043]" },
+                      { v: "100%", l: lang === "en" ? "Insured" : "Asegurados", c: "text-white" },
                     ].map(({ v, l, c }) => (
-                      <div key={l} className="bg-white/10 rounded-xl px-4 py-2 text-center">
-                        <div className={`text-lg font-black ${c}`}>{v}</div>
-                        <div className="text-[10px] text-gray-400 mt-0.5">{l}</div>
+                      <div key={l} className="flex-1 bg-white/10 rounded-xl px-2 py-2 text-center">
+                        <div className={`text-base font-black ${c}`}>{v}</div>
+                        <div className="text-[9px] text-gray-400 mt-0.5">{l}</div>
                       </div>
                     ))}
                   </div>
@@ -837,8 +840,9 @@ export const Home = () => {
               <p className="text-gray-500 leading-relaxed mb-8 text-sm">{tx.about.p2}</p>
               <div className="flex gap-4 mb-6">
                 {[
-                  { v: "8+",   l: lang === "en" ? "Services"  : "Servicios",  c: "text-[#3AB5E5]" },
-                  { v: "100%", l: lang === "en" ? "Guarantee" : "Garantía",   c: "text-[#6BC043]" },
+                  { v: "8+",   l: lang === "en" ? "Services" : "Servicios", c: "text-[#3AB5E5]" },
+                  { v: "100%", l: lang === "en" ? "Guarantee" : "Garantía", c: "text-[#6BC043]" },
+                  { v: "100%", l: lang === "en" ? "Insured" : "Asegurados", c: "text-[#0D2B4E]" },
                 ].map(({ v, l, c }) => (
                   <div key={l} className="bg-white rounded-xl p-3 text-center border border-gray-100 shadow-sm min-w-[72px]">
                     <div className={`text-xl font-black ${c}`}>{v}</div>
@@ -896,19 +900,23 @@ export const Home = () => {
                   {lang === "en" ? "Send us a message" : "Envíanos un mensaje"}
                 </h3>
                 <div className="grid sm:grid-cols-2 gap-4">
-                  <input required type="text" placeholder={tx.contact.form.name} value={form.name}
+                  <input required type="text" name="name" autoComplete="name" aria-label={tx.contact.form.name}
+                    placeholder={tx.contact.form.name} value={form.name}
                     onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
                     className="border border-gray-200 rounded-xl px-4 py-3 text-sm w-full transition-all" />
-                  <input type="tel" placeholder={tx.contact.form.phone} value={form.phone}
+                  <input type="tel" name="phone" autoComplete="tel" aria-label={tx.contact.form.phone}
+                    placeholder={tx.contact.form.phone} value={form.phone}
                     onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
                     className="border border-gray-200 rounded-xl px-4 py-3 text-sm w-full transition-all" />
                 </div>
-                <select value={form.service} onChange={e => setForm(f => ({ ...f, service: e.target.value }))}
+                <select name="service" aria-label={tx.contact.form.service}
+                  value={form.service} onChange={e => setForm(f => ({ ...f, service: e.target.value }))}
                   className="border border-gray-200 rounded-xl px-4 py-3 text-sm w-full text-gray-600 transition-all bg-white">
                   <option value="">{tx.contact.form.service}</option>
                   {tx.contact.form.services.map(s => <option key={s} value={s}>{s}</option>)}
                 </select>
-                <textarea rows={3} placeholder={tx.contact.form.message} value={form.message}
+                <textarea rows={3} name="message" aria-label={tx.contact.form.message}
+                  placeholder={tx.contact.form.message} value={form.message}
                   onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
                   className="border border-gray-200 rounded-xl px-4 py-3 text-sm w-full resize-none transition-all" />
 
