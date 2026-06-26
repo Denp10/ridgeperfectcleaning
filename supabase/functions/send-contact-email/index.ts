@@ -2,10 +2,23 @@ import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors';
 
 const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY');
 
-// Verified domain addresses (requires ridgeperfectcleaning.com verified in Resend)
-const FROM_NOTIFY = 'Ridge Perfect Cleaning <noreply@ridgeperfectcleaning.com>';
-const FROM_ACK = 'Ridge Perfect Cleaning <info@ridgeperfectcleaning.com>';
-const TO_BUSINESS = 'info@ridgeperfectcleaning.com';
+// ─────────────────────────────────────────────────────────────────────────────
+// TEST_MODE = true  → Resend sandbox: can only send FROM onboarding@resend.dev
+//                     and TO the Resend account owner's email. No customer ack.
+// TEST_MODE = false → Domain verified: send to info@ + acknowledgment to customer.
+//
+// Switch to false once ridgeperfectcleaning.com is verified at resend.com/domains.
+// ─────────────────────────────────────────────────────────────────────────────
+const TEST_MODE = true;
+const OWNER_EMAIL = 'denspierre10@gmail.com'; // Resend account owner (test-mode recipient)
+
+const FROM_NOTIFY = TEST_MODE
+  ? 'Ridge Perfect Cleaning <onboarding@resend.dev>'
+  : 'Ridge Perfect Cleaning <noreply@ridgeperfectcleaning.com>';
+const FROM_ACK = TEST_MODE
+  ? 'Ridge Perfect Cleaning <onboarding@resend.dev>'
+  : 'Ridge Perfect Cleaning <info@ridgeperfectcleaning.com>';
+const TO_BUSINESS = TEST_MODE ? OWNER_EMAIL : 'info@ridgeperfectcleaning.com';
 
 interface ContactPayload {
   name?: string;
@@ -90,9 +103,10 @@ Deno.serve(async (req) => {
       });
     }
 
-    // ── 2. Acknowledgment email to the customer (best-effort) ──────────────────
+    // ── 2. Acknowledgment email to the customer ────────────────────────────────
+    // Skipped in TEST_MODE: Resend sandbox can't email arbitrary recipients.
     let ackSent = false;
-    if (email) {
+    if (!TEST_MODE && email) {
       const ackHtml = `
         <div style="font-family:Arial,sans-serif;color:#0d2b4e;max-width:600px;margin:auto">
           <h2 style="color:#3AB5E5;margin-bottom:4px">Thank you, ${escapeHtml(name)}!</h2>
@@ -122,7 +136,7 @@ Deno.serve(async (req) => {
         to: [email],
         subject: 'We received your request – Ridge Perfect Cleaning',
         html: ackHtml,
-        reply_to: TO_BUSINESS,
+        reply_to: 'info@ridgeperfectcleaning.com',
       });
       ackSent = ack.ok;
       if (!ack.ok) console.error('Resend ack error', ack.status, ack.data);
