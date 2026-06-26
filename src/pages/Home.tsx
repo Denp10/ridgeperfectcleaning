@@ -5,6 +5,7 @@ import {
   UserCheck, Star, Phone, Mail, MapPin, Menu, X, ChevronRight,
   Globe, CheckCircle, MessageCircle, ChevronDown, Send, Loader2,
 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 // ─── Browser language ─────────────────────────────────────────────────────────
 const getBrowserLang = (): "en" | "es" => {
