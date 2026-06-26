@@ -5,6 +5,7 @@ import {
   UserCheck, Star, Phone, Mail, MapPin, Menu, X, ChevronRight,
   Globe, CheckCircle, MessageCircle, ChevronDown, Send, Loader2,
 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 // ─── Browser language ─────────────────────────────────────────────────────────
 const getBrowserLang = (): "en" | "es" => {
@@ -375,7 +376,7 @@ export const Home = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq,  setOpenFaq]  = useState<number | null>(null);
   const [formState, setFormState] = useState<"idle" | "sending" | "success" | "error">("idle");
-  const [form, setForm] = useState({ name: "", phone: "", service: "", message: "" });
+  const [form, setForm] = useState({ name: "", phone: "", email: "", service: "", message: "" });
   const [showAllServices, setShowAllServices] = useState(false);
   const [activeReview, setActiveReview] = useState(0);
   const tx = t[lang];
@@ -399,25 +400,25 @@ export const Home = () => {
     setMenuOpen(false);
   };
 
-  // Real form submission via Formspree
+  // Real form submission via Lovable Cloud edge function (Resend)
   const handleForm = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormState("sending");
     try {
-      const res = await fetch("https://formspree.io/f/xpwzadkb", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ ...form, _subject: `Cleaning Request – ${form.service || "General"}` }),
+      const { data, error } = await supabase.functions.invoke("send-contact-email", {
+        body: form,
       });
-      if (res.ok) {
+      if (!error && (data as any)?.ok) {
         setFormState("success");
-        setForm({ name: "", phone: "", service: "", message: "" });
+        setForm({ name: "", phone: "", email: "", service: "", message: "" });
         setTimeout(() => setFormState("idle"), 6000);
       } else {
+        console.error("send-contact-email failed", error, data);
         setFormState("error");
         setTimeout(() => setFormState("idle"), 5000);
       }
-    } catch {
+    } catch (err) {
+      console.error(err);
       setFormState("error");
       setTimeout(() => setFormState("idle"), 5000);
     }
@@ -909,6 +910,10 @@ export const Home = () => {
                     onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
                     className="border border-gray-200 rounded-xl px-4 py-3 text-sm w-full transition-all" />
                 </div>
+                <input type="email" name="email" autoComplete="email" aria-label="Email"
+                  placeholder={lang === "en" ? "Email (optional)" : "Correo (opcional)"} value={form.email}
+                  onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+                  className="border border-gray-200 rounded-xl px-4 py-3 text-sm w-full transition-all" />
                 <select name="service" aria-label={tx.contact.form.service}
                   value={form.service} onChange={e => setForm(f => ({ ...f, service: e.target.value }))}
                   className="border border-gray-200 rounded-xl px-4 py-3 text-sm w-full text-gray-600 transition-all bg-white">
