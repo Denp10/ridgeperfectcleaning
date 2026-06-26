@@ -375,7 +375,7 @@ export const Home = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq,  setOpenFaq]  = useState<number | null>(null);
   const [formState, setFormState] = useState<"idle" | "sending" | "success" | "error">("idle");
-  const [form, setForm] = useState({ name: "", phone: "", service: "", message: "" });
+  const [form, setForm] = useState({ name: "", phone: "", email: "", service: "", message: "" });
   const [showAllServices, setShowAllServices] = useState(false);
   const [activeReview, setActiveReview] = useState(0);
   const tx = t[lang];
