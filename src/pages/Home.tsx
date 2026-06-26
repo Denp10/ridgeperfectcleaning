@@ -5,13 +5,11 @@ import {
   UserCheck, Star, Phone, Mail, MapPin, Menu, X, ChevronRight,
   Globe, CheckCircle, MessageCircle, ChevronDown, Send, Loader2,
 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 
-// ─── Browser language ─────────────────────────────────────────────────────────
-const getBrowserLang = (): "en" | "es" => {
-  const l = (navigator.language || navigator.languages?.[0] || "en").toLowerCase();
-  return l.startsWith("es") ? "es" : "en";
-};
+// ─── Default language ─────────────────────────────────────────────────────────
+// Site always loads in English regardless of browser language.
+// Users can still switch to Spanish manually with the EN/ES toggle.
+const getBrowserLang = (): "en" | "es" => "en";
 
 // ─── Translations ─────────────────────────────────────────────────────────────
 const t = {
@@ -400,20 +398,25 @@ export const Home = () => {
     setMenuOpen(false);
   };
 
-  // Real form submission via Lovable Cloud edge function (Resend)
+  // Real form submission via Formspree
   const handleForm = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormState("sending");
     try {
-      const { data, error } = await supabase.functions.invoke("send-contact-email", {
-        body: form,
+      const res = await fetch("https://formspree.io/f/xpwzadkb", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          ...form,
+          _replyto: form.email || undefined,
+          _subject: `New Cleaning Request – ${form.service || "General"} – ${form.name}`,
+        }),
       });
-      if (!error && (data as any)?.ok) {
+      if (res.ok) {
         setFormState("success");
         setForm({ name: "", phone: "", email: "", service: "", message: "" });
         setTimeout(() => setFormState("idle"), 6000);
       } else {
-        console.error("send-contact-email failed", error, data);
         setFormState("error");
         setTimeout(() => setFormState("idle"), 5000);
       }
