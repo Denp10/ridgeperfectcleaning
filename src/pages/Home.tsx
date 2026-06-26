@@ -813,7 +813,7 @@ export const Home = () => {
                     {[
                       { v: "8+",   l: lang === "en" ? "Services" : "Servicios", c: "text-[#3AB5E5]" },
                       { v: "100%", l: lang === "en" ? "Guarantee" : "Garantía", c: "text-[#6BC043]" },
-                      { v: "100%", l: lang === "en" ? "Insured" : "Asegurados", c: "text-white" },
+                      { v: "+100", l: lang === "en" ? "Happy Clients" : "Clientes Felices", c: "text-white" },
                     ].map(({ v, l, c }) => (
                       <div key={l} className="flex-1 bg-white/10 rounded-xl px-2 py-2 text-center">
                         <div className={`text-base font-black ${c}`}>{v}</div>
@@ -842,7 +842,7 @@ export const Home = () => {
                 {[
                   { v: "8+",   l: lang === "en" ? "Services" : "Servicios", c: "text-[#3AB5E5]" },
                   { v: "100%", l: lang === "en" ? "Guarantee" : "Garantía", c: "text-[#6BC043]" },
-                  { v: "100%", l: lang === "en" ? "Insured" : "Asegurados", c: "text-[#0D2B4E]" },
+                  { v: "+100", l: lang === "en" ? "Happy Clients" : "Clientes Felices", c: "text-[#0D2B4E]" },
                 ].map(({ v, l, c }) => (
                   <div key={l} className="bg-white rounded-xl p-3 text-center border border-gray-100 shadow-sm min-w-[72px]">
                     <div className={`text-xl font-black ${c}`}>{v}</div>
