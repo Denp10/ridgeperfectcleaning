@@ -336,14 +336,14 @@ const BeforeAfterCard = ({ imgBefore, imgAfter, label, before, after }: { imgBef
         onPointerCancel={() => { dragging.current = false; }}
       >
         {/* AFTER (clean) — full background */}
-        <img src={imgAfter} alt={`${label} after`} className="absolute inset-0 w-full h-full object-cover" />
+        <img src={imgAfter} alt={`${label} after`} draggable={false} className="absolute inset-0 w-full h-full object-cover pointer-events-none" />
 
         {/* BEFORE (dirty) — covers left portion, shrinks as user drags right */}
         {beforeW > 0.5 && (
-          <div className="absolute inset-0 overflow-hidden" style={{ width: `${beforeW}%`, left: 0, right: "auto" }}>
+          <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ width: `${beforeW}%`, left: 0, right: "auto" }}>
             <img
-              src={imgBefore} alt={`${label} before`}
-              className="absolute inset-0 h-full object-cover"
+              src={imgBefore} alt={`${label} before`} draggable={false}
+              className="absolute inset-0 h-full object-cover pointer-events-none"
               style={{ width: `${Math.round(10000 / beforeW)}%`, maxWidth: "none", left: 0 }}
             />
           </div>
