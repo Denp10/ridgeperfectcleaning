@@ -42,10 +42,10 @@ const t = {
       sub: "Visible results, every time",
       before: "Before", after: "After",
       items: [
-        { imgBefore: "/Estufa1.png", imgAfter: "/Estufa2.png", label: "Stove Deep Clean" },
+        { imgBefore: "/CocinaSucia.jpg", imgAfter: "/CocinaLimpia.jpg", label: "Kitchen Cleaning" },
         { imgBefore: "/coche3.jpg",  imgAfter: "/coche4.jpeg",  label: "Mobile Car Wash" },
         { imgBefore: "/Tapete1.png", imgAfter: "/Tapete2.png", label: "Carpet Cleaning" },
-        { imgBefore: "/couch-before.jpg", imgAfter: "/couch-after.jpg", label: "Upholstery Cleaning" },
+        { imgBefore: "/SalaSucia.jpg", imgAfter: "/SalaLimpia.jpeg", label: "Living Room Cleaning" },
       ],
     },
     pricing: {
@@ -149,10 +149,10 @@ const t = {
       sub: "Resultados visibles en cada limpieza",
       before: "Antes", after: "Después",
       items: [
-        { imgBefore: "/Estufa1.png", imgAfter: "/Estufa2.png", label: "Limpieza de Estufa" },
+        { imgBefore: "/CocinaSucia.jpg", imgAfter: "/CocinaLimpia.jpg", label: "Limpieza de Cocina" },
         { imgBefore: "/coche3.jpg",  imgAfter: "/coche4.jpeg",  label: "Lavado de Auto Móvil" },
         { imgBefore: "/Tapete1.png", imgAfter: "/Tapete2.png", label: "Limpieza de Tapete" },
-        { imgBefore: "/couch-before.jpg", imgAfter: "/couch-after.jpg", label: "Limpieza de Tapicería" },
+        { imgBefore: "/SalaSucia.jpg", imgAfter: "/SalaLimpia.jpeg", label: "Limpieza de Sala" },
       ],
     },
     pricing: {
