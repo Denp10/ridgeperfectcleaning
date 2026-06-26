@@ -665,9 +665,9 @@ export const Home = () => {
 
       {/* ── BEFORE & AFTER ───────────────────────────────────────────────────── */}
       <section className="py-8 sm:py-14 px-4 sm:px-6 bg-[#F8FBFF]">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <SectionHead label={tx.beforeAfter.heading} title={tx.beforeAfter.sub} />
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {tx.beforeAfter.items.map(({ imgBefore, imgAfter, label }, i) => (
               <Reveal key={label} delay={i * 70}>
                 <BeforeAfterCard imgBefore={imgBefore} imgAfter={imgAfter} label={label} before={tx.beforeAfter.before} after={tx.beforeAfter.after} />
