@@ -327,7 +327,6 @@ const BeforeAfterCard = ({ imgBefore, imgAfter, label, before, after }: { imgBef
         onPointerDown={e => {
           dragging.current = true;
           e.currentTarget.setPointerCapture(e.pointerId);
-          update(e.clientX);
         }}
         onPointerMove={e => { if (dragging.current) update(e.clientX); }}
         onPointerUp={e => {
