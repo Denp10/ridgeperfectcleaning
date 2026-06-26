@@ -399,25 +399,25 @@ export const Home = () => {
     setMenuOpen(false);
   };
 
-  // Real form submission via Formspree
+  // Real form submission via Lovable Cloud edge function (Resend)
   const handleForm = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormState("sending");
     try {
-      const res = await fetch("https://formspree.io/f/xpwzadkb", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ ...form, _subject: `Cleaning Request – ${form.service || "General"}` }),
+      const { data, error } = await supabase.functions.invoke("send-contact-email", {
+        body: form,
       });
-      if (res.ok) {
+      if (!error && (data as any)?.ok) {
         setFormState("success");
-        setForm({ name: "", phone: "", service: "", message: "" });
+        setForm({ name: "", phone: "", email: "", service: "", message: "" });
         setTimeout(() => setFormState("idle"), 6000);
       } else {
+        console.error("send-contact-email failed", error, data);
         setFormState("error");
         setTimeout(() => setFormState("idle"), 5000);
       }
-    } catch {
+    } catch (err) {
+      console.error(err);
       setFormState("error");
       setTimeout(() => setFormState("idle"), 5000);
     }
