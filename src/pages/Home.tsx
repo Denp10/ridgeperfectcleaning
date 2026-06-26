@@ -322,14 +322,19 @@ const BeforeAfterCard = ({ imgBefore, imgAfter, label, before, after }: { imgBef
     <div className="rounded-2xl overflow-hidden shadow-md border border-gray-100">
       <div
         ref={containerRef}
-        className="relative select-none cursor-col-resize"
+        className="relative select-none cursor-col-resize touch-none"
         style={{ aspectRatio: "4/3" }}
-        onMouseDown={() => { dragging.current = true; }}
-        onMouseMove={e => { if (dragging.current) update(e.clientX); }}
-        onMouseUp={() => { dragging.current = false; }}
-        onMouseLeave={() => { dragging.current = false; }}
-        onTouchStart={e => update(e.touches[0].clientX)}
-        onTouchMove={e => update(e.touches[0].clientX)}
+        onPointerDown={e => {
+          dragging.current = true;
+          e.currentTarget.setPointerCapture(e.pointerId);
+          update(e.clientX);
+        }}
+        onPointerMove={e => { if (dragging.current) update(e.clientX); }}
+        onPointerUp={e => {
+          dragging.current = false;
+          e.currentTarget.releasePointerCapture(e.pointerId);
+        }}
+        onPointerCancel={() => { dragging.current = false; }}
       >
         {/* AFTER (clean) — full background */}
         <img src={imgAfter} alt={`${label} after`} className="absolute inset-0 w-full h-full object-cover" />
