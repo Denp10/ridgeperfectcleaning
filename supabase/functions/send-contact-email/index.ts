@@ -9,7 +9,7 @@ const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY');
 //
 // Switch to false once ridgeperfectcleaning.com is verified at resend.com/domains.
 // ─────────────────────────────────────────────────────────────────────────────
-const TEST_MODE = true;
+const TEST_MODE = false;
 const OWNER_EMAIL = 'denspierre10@gmail.com'; // Resend account owner (test-mode recipient)
 
 const FROM_NOTIFY = TEST_MODE
