@@ -64,7 +64,7 @@ Deno.serve(async (req) => {
     const service = (body.service || '').toString().trim().slice(0, 80);
     const message = (body.message || '').toString().trim().slice(0, 4000);
 
-    if (!name || !message || (!phone && !email)) {
+    if (!name || !email || !message) {
       return new Response(JSON.stringify({ error: 'Missing required fields' }), {
         status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },

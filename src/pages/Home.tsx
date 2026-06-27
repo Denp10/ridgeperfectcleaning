@@ -909,8 +909,8 @@ export const Home = () => {
                     onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
                     className="border border-gray-200 rounded-xl px-4 py-3 text-sm w-full transition-all" />
                 </div>
-                <input type="email" name="email" autoComplete="email" aria-label="Email"
-                  placeholder={lang === "en" ? "Email (optional)" : "Correo (opcional)"} value={form.email}
+                <input required type="email" name="email" autoComplete="email" aria-label="Email"
+                  placeholder={lang === "en" ? "Email" : "Correo electrónico"} value={form.email}
                   onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
                   className="border border-gray-200 rounded-xl px-4 py-3 text-sm w-full transition-all" />
                 <select name="service" aria-label={tx.contact.form.service}
