@@ -3,7 +3,10 @@
     "allow": [
       "Bash(git init *)",
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(cd \"/c/Users/Pro-Fill365/Documents/Website/ridgeperfectcleaning-main\" && grep -n \"why-us\\\\|collapsible\\\\|openBA\\\\|MobileCollapsible\\\\|merged\\\\|footer.*pt-7\\\\|Coche\" src/pages/Home.tsx | head -20)",
+      "Read(//c/c/Users/Pro-Fill365/Documents/Website/ridgeperfectcleaning-main/**)",
+      "Read(//c/c/Users/Pro-Fill365/Documents/Website/ridgeperfectcleaning-main/public/**)"
     ]
   }
 }

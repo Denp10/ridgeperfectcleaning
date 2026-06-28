@@ -498,6 +498,7 @@ export const Home = () => {
               </button>
             ))}
             <button onClick={() => setLang(l => l === "en" ? "es" : "en")}
+              aria-label={lang === "en" ? "Cambiar a español" : "Switch to English"}
               className="flex items-center gap-1.5 text-sm font-bold px-3 py-1.5 rounded-full border border-[#3AB5E5] text-[#3AB5E5] hover:bg-[#3AB5E5] hover:text-white transition-all">
               <Globe size={14} /> {lang === "en" ? "ES" : "EN"}
             </button>
@@ -510,10 +511,13 @@ export const Home = () => {
           {/* Mobile right */}
           <div className="md:hidden flex items-center gap-2">
             <button onClick={() => setLang(l => l === "en" ? "es" : "en")}
+              aria-label={lang === "en" ? "Cambiar a español" : "Switch to English"}
               className="flex items-center gap-1 text-sm font-bold px-2.5 py-1.5 rounded-full border border-[#3AB5E5] text-[#3AB5E5]">
               <Globe size={13} /> {lang === "en" ? "ES" : "EN"}
             </button>
-            <button onClick={() => setMenuOpen(!menuOpen)} className="p-1 text-[#0D2B4E]">
+            <button onClick={() => setMenuOpen(!menuOpen)} className="p-1 text-[#0D2B4E]"
+              aria-label={menuOpen ? (lang === "en" ? "Close menu" : "Cerrar menú") : (lang === "en" ? "Open menu" : "Abrir menú")}
+              aria-expanded={menuOpen}>
               {menuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
@@ -537,6 +541,12 @@ export const Home = () => {
 
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-[#0D2B4E] pt-24">
+        {/* Semantic page heading for SEO + screen readers (visually hidden) */}
+        <h1 className="sr-only">
+          {lang === "en"
+            ? "Ridge Perfect Cleaning — Professional Residential & Commercial Cleaning in Palm Beach County, FL"
+            : "Ridge Perfect Cleaning — Limpieza Residencial y Comercial Profesional en Palm Beach County, FL"}
+        </h1>
         {/* Natural-size image — no crop, no repeat, shows complete photo */}
         <img
           src="/Image4a.jpg"
@@ -760,6 +770,8 @@ export const Home = () => {
             <div className="flex justify-center gap-2">
               {tx.testimonials.items.map((_, i) => (
                 <button key={i} onClick={() => setActiveReview(i)}
+                  aria-label={lang === "en" ? `Show review ${i + 1}` : `Mostrar reseña ${i + 1}`}
+                  aria-current={i === activeReview}
                   className="rounded-full transition-all duration-300"
                   style={{ width: i === activeReview ? 24 : 8, height: 8, background: i === activeReview ? "#3AB5E5" : "#CBD5E1" }}
                 />

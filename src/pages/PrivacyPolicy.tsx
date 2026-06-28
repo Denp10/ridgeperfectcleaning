@@ -2,7 +2,22 @@ import { useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 
 export const PrivacyPolicy = () => {
-  useEffect(() => { window.scrollTo(0, 0); }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    // Unique metadata for this route (restored on unmount)
+    const prevTitle = document.title;
+    const descEl = document.querySelector('meta[name="description"]');
+    const prevDesc = descEl?.getAttribute("content") ?? "";
+    document.title = "Privacy Policy & Terms | Ridge Perfect Cleaning";
+    descEl?.setAttribute(
+      "content",
+      "Privacy Policy and Terms of Service for Ridge Perfect Cleaning Solutions, serving Palm Beach County, FL."
+    );
+    return () => {
+      document.title = prevTitle;
+      descEl?.setAttribute("content", prevDesc);
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-white font-sans">

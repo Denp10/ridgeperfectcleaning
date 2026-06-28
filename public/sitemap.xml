@@ -9,4 +9,10 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://ridgeperfectcleaning.com/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://ridgeperfectcleaning.com/" />
   </url>
+  <url>
+    <loc>https://ridgeperfectcleaning.com/privacy</loc>
+    <lastmod>2026-06-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
 </urlset>
