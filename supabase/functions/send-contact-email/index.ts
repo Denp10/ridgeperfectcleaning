@@ -35,11 +35,10 @@ const escapeHtml = (s: string) =>
 
 // ── Branded email shell ───────────────────────────────────────────────────────
 const brandHeader = `
-  <div style="background:#0D2B4E;padding:26px 32px;text-align:center">
-    <div style="font-size:22px;font-weight:800;letter-spacing:1px;color:#ffffff;font-family:Arial,Helvetica,sans-serif">
-      RIDGE <span style="color:#3AB5E5">PERFECT</span> CLEANING
-    </div>
-    <div style="font-size:11px;color:#9fb3c8;letter-spacing:3px;text-transform:uppercase;margin-top:5px">
+  <div style="background:#ffffff;padding:30px 32px 24px;text-align:center;border-bottom:1px solid #eef2f7">
+    <img src="https://ridgeperfectcleaning.com/Logo_1.png" alt="Ridge Perfect Cleaning" width="180"
+      style="display:block;margin:0 auto 12px;width:180px;max-width:60%;height:auto" />
+    <div style="font-size:11px;color:#7a8aa0;letter-spacing:3px;text-transform:uppercase">
       Cleaning Beyond Expectations
     </div>
   </div>`;
