@@ -820,6 +820,9 @@ export const Home = () => {
                 </div>
                 {/* About text + stats + CTA — mobile only, inside card */}
                 <div className="md:hidden border-t border-white/10 pt-4 mt-1">
+                  <div className="rounded-xl overflow-hidden mb-3" style={{ aspectRatio: "4/3" }}>
+                    <img src="/Image2.jpeg" alt="Cleaning service" className="w-full h-full object-contain bg-white/5" loading="lazy" />
+                  </div>
                   <p className="text-gray-400 text-[11px] leading-relaxed mb-4">{tx.about.p1}</p>
                   <div className="flex gap-2.5 mb-4">
                     {[
