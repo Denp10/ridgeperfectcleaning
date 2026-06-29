@@ -4,18 +4,38 @@ import { ArrowLeft } from "lucide-react";
 export const PrivacyPolicy = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
-    // Unique metadata for this route (restored on unmount)
+
+    // Unique metadata for this route (title, description, canonical, OG) — restored on unmount.
+    // Note: this helps Google (renders JS); social crawlers don't run JS and read index.html.
+    const url = "https://ridgeperfectcleaning.com/privacy";
+    const title = "Privacy Policy & Terms | Ridge Perfect Cleaning";
+    const description =
+      "Privacy Policy and Terms of Service for Ridge Perfect Cleaning Solutions, serving Palm Beach County, FL.";
+
+    const setAttr = (selector: string, attr: string, value: string) => {
+      const el = document.querySelector(selector) as HTMLElement | null;
+      const prev = el?.getAttribute(attr) ?? null;
+      el?.setAttribute(attr, value);
+      return () => {
+        if (!el) return;
+        prev === null ? el.removeAttribute(attr) : el.setAttribute(attr, prev);
+      };
+    };
+
     const prevTitle = document.title;
-    const descEl = document.querySelector('meta[name="description"]');
-    const prevDesc = descEl?.getAttribute("content") ?? "";
-    document.title = "Privacy Policy & Terms | Ridge Perfect Cleaning";
-    descEl?.setAttribute(
-      "content",
-      "Privacy Policy and Terms of Service for Ridge Perfect Cleaning Solutions, serving Palm Beach County, FL."
-    );
+    document.title = title;
+
+    const restores = [
+      setAttr('meta[name="description"]', "content", description),
+      setAttr('link[rel="canonical"]', "href", url),
+      setAttr('meta[property="og:title"]', "content", title),
+      setAttr('meta[property="og:description"]', "content", description),
+      setAttr('meta[property="og:url"]', "content", url),
+    ];
+
     return () => {
       document.title = prevTitle;
-      descEl?.setAttribute("content", prevDesc);
+      restores.forEach((restore) => restore());
     };
   }, []);
 
